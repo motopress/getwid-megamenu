@@ -1,19 +1,26 @@
 {
-  "name": "motopress",
-  "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-line-ending-corrector": "^1.0.2",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-sass": "^4.0.1"
-  }
+	"name": "mp-megamenu",
+	"version": "0.0.1",
+	"private": true,
+	"description": "MP MegaMenu.",
+	"author": "MotoPress",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"WordPress",
+		"block"
+	],
+	"main": "build/index.js",
+	"devDependencies": {
+		"@wordpress/scripts": "^12.1.0"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"format:js": "wp-scripts format-js",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"start": "wp-scripts start"
+	},
+	"dependencies": {
+		"classnames": "^2.2.6"
+	}
 }

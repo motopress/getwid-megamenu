@@ -1,0 +1,28 @@
+{
+	"name": "mp-megamenu/menu-item",
+	"category": "layout",
+	"parent": [
+		"mp-megamenu/menu"
+	],
+	"attributes": {
+		"url": {
+			"type": "string",
+			"default": ""
+		},
+		"text": {
+			"type": "string"
+		},
+		"linkTarget": {
+			"type": "string"
+		},
+		"rel": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"anchor": false,
+		"align": false,
+		"alignWide": false,
+		"reusable": false
+	}
+}

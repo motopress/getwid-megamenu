@@ -1,0 +1,29 @@
+.wp-block-mp-megamenu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative; }
+  .wp-block-mp-megamenu-item {
+    padding: 10px; }
+    .wp-block-mp-megamenu-item:hover .wp-block-mp-megamenu-item__popup-wrapper {
+      height: auto;
+      overflow: visible; }
+
+.wp-block-mp-megamenu-item__popup-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 0;
+  overflow: hidden; }
+
+.wp-block-mp-megamenu-item__popup {
+  background: #fff;
+  padding: 10px; }
+  .wp-block-mp-megamenu-item__popup:after, .wp-block-mp-megamenu-item__popup:before {
+    display: table;
+    content: '';
+    clear: both; }
+
+
+/*# sourceMappingURL=style-index.css.map*/

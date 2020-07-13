@@ -1,0 +1,12 @@
+{
+  "name": "mp-megamenu/menu",
+  "category": "layout",
+  "attributes": { },
+  "supports": {
+    "anchor": false,
+    "align": false,
+    "alignWide": true,
+    "reusable": false,
+    "customClassName": true
+  }
+}
