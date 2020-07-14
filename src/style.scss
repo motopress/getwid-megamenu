@@ -51,3 +51,9 @@
         clear: both;
     }
 }
+
+.wp-block-mp-megamenu-item__dropdown-icon {
+    > * {
+        vertical-align: middle;
+    }
+}

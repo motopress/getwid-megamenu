@@ -46,7 +46,7 @@ function MegaMenu( args ) {
 		}
 	}
 
-	const menuClasses = classnames(className,{
+	const menuClasses = classnames( 'wp-block-mp-megamenu' ,{
 		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
 	});
 
@@ -97,7 +97,7 @@ function MegaMenu( args ) {
 					}
 					__experimentalPassedProps={ {
 						className: classnames(
-							'wp-block-mp-megamenu-menu__container'
+							'wp-block-mp-megamenu__container'
 						),
 					} }
 					__experimentalMoverDirection="horizontal"

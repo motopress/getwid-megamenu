@@ -469,7 +469,8 @@ var _wp$element = wp.element,
     useCallback = _wp$element.useCallback,
     useState = _wp$element.useState,
     useRef = _wp$element.useRef,
-    useEffect = _wp$element.useEffect;
+    useEffect = _wp$element.useEffect,
+    useLayoutEffect = _wp$element.useLayoutEffect;
 var compose = wp.compose.compose;
 var _wp$data = wp.data,
     withSelect = _wp$data.withSelect,
@@ -629,9 +630,12 @@ function MenuItemEdit(props) {
       rel: updatedRel
     });
   }, [rel, setAttributes]);
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu-menu-item', {
+  var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
+  var menuItemHasChildrens = isItemPopupOpened || hasDescendants;
+  var showPopup = isMenuItemSelected && menuItemHasChildrens;
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu-item', {
     'has-child': hasDescendants,
-    'is-opened': (isSelected || isParentOfSelectedBlock) && (isItemPopupOpened || hasDescendants)
+    'is-opened': showPopup
   });
 
   var _useState5 = useState({
@@ -643,7 +647,7 @@ function MenuItemEdit(props) {
       setPopupPosition = _useState6[1];
 
   var updatePopupPosition = function updatePopupPosition() {
-    var rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu-menu');
+    var rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu');
     var blockNode = rootBlockNode.querySelector('[data-block="' + clientId + '"]');
     var rootCoords = rootBlockNode.getBoundingClientRect();
     var blockCoords = blockNode.getBoundingClientRect();
@@ -665,6 +669,11 @@ function MenuItemEdit(props) {
     className: itemClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wp-block-mp-megamenu-item__link"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", {
+    href: "#",
+    onClick: function onClick() {
+      return false;
+    }
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RichText, {
     placeholder: itemLabelPlaceholder,
     value: text,
@@ -677,7 +686,11 @@ function MenuItemEdit(props) {
     onReplace: onReplace,
     onMerge: mergeBlocks,
     identifier: "text"
-  })), (isSelected || isParentOfSelectedBlock) && (isItemPopupOpened || hasDescendants) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+    className: "wp-block-mp-megamenu-item__dropdown-icon"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+    className: "dashicons dashicons-arrow-down"
+  })))), showPopup && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wp-block-mp-megamenu-item__popup-wrapper",
     style: popupStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
@@ -851,7 +864,7 @@ function MegaMenu(args) {
     };
   }
 
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification)); // UI State: rendered Block UI
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification)); // UI State: rendered Block UI
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Toolbar, {
     icon: attributes.itemsJustification ? "editor-align".concat(attributes.itemsJustification) : "editor-alignleft",
@@ -883,7 +896,7 @@ function MegaMenu(args) {
     templateInsertUpdatesSelection: false,
     renderAppender: isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants || isSelected ? InnerBlocks.DefaultAppender : false,
     __experimentalPassedProps: {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu-menu__container')
+      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu__container')
     },
     __experimentalMoverDirection: "horizontal"
   })));

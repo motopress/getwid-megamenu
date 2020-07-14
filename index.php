@@ -113,7 +113,13 @@ function mp_megamenu_render_mp_megamenu_item( $attributes, $content ) {
 		$html .= ' target="_blank"';
 	}
 
-	$html .= '>' . $attributes['text'] . '</a></div>';
+	$html .= '>' . $attributes['text'];
+
+	if ( $content ) {
+		$html .= '<span class="wp-block-mp-megamenu-item__dropdown-icon"><span class="dashicons dashicons-arrow-down"></span></span>';
+	}
+
+	$html .= '</a></div>';
 
 	if ( $content ) {
 		$html .= '<div class="wp-block-mp-megamenu-item__popup-wrapper">';

@@ -1,39 +1,39 @@
-.wp-block-mp-megamenu-menu {
+.wp-block-mp-megamenu {
     border: 2px solid #0d66c2;
     padding: 10px;
     position: relative;
 }
 
-.wp-block-mp-megamenu-menu-item {
+.wp-block-mp-megamenu-item {
     border: 1px solid #00d082;
     padding: 5px;
     z-index: 10;
 }
 
-.wp-block-mp-megamenu-menu > .block-editor-inner-blocks > .block-editor-block-list__layout,
-.wp-block-mp-megamenu-menu__container {
+.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.wp-block-mp-megamenu__container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.wp-block-mp-megamenu-menu.justify-items-left > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-left > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-start;
 }
 
-.wp-block-mp-megamenu-menu.justify-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: center;
 }
 
-.wp-block-mp-megamenu-menu.justify-items-right > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-right > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-end;
 }
 
-.wp-block-mp-megamenu-menu > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
+.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
     margin: 0 20px 0 0;
 }
 
-.wp-block-mp-megamenu-menu > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
+.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
     margin-left: 20px;
 }
 
@@ -52,11 +52,15 @@
     background: #fff;
 }
 
-.wp-block-mp-megamenu-menu-item.is-opened .wp-block-mp-megamenu-item__popup-wrapper,
-.wp-block-mp-megamenu-menu-item:hover .wp-block-mp-megamenu-item__popup-wrapper {
+.wp-block-mp-megamenu-item.is-opened .wp-block-mp-megamenu-item__popup-wrapper,
+.wp-block-mp-megamenu-item:hover .wp-block-mp-megamenu-item__popup-wrapper {
     overflow: visible;
     height: auto;
 }
 
+.wp-block-mp-megamenu-item__link a{
+    display: flex;
+    align-items: center;
+}
 
 /*# sourceMappingURL=index.css.map*/

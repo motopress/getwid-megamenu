@@ -8,7 +8,7 @@ import classnames from 'classnames';
  */
 const { head } = lodash;
 const {__} = wp.i18n;
-const {useCallback, useState, useRef, useEffect} = wp.element;
+const {useCallback, useState, useRef, useEffect, useLayoutEffect} = wp.element;
 const {compose} = wp.compose;
 const {withSelect, withDispatch} = wp.data;
 const {
@@ -142,7 +142,6 @@ function MenuItemEdit(props) {
 
     const [isItemPopupOpened, setIsItemPopupOpened] = useState(hasDescendants);
 
-
     const toggleItemPopup = () => {
 	    setIsItemPopupOpened(!isItemPopupOpened);
 	    if(hasDescendants){
@@ -170,18 +169,22 @@ function MenuItemEdit(props) {
 		[rel, setAttributes]
 	);
 
+	const isMenuItemSelected = isSelected || isParentOfSelectedBlock;
+	const menuItemHasChildrens = isItemPopupOpened || hasDescendants;
+	const showPopup = isMenuItemSelected && menuItemHasChildrens;
+
 	const itemClasses = classnames(
-		'wp-block-mp-megamenu-menu-item',
+		'wp-block-mp-megamenu-item',
 		{
 			'has-child': hasDescendants,
-			'is-opened': (isSelected || isParentOfSelectedBlock) && (isItemPopupOpened || hasDescendants)
+			'is-opened': showPopup
 		}
 	);
 
 	const [popupPosition, setPopupPosition] = useState({left:0, width: 'auto'});
 
 	const updatePopupPosition = () => {
-		const rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu-menu' );
+		const rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
 		const blockNode = rootBlockNode.querySelector( '[data-block="' + clientId + '"]' );
 		const rootCoords = rootBlockNode.getBoundingClientRect();
 		const blockCoords = blockNode.getBoundingClientRect();
@@ -203,17 +206,31 @@ function MenuItemEdit(props) {
 		<>
 			<div className={itemClasses}>
 				<div className='wp-block-mp-megamenu-item__link'>
-					<RichText
-						placeholder={itemLabelPlaceholder}
-						value={text}
-						onChange={(value) => setAttributes({text: value})}
-						withoutInteractiveFormatting
-						onReplace={onReplace}
-						onMerge={mergeBlocks}
-						identifier="text"/>
+					<a
+						href="#"
+						onClick={ () => {
+							return false;
+						} }
+					>
+						<RichText
+							placeholder={itemLabelPlaceholder}
+							value={text}
+							onChange={(value) => setAttributes({text: value})}
+							withoutInteractiveFormatting
+							onReplace={onReplace}
+							onMerge={mergeBlocks}
+							identifier="text"/>
+						{
+							(menuItemHasChildrens) && (
+								<span className="wp-block-mp-megamenu-item__dropdown-icon">
+								<span className="dashicons dashicons-arrow-down"></span>
+							</span>
+							)
+						}
+					</a>
 				</div>
 				{
-					((isSelected || isParentOfSelectedBlock) && (isItemPopupOpened || hasDescendants)) && (
+					(showPopup) && (
 						<div className='wp-block-mp-megamenu-item__popup-wrapper' style={popupStyle}>
 							<div className='wp-block-mp-megamenu-item__popup'>
 								<InnerBlocks/>
