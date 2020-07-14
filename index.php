@@ -71,6 +71,12 @@ function mp_megamenu_register_block() {
 
 add_action( 'init', 'mp_megamenu_register_block' );
 
+function mp_megamenu_enqueue_frontend_assets() {
+	wp_enqueue_script('mp-megamenu-block-frontend', plugins_url( 'build/frontend.js', __FILE__ ), ['jquery'], MP_MEGAMENU_VERSION, true);
+}
+
+add_action( 'wp_enqueue_scripts', 'mp_megamenu_enqueue_frontend_assets' );
+
 function mp_megamenu_render_mp_megamenu_item( $attributes, $content ) {
 
 	$html = '';
@@ -122,8 +128,8 @@ function mp_megamenu_render_mp_megamenu_item( $attributes, $content ) {
 	$html .= '</a></div>';
 
 	if ( $content ) {
-		$html .= '<div class="wp-block-mp-megamenu-item__popup-wrapper">';
-		$html .= '<div class="wp-block-mp-megamenu-item__popup">';
+		$html .= '<div class="wp-block-mp-megamenu-item__dropdown-wrapper">';
+		$html .= '<div class="wp-block-mp-megamenu-item__dropdown">';
 		$html .= $content;
 		$html .= '</div></div>';
 	}
@@ -138,7 +144,8 @@ function mp_megamenu_render_mp_megamenu( $attributes, $content ) {
 	$classes = array_merge(
 		isset( $attributes['className'] ) ? array( $attributes['className'] ) : array(),
 		isset( $attributes['align'] ) ? array( 'align' . $attributes['align'] ) : array(),
-		isset( $attributes['itemsJustification'] ) ? array( 'justify-items-' . $attributes['itemsJustification'] ) : array()
+		isset( $attributes['itemsJustification'] ) ? array( 'justify-items-' . $attributes['itemsJustification'] ) : array(),
+		isset( $attributes['expandDropdown'] ) && $attributes['expandDropdown'] ? array( 'has-full-width-dropdown' ) : array()
 	);
 
 	$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '">';

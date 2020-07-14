@@ -18,7 +18,8 @@
 		"format:js": "wp-scripts format-js",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+		"start:custom": "wp-scripts start src/index.js src/frontend.js"
 	},
 	"dependencies": {
 		"classnames": "^2.2.6"

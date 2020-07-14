@@ -12,7 +12,11 @@ const {
 	InnerBlocks,
 	BlockControls
 } = wp.blockEditor;
-const { Toolbar } = wp.components;
+const {
+	Toolbar,
+	ToolbarButton,
+	ToolbarGroup
+} = wp.components;
 const { withSelect } = wp.data;
 const { compose } = wp.compose;
 
@@ -46,8 +50,15 @@ function MegaMenu( args ) {
 		}
 	}
 
+	function expandDropdown() {
+		setAttributes( {
+			expandDropdown: !attributes.expandDropdown,
+		} );
+	}
+
 	const menuClasses = classnames( 'wp-block-mp-megamenu' ,{
 		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
+		[ `has-full-width-dropdown` ]: attributes.expandDropdown,
 	});
 
 	// UI State: rendered Block UI
@@ -80,6 +91,14 @@ function MegaMenu( args ) {
 						},
 					] }
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						name="expand"
+						icon={attributes.expandDropdown ? "editor-contract" : "editor-expand"}
+						title={__('Expand dropdown')}
+						onClick={expandDropdown}
+					/>
+				</ToolbarGroup>
 			</BlockControls>
 			<div className={ menuClasses }>
 				<InnerBlocks

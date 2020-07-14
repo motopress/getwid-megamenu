@@ -8,7 +8,7 @@
         padding: 10px;
 
         &:hover {
-            .wp-block-mp-megamenu-item__popup-wrapper {
+            .wp-block-mp-megamenu-item__dropdown-wrapper {
                 height: auto;
                 overflow: visible;
             }
@@ -30,7 +30,7 @@
     }
 }
 
-.wp-block-mp-megamenu-item__popup-wrapper {
+.wp-block-mp-megamenu-item__dropdown-wrapper {
     position: absolute;
     left: 0;
     right: 0;
@@ -40,7 +40,7 @@
     z-index: 1;
 }
 
-.wp-block-mp-megamenu-item__popup {
+.wp-block-mp-megamenu-item__dropdown {
     background: #fff;
     padding: 10px;
 

@@ -4,6 +4,10 @@
   "attributes": {
     "itemsJustification": {
       "type": "string"
+    },
+    "expandDropdown": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

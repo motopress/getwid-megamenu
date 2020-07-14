@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-const { head } = lodash;
+const { head, isEqual } = lodash;
 const {__} = wp.i18n;
 const {useCallback, useState, useRef, useEffect, useLayoutEffect} = wp.element;
 const {compose} = wp.compose;
@@ -45,8 +45,8 @@ function MenuItemToolbar(args) {
         setAttributes,
         opensInNewTab,
         onToggleOpenInNewTab,
-	    toggleItemPopup,
-        isItemPopupOpened,
+	    toggleItemDropdown,
+        isItemDropdownOpened,
 	    hasDescendants
     } = args;
 	const [isURLPickerOpen, setIsURLPickerOpen] = useState(false);
@@ -101,7 +101,7 @@ function MenuItemToolbar(args) {
 	                    name="submenu"
 	                    icon="download"
 	                    title={ __( 'Add submenu' ) }
-	                    onClick={ toggleItemPopup }
+	                    onClick={ toggleItemDropdown }
 	                />
 				</ToolbarGroup>
 			</BlockControls>
@@ -122,7 +122,8 @@ function MenuItemEdit(props) {
 		hasDescendants,
 		updateInnerBlocks,
 		rootBlockClientId,
-		clientId
+		clientId,
+		parentAttributes
 	} = props;
 	const {
 		linkTarget,
@@ -140,10 +141,10 @@ function MenuItemEdit(props) {
 
 	const itemLabelPlaceholder = __( 'Add link…' );
 
-    const [isItemPopupOpened, setIsItemPopupOpened] = useState(hasDescendants);
+    const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
 
-    const toggleItemPopup = () => {
-	    setIsItemPopupOpened(!isItemPopupOpened);
+    const toggleItemDropdown = () => {
+	    setIsItemDropdownOpened(!isItemDropdownOpened);
 	    if(hasDescendants){
 		    updateInnerBlocks();
 	    }
@@ -170,36 +171,52 @@ function MenuItemEdit(props) {
 	);
 
 	const isMenuItemSelected = isSelected || isParentOfSelectedBlock;
-	const menuItemHasChildrens = isItemPopupOpened || hasDescendants;
-	const showPopup = isMenuItemSelected && menuItemHasChildrens;
+	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
+	const showDropdown = isMenuItemSelected && menuItemHasChildrens;
 
 	const itemClasses = classnames(
 		'wp-block-mp-megamenu-item',
 		{
 			'has-child': hasDescendants,
-			'is-opened': showPopup
+			'is-opened': showDropdown
 		}
 	);
 
-	const [popupPosition, setPopupPosition] = useState({left:0, width: 'auto'});
+	const [dropdownPosition, setDropdownPosition] = useState({left:0, width: 'auto'});
 
-	const updatePopupPosition = () => {
+	const updateDropdownPosition = () => {
 		const rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
 		const blockNode = rootBlockNode.querySelector( '[data-block="' + clientId + '"]' );
 		const rootCoords = rootBlockNode.getBoundingClientRect();
 		const blockCoords = blockNode.getBoundingClientRect();
-		const left = blockCoords.x - rootCoords.x;
+		let newDropdownPosition = {};
 
-		setPopupPosition({left: -left, width: rootCoords.width});
+		if( parentAttributes.expandDropdown ) {
+			const editorNodeCoords = document.querySelector('.editor-styles-wrapper').getBoundingClientRect();
+			const left = blockCoords.x - editorNodeCoords.x;
+			newDropdownPosition = {left: -left, width: editorNodeCoords.width};
+		} else {
+			const left = blockCoords.x - rootCoords.x;
+			newDropdownPosition = {left: -left, width: rootCoords.width};
+		}
+
+		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
+			setDropdownPosition(newDropdownPosition);
+		}
+
 	};
 
 	useEffect(() => {
-		updatePopupPosition();
+		updateDropdownPosition();
 	}, [isSelected]);
 
-	const popupStyle = {
-		left: popupPosition.left,
-		width: popupPosition.width
+	useEffect(() => {
+		window.addEventListener('resize', updateDropdownPosition);
+	}, []);
+
+	const dropdownStyle = {
+		left: dropdownPosition.left,
+		width: dropdownPosition.width
 	};
 
 	return (
@@ -223,16 +240,16 @@ function MenuItemEdit(props) {
 						{
 							(menuItemHasChildrens) && (
 								<span className="wp-block-mp-megamenu-item__dropdown-icon">
-								<span className="dashicons dashicons-arrow-down"></span>
-							</span>
+									<span className="dashicons dashicons-arrow-down"></span>
+								</span>
 							)
 						}
 					</a>
 				</div>
 				{
-					(showPopup) && (
-						<div className='wp-block-mp-megamenu-item__popup-wrapper' style={popupStyle}>
-							<div className='wp-block-mp-megamenu-item__popup'>
+					(showDropdown) && (
+						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={dropdownStyle}>
+							<div className='wp-block-mp-megamenu-item__dropdown'>
 								<InnerBlocks/>
 							</div>
 						</div>
@@ -242,8 +259,8 @@ function MenuItemEdit(props) {
 
 			<MenuItemToolbar
                 url={url}
-				toggleItemPopup={toggleItemPopup}
-                isItemPopupOpened={isItemPopupOpened}
+				toggleItemDropdown={toggleItemDropdown}
+                isItemDropdownOpened={isItemDropdownOpened}
                 setAttributes={setAttributes}
                 isSelected={isSelected}
 				hasDescendants
@@ -265,6 +282,7 @@ export default compose([
 			hasSelectedInnerBlock,
 			getClientIdsOfDescendants,
 			getBlockParentsByBlockName,
+			getBlock
 		} = select('core/block-editor');
 		const {clientId} = ownProps;
 		const isParentOfSelectedBlock = hasSelectedInnerBlock(clientId, true);
@@ -274,11 +292,14 @@ export default compose([
 			getBlockParentsByBlockName( clientId, 'mp-megamenu/menu' )
 		);
 
+		const parentAttributes = getBlock(rootBlockClientId).attributes;
+
 		return {
 			isParentOfSelectedBlock,
 			hasDescendants,
 			rootBlockClientId,
-			clientId
+			clientId,
+			parentAttributes
 		};
 	}),
 	withDispatch( ( dispatch, { clientId } ) => {
