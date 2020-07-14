@@ -23,6 +23,7 @@
 		"anchor": false,
 		"align": false,
 		"alignWide": false,
-		"reusable": false
+		"reusable": false,
+		"lightBlockWrapper": true
 	}
 }

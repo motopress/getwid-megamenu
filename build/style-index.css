@@ -8,6 +8,12 @@
     .wp-block-mp-megamenu-item:hover .wp-block-mp-megamenu-item__popup-wrapper {
       height: auto;
       overflow: visible; }
+  .wp-block-mp-megamenu.justify-items-left {
+    justify-content: flex-start; }
+  .wp-block-mp-megamenu.justify-items-center {
+    justify-content: center; }
+  .wp-block-mp-megamenu.justify-items-right {
+    justify-content: flex-end; }
 
 .wp-block-mp-megamenu-item__popup-wrapper {
   position: absolute;
@@ -15,7 +21,8 @@
   right: 0;
   top: 100%;
   height: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 1; }
 
 .wp-block-mp-megamenu-item__popup {
   background: #fff;

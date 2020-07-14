@@ -1,12 +1,16 @@
 {
   "name": "mp-megamenu/menu",
   "category": "layout",
-  "attributes": { },
+  "attributes": {
+    "itemsJustification": {
+      "type": "string"
+    }
+  },
   "supports": {
     "anchor": false,
-    "align": false,
-    "alignWide": true,
+    "align": ["wide", "full"],
     "reusable": false,
-    "customClassName": true
+    "customClassName": true,
+    "lightBlockWrapper": true
   }
 }

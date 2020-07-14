@@ -128,7 +128,14 @@ function mp_megamenu_render_mp_megamenu_item( $attributes, $content ) {
 }
 
 function mp_megamenu_render_mp_megamenu( $attributes, $content ) {
-	$html = '<div class="wp-block-mp-megamenu">';
+
+	$classes = array_merge(
+		isset( $attributes['className'] ) ? array( $attributes['className'] ) : array(),
+		isset( $attributes['align'] ) ? array( 'align' . $attributes['align'] ) : array(),
+		isset( $attributes['itemsJustification'] ) ? array( 'justify-items-' . $attributes['itemsJustification'] ) : array()
+	);
+
+	$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '">';
 	$html .= $content;
 	$html .= '</div>';
 

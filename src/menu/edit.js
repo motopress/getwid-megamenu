@@ -6,10 +6,13 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
+const { __ } = wp.i18n;
 const { useRef } = wp.element;
 const {
-	InnerBlocks
+	InnerBlocks,
+	BlockControls
 } = wp.blockEditor;
+const { Toolbar } = wp.components;
 const { withSelect } = wp.data;
 const { compose } = wp.compose;
 
@@ -26,15 +29,59 @@ function MegaMenu( args ) {
 		selectedBlockHasDescendants,
 		isImmediateParentOfSelectedBlock,
 		isSelected,
+		setAttributes,
 		className,
+		attributes
 	} = args;
 
 	const ref = useRef();
 
+	function setAlignment(alignment) {
+		return () => {
+			const itemsJustification =
+				attributes.itemsJustification === alignment ? undefined : alignment;
+			setAttributes( {
+				itemsJustification,
+			} );
+		}
+	}
+
+	const menuClasses = classnames(className,{
+		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
+	});
+
 	// UI State: rendered Block UI
 	return (
 		<>
-			<div className={className}>
+			<BlockControls>
+				<Toolbar
+					icon={ attributes.itemsJustification ? `editor-align${attributes.itemsJustification}` : "editor-alignleft" }
+					label={ __( 'Change items justification' ) }
+					isCollapsed
+					controls={ [
+						{
+							icon: "editor-alignleft",
+							title: __( 'Justify items left' ),
+							isActive: 'left' === attributes.itemsJustification,
+							onClick: setAlignment( 'left' ),
+						},
+						{
+							icon: "editor-aligncenter",
+							title: __( 'Justify items center' ),
+							isActive:
+								'center' === attributes.itemsJustification,
+							onClick: setAlignment( 'center' ),
+						},
+						{
+							icon: "editor-alignright",
+							title: __( 'Justify items right' ),
+							isActive: 'right' === attributes.itemsJustification,
+							onClick: setAlignment( 'right' ),
+						},
+					] }
+				/>
+			</BlockControls>
+			<div className={ menuClasses }>
 				<InnerBlocks
 					ref={ ref }
 					template={ TEMPLATE }

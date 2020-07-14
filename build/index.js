@@ -206,6 +206,32 @@ module.exports = _arrayWithHoles;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
@@ -406,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: name, category, parent, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false}}");
+module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -766,7 +792,7 @@ function save() {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":true,\"reusable\":false,\"customClassName\":true}}");
+module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -779,10 +805,13 @@ module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layou
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 /**
@@ -793,8 +822,12 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
+var __ = wp.i18n.__;
 var useRef = wp.element.useRef;
-var InnerBlocks = wp.blockEditor.InnerBlocks;
+var _wp$blockEditor = wp.blockEditor,
+    InnerBlocks = _wp$blockEditor.InnerBlocks,
+    BlockControls = _wp$blockEditor.BlockControls;
+var Toolbar = wp.components.Toolbar;
 var withSelect = wp.data.withSelect;
 var compose = wp.compose.compose;
 var TEMPLATE = [['mp-megamenu/menu-item', {}]];
@@ -804,12 +837,45 @@ function MegaMenu(args) {
   var selectedBlockHasDescendants = args.selectedBlockHasDescendants,
       isImmediateParentOfSelectedBlock = args.isImmediateParentOfSelectedBlock,
       isSelected = args.isSelected,
-      className = args.className;
-  var ref = useRef(); // UI State: rendered Block UI
+      setAttributes = args.setAttributes,
+      className = args.className,
+      attributes = args.attributes;
+  var ref = useRef();
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: className
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
+  function setAlignment(alignment) {
+    return function () {
+      var itemsJustification = attributes.itemsJustification === alignment ? undefined : alignment;
+      setAttributes({
+        itemsJustification: itemsJustification
+      });
+    };
+  }
+
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification)); // UI State: rendered Block UI
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Toolbar, {
+    icon: attributes.itemsJustification ? "editor-align".concat(attributes.itemsJustification) : "editor-alignleft",
+    label: __('Change items justification'),
+    isCollapsed: true,
+    controls: [{
+      icon: "editor-alignleft",
+      title: __('Justify items left'),
+      isActive: 'left' === attributes.itemsJustification,
+      onClick: setAlignment('left')
+    }, {
+      icon: "editor-aligncenter",
+      title: __('Justify items center'),
+      isActive: 'center' === attributes.itemsJustification,
+      onClick: setAlignment('center')
+    }, {
+      icon: "editor-alignright",
+      title: __('Justify items right'),
+      isActive: 'right' === attributes.itemsJustification,
+      onClick: setAlignment('right')
+    }]
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: menuClasses
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
     templateLock: false,
@@ -817,7 +883,7 @@ function MegaMenu(args) {
     templateInsertUpdatesSelection: false,
     renderAppender: isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants || isSelected ? InnerBlocks.DefaultAppender : false,
     __experimentalPassedProps: {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wp-block-mp-megamenu-menu__container')
+      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu-menu__container')
     },
     __experimentalMoverDirection: "horizontal"
   })));
@@ -865,6 +931,7 @@ var __ = wp.i18n.__;
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
   title: __('Menu'),
   category: _block_json__WEBPACK_IMPORTED_MODULE_0__.category,
+  attributes: _block_json__WEBPACK_IMPORTED_MODULE_0__.attributes,
   supports: _block_json__WEBPACK_IMPORTED_MODULE_0__.supports,
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_1__["default"]
