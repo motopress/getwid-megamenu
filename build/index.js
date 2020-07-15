@@ -649,27 +649,28 @@ function MenuItemEdit(props) {
       setDropdownPosition = _useState6[1];
 
   var updateDropdownPosition = function updateDropdownPosition() {
-    var rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu');
-    var blockNode = rootBlockNode.querySelector('[data-block="' + clientId + '"]');
-    var rootCoords = rootBlockNode.getBoundingClientRect();
-    var blockCoords = blockNode.getBoundingClientRect();
     var newDropdownPosition = {};
+    var blockNode = document.querySelector('[data-block="' + clientId + '"]');
+    var blockCoords = blockNode.getBoundingClientRect();
+    var rootBlockNode;
 
     if (parentAttributes.expandDropdown) {
-      var editorNodeCoords = document.querySelector('.editor-styles-wrapper').getBoundingClientRect();
-      var left = blockCoords.x - editorNodeCoords.x;
-      newDropdownPosition = {
-        left: -left,
-        width: editorNodeCoords.width
-      };
+      rootBlockNode = document.querySelector('.editor-styles-wrapper');
     } else {
-      var _left = blockCoords.x - rootCoords.x;
-
-      newDropdownPosition = {
-        left: -_left,
-        width: rootCoords.width
-      };
+      rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu');
     }
+
+    var rootCoords = rootBlockNode.getBoundingClientRect();
+    var left = -(blockCoords.x - rootCoords.x);
+
+    if (parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth) {
+      left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
+    }
+
+    newDropdownPosition = {
+      left: left,
+      width: rootCoords.width
+    };
 
     if (!isEqual(newDropdownPosition, dropdownPosition)) {
       setDropdownPosition(newDropdownPosition);
@@ -684,7 +685,11 @@ function MenuItemEdit(props) {
   }, []);
   var dropdownStyle = {
     left: dropdownPosition.left,
-    width: dropdownPosition.width
+    width: dropdownPosition.width,
+    maxWidth: parentAttributes.dropdownMaxWidth
+  };
+  var dropdownContentStyle = {
+    maxWidth: parentAttributes.dropdownContentMaxWidth
   };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: itemClasses
@@ -716,7 +721,10 @@ function MenuItemEdit(props) {
     style: dropdownStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wp-block-mp-megamenu-item__dropdown"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, null)))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(MenuItemToolbar, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wp-block-mp-megamenu-item__dropdown-content",
+    style: dropdownContentStyle
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, null))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(MenuItemToolbar, {
     url: url,
     toggleItemDropdown: toggleItemDropdown,
     isItemDropdownOpened: isItemDropdownOpened,
@@ -829,7 +837,7 @@ function save() {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false},\"menuMaxWidth\":{\"type\":\"string\"},\"dropdownMaxWidth\":{\"type\":\"string\"},\"dropdownContentMaxWidth\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -863,11 +871,14 @@ var __ = wp.i18n.__;
 var useRef = wp.element.useRef;
 var _wp$blockEditor = wp.blockEditor,
     InnerBlocks = _wp$blockEditor.InnerBlocks,
-    BlockControls = _wp$blockEditor.BlockControls;
+    BlockControls = _wp$blockEditor.BlockControls,
+    InspectorControls = _wp$blockEditor.InspectorControls;
 var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
     Toolbar = _wp$components.Toolbar,
     ToolbarButton = _wp$components.ToolbarButton,
-    ToolbarGroup = _wp$components.ToolbarGroup;
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    RangeControl = _wp$components.RangeControl;
 var withSelect = wp.data.withSelect;
 var compose = wp.compose.compose;
 var TEMPLATE = [['mp-megamenu/menu-item', {}]];
@@ -899,7 +910,10 @@ function MegaMenu(args) {
     });
   }
 
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames)); // UI State: rendered Block UI
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
+  var menuContentStyle = {
+    maxWidth: attributes.menuMaxWidth
+  }; // UI State: rendered Block UI
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Toolbar, {
     icon: attributes.itemsJustification ? "editor-align".concat(attributes.itemsJustification) : "editor-alignleft",
@@ -926,8 +940,43 @@ function MegaMenu(args) {
     icon: attributes.expandDropdown ? "editor-contract" : "editor-expand",
     title: __('Expand dropdown'),
     onClick: expandDropdown
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Settings')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
+    label: __('Maximum width of top-level menu in pixels'),
+    value: attributes.menuMaxWidth,
+    onChange: function onChange(menuMaxWidth) {
+      return setAttributes({
+        menuMaxWidth: menuMaxWidth
+      });
+    },
+    min: 0,
+    max: 2000
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
+    label: __('Maximum width of dropdown in pixels'),
+    value: attributes.dropdownMaxWidth,
+    onChange: function onChange(dropdownMaxWidth) {
+      return setAttributes({
+        dropdownMaxWidth: dropdownMaxWidth
+      });
+    },
+    min: 0,
+    max: 2000
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
+    label: __('Maximum width of dropdown content in pixels'),
+    value: attributes.dropdownContentMaxWidth,
+    onChange: function onChange(dropdownContentMaxWidth) {
+      return setAttributes({
+        dropdownContentMaxWidth: dropdownContentMaxWidth
+      });
+    },
+    min: 0,
+    max: 2000
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wp-block-mp-megamenu__content",
+    style: menuContentStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
@@ -935,11 +984,8 @@ function MegaMenu(args) {
     allowedBlocks: ALLOWED_BLOCKS,
     templateInsertUpdatesSelection: false,
     renderAppender: isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants || isSelected ? InnerBlocks.DefaultAppender : false,
-    __experimentalPassedProps: {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu__container')
-    },
     __experimentalMoverDirection: "horizontal"
-  })));
+  }))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (compose([withSelect(function (select, _ref) {

@@ -130,8 +130,9 @@ function mp_megamenu_render_mp_megamenu_item( $attributes, $content ) {
 	if ( $content ) {
 		$html .= '<div class="wp-block-mp-megamenu-item__dropdown-wrapper">';
 		$html .= '<div class="wp-block-mp-megamenu-item__dropdown">';
+		$html .= '<div class="wp-block-mp-megamenu-item__dropdown-content">';
 		$html .= $content;
-		$html .= '</div></div>';
+		$html .= '</div></div></div>';
 	}
 
 	$html .= '</div>';
@@ -148,9 +149,21 @@ function mp_megamenu_render_mp_megamenu( $attributes, $content ) {
 		isset( $attributes['expandDropdown'] ) && $attributes['expandDropdown'] ? array( 'has-full-width-dropdown' ) : array()
 	);
 
-	$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '">';
+	$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '"';
+	if(isset( $attributes['dropdownMaxWidth'])){
+		$html .= ' data-dropdown-width="'.$attributes['dropdownMaxWidth'].'"';
+	}
+	if(isset( $attributes['dropdownContentMaxWidth'])){
+		$html .= ' data-dropdown-content-width="'.$attributes['dropdownContentMaxWidth'].'"';
+	}
+	$html .= '>';
+	$html .= '<div class="wp-block-mp-megamenu__content"';
+	if(isset( $attributes['menuMaxWidth'])){
+		$html .= ' style="max-width:'.$attributes['menuMaxWidth'].'px"';
+	}
+	$html .='>';
 	$html .= $content;
-	$html .= '</div>';
+	$html .= '</div></div>';
 
 	return $html;
 }

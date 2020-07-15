@@ -185,25 +185,29 @@ function MenuItemEdit(props) {
 	const [dropdownPosition, setDropdownPosition] = useState({left:0, width: 'auto'});
 
 	const updateDropdownPosition = () => {
-		const rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
-		const blockNode = rootBlockNode.querySelector( '[data-block="' + clientId + '"]' );
-		const rootCoords = rootBlockNode.getBoundingClientRect();
-		const blockCoords = blockNode.getBoundingClientRect();
 		let newDropdownPosition = {};
+		const blockNode = document.querySelector( '[data-block="' + clientId + '"]' );
+		const blockCoords = blockNode.getBoundingClientRect();
 
-		if( parentAttributes.expandDropdown ) {
-			const editorNodeCoords = document.querySelector('.editor-styles-wrapper').getBoundingClientRect();
-			const left = blockCoords.x - editorNodeCoords.x;
-			newDropdownPosition = {left: -left, width: editorNodeCoords.width};
+		let rootBlockNode;
+		if ( parentAttributes.expandDropdown ) {
+			rootBlockNode = document.querySelector('.editor-styles-wrapper');
 		} else {
-			const left = blockCoords.x - rootCoords.x;
-			newDropdownPosition = {left: -left, width: rootCoords.width};
+			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
 		}
+		const rootCoords = rootBlockNode.getBoundingClientRect();
+
+		let left = -(blockCoords.x - rootCoords.x);
+
+		if ( parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth ) {
+			left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
+		}
+
+		newDropdownPosition = {left: left, width: rootCoords.width};
 
 		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
 			setDropdownPosition(newDropdownPosition);
 		}
-
 	};
 
 	useEffect(() => {
@@ -216,7 +220,12 @@ function MenuItemEdit(props) {
 
 	const dropdownStyle = {
 		left: dropdownPosition.left,
-		width: dropdownPosition.width
+		width: dropdownPosition.width,
+		maxWidth: parentAttributes.dropdownMaxWidth
+	};
+
+	const dropdownContentStyle = {
+		maxWidth: parentAttributes.dropdownContentMaxWidth
 	};
 
 	return (
@@ -250,7 +259,9 @@ function MenuItemEdit(props) {
 					(showDropdown) && (
 						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={dropdownStyle}>
 							<div className='wp-block-mp-megamenu-item__dropdown'>
-								<InnerBlocks/>
+								<div className='wp-block-mp-megamenu-item__dropdown-content' style={dropdownContentStyle}>
+									<InnerBlocks/>
+								</div>
 							</div>
 						</div>
 					)

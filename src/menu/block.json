@@ -8,6 +8,15 @@
     "expandDropdown": {
       "type": "boolean",
       "default": false
+    },
+    "menuMaxWidth": {
+      "type": "string"
+    },
+    "dropdownMaxWidth": {
+      "type": "string"
+    },
+    "dropdownContentMaxWidth": {
+      "type": "string"
     }
   },
   "supports": {

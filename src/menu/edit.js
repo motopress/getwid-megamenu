@@ -10,12 +10,15 @@ const { __ } = wp.i18n;
 const { useRef } = wp.element;
 const {
 	InnerBlocks,
-	BlockControls
+	BlockControls,
+	InspectorControls
 } = wp.blockEditor;
 const {
+	PanelBody,
 	Toolbar,
 	ToolbarButton,
-	ToolbarGroup
+	ToolbarGroup,
+	RangeControl
 } = wp.components;
 const { withSelect } = wp.data;
 const { compose } = wp.compose;
@@ -61,6 +64,10 @@ function MegaMenu( args ) {
 		[ `has-full-width-dropdown` ]: attributes.expandDropdown,
 	});
 
+	const menuContentStyle = {
+		maxWidth: attributes.menuMaxWidth
+	};
+
 	// UI State: rendered Block UI
 	return (
 		<>
@@ -100,27 +107,49 @@ function MegaMenu( args ) {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
+			<InspectorControls>
+				<PanelBody title={ __( 'Settings' ) }>
+					<RangeControl
+						label={ __( 'Maximum width of top-level menu in pixels' ) }
+						value={ attributes.menuMaxWidth }
+						onChange={ ( menuMaxWidth ) => setAttributes( { menuMaxWidth } ) }
+						min={ 0 }
+						max={ 2000 }
+					/>
+					<RangeControl
+						label={ __( 'Maximum width of dropdown in pixels' ) }
+						value={ attributes.dropdownMaxWidth }
+						onChange={ ( dropdownMaxWidth ) => setAttributes( { dropdownMaxWidth } ) }
+						min={ 0 }
+						max={ 2000 }
+					/>
+					<RangeControl
+						label={ __( 'Maximum width of dropdown content in pixels' ) }
+						value={ attributes.dropdownContentMaxWidth }
+						onChange={ ( dropdownContentMaxWidth ) => setAttributes( { dropdownContentMaxWidth } ) }
+						min={ 0 }
+						max={ 2000 }
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<div className={ menuClasses }>
-				<InnerBlocks
-					ref={ ref }
-					template={ TEMPLATE }
-					templateLock={ false }
-					allowedBlocks={ ALLOWED_BLOCKS }
-					templateInsertUpdatesSelection={ false }
-					renderAppender={
-						( isImmediateParentOfSelectedBlock &&
-							! selectedBlockHasDescendants ) ||
-						isSelected
-							? InnerBlocks.DefaultAppender
-							: false
-					}
-					__experimentalPassedProps={ {
-						className: classnames(
-							'wp-block-mp-megamenu__container'
-						),
-					} }
-					__experimentalMoverDirection="horizontal"
-				/>
+				<div className="wp-block-mp-megamenu__content" style={ menuContentStyle }>
+					<InnerBlocks
+						ref={ ref }
+						template={ TEMPLATE }
+						templateLock={ false }
+						allowedBlocks={ ALLOWED_BLOCKS }
+						templateInsertUpdatesSelection={ false }
+						renderAppender={
+							( isImmediateParentOfSelectedBlock &&
+								! selectedBlockHasDescendants ) ||
+							isSelected
+								? InnerBlocks.DefaultAppender
+								: false
+						}
+						__experimentalMoverDirection="horizontal"
+					/>
+				</div>
 			</div>
 		</>
 	);

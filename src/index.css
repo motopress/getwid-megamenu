@@ -10,30 +10,29 @@
     z-index: 10;
 }
 
-.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout,
-.wp-block-mp-megamenu__container {
+.wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.wp-block-mp-megamenu.justify-items-left > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-left .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-start;
 }
 
-.wp-block-mp-megamenu.justify-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-center .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: center;
 }
 
-.wp-block-mp-megamenu.justify-items-right > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-mp-megamenu.justify-items-right .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-end;
 }
 
-.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
+.wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
     margin: 0 20px 0 0;
 }
 
-.wp-block-mp-megamenu > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
+.wp-block-mp-megamenu__content  > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
     margin-left: 20px;
 }
 
@@ -50,6 +49,15 @@
     padding: 10px;
     border: 1px solid #6F9C1B;
     background: #fff;
+}
+
+.wp-block-mp-megamenu-item__dropdown-content{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.wp-block-mp-megamenu-item__dropdown-content > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
+    max-width: 100%;
 }
 
 .wp-block-mp-megamenu-item.is-opened .wp-block-mp-megamenu-item__dropdown-wrapper {
