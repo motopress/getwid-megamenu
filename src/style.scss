@@ -1,7 +1,7 @@
 .wp-block-mp-megamenu {
     position: relative;
 
-    &__content{
+    &__content {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -22,7 +22,7 @@
 
     &.justify-items {
         &-left {
-            .wp-block-mp-megamenu__content{
+            .wp-block-mp-megamenu__content {
                 justify-content: flex-start;
             }
         }
@@ -68,8 +68,89 @@
     margin-right: auto;
 }
 
+.wp-block-mp-plain-menu-item__dropdown-icon,
 .wp-block-mp-megamenu-item__dropdown-icon {
     > * {
         vertical-align: middle;
+    }
+}
+
+.wp-block-mp-plain-menu {
+    &.justify-items {
+        &-left {
+            .wp-block-mp-plain-menu__content {
+                justify-content: flex-start;
+            }
+        }
+
+        &-center {
+            .wp-block-mp-plain-menu__content {
+                justify-content: center;
+            }
+        }
+
+        &-right {
+            .wp-block-mp-plain-menu__content {
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+.wp-block-mp-plain-menu__content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wp-block-mp-plain-menu-item__dropdown {
+    z-index: 10;
+    display: none;
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+
+    & & {
+        left: 100%;
+        top: 0;
+    }
+}
+
+.wp-block-mp-plain-menu-item {
+    position: relative;
+
+    &.is-opened,
+    &.has-child-selected,
+    &:hover {
+        > .wp-block-mp-plain-menu-item__dropdown {
+            display: block;
+        }
+    }
+
+    &:first-child {
+        .wp-block-mp-plain-menu-item__dropdown & {
+            > .wp-block-mp-plain-menu-item__link {
+                > a {
+                    padding-top: .5em;
+                }
+            }
+        }
+    }
+
+    &:last-child {
+        .wp-block-mp-plain-menu-item__dropdown & {
+            > .wp-block-mp-plain-menu-item__link {
+                > a {
+                    padding-bottom: .5em;
+                }
+            }
+        }
+    }
+
+    a {
+        padding: .25em 1em;
+        display: block;
     }
 }

@@ -10,29 +10,34 @@
     z-index: 10;
 }
 
-.wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout{
+.wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
+.wp-block-mp-plain-menu.justify-items-left .wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout,
 .wp-block-mp-megamenu.justify-items-left .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-start;
 }
 
+.wp-block-mp-plain-menu.justify-items-center .wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout,
 .wp-block-mp-megamenu.justify-items-center .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: center;
 }
 
+.wp-block-mp-plain-menu.justify-items-right .wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout,
 .wp-block-mp-megamenu.justify-items-right .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
     justify-content: flex-end;
 }
 
+.wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block,
 .wp-block-mp-megamenu__content > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
     margin: 0 20px 0 0;
 }
 
-.wp-block-mp-megamenu__content  > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
+.wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-list-appender {
     margin-left: 20px;
 }
 
@@ -51,7 +56,7 @@
     background: #fff;
 }
 
-.wp-block-mp-megamenu-item__dropdown-content{
+.wp-block-mp-megamenu-item__dropdown-content {
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -65,9 +70,15 @@
     height: auto;
 }
 
-.wp-block-mp-megamenu-item__link a{
+.wp-block-mp-plain-menu-item__link a,
+.wp-block-mp-megamenu-item__link a {
     display: flex;
     align-items: center;
 }
+
+.wp-block-mp-plain-menu-item .wp-block-mp-plain-menu-item__dropdown a{
+    display: flex;
+}
+
 
 /*# sourceMappingURL=index.css.map*/
