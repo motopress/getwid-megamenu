@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-const { head, isEqual } = lodash;
+const { head, isEqual, escape } = lodash;
 const {__} = wp.i18n;
 const {useCallback, useState, useRef, useEffect, useLayoutEffect} = wp.element;
 const {compose} = wp.compose;
@@ -42,6 +42,7 @@ function MenuItemToolbar(args) {
     const {
         isSelected,
         url,
+	    text,
         setAttributes,
         opensInNewTab,
         onToggleOpenInNewTab,
@@ -68,6 +69,12 @@ function MenuItemToolbar(args) {
 		setIsURLPickerOpen( false );
 	};
 
+	useEffect( () => {
+		if ( isSelected && ! url ) {
+			setIsURLPickerOpen( true );
+		}
+	}, [ isSelected ] );
+
 	const linkControl = isURLPickerOpen && (
 		<Popover position="bottom center" onClose={() => setIsURLPickerOpen(false)}>
 			<__experimentalLinkControl
@@ -77,10 +84,23 @@ function MenuItemToolbar(args) {
 					opensInNewTab
 				}}
 				onChange={ ( {
+					title: newTitle = '',
 	                url: newURL = '',
 	                opensInNewTab: newOpensInNewTab,
                 } ) => {
-					setAttributes({url: newURL});
+					setAttributes({
+						url: newURL,
+						text: ( () => {
+							console.log({text, newTitle});
+							if ( text ) {
+								return text;
+							}
+
+							if ( newTitle !== '' && text !== newTitle) {
+								return escape( newTitle );
+							}
+						} )()
+					});
 
 					if (opensInNewTab !== newOpensInNewTab) {
 						onToggleOpenInNewTab(newOpensInNewTab);
@@ -226,6 +246,7 @@ function MenuItemEdit(props) {
 
 			<MenuItemToolbar
                 url={url}
+                text={text}
 				insertPlainMenuItem={insertPlainMenuItem}
                 isItemDropdownOpened={isItemDropdownOpened}
                 setAttributes={setAttributes}

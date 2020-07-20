@@ -17,6 +17,13 @@
     },
     "dropdownContentMaxWidth": {
       "type": "string"
+    },
+    "collapseOnMobile": {
+      "type": "boolean"
+    },
+    "collapseWidth": {
+      "type": "string",
+      "default": "768"
     }
   },
   "supports": {
