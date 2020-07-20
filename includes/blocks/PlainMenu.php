@@ -13,7 +13,8 @@ class PlainMenu extends AbstractBlock {
 	public function render_callback( $attributes, $content ) {
 		$classes = array_merge(
 			isset( $attributes['className'] ) ? array( $attributes['className'] ) : array(),
-			isset( $attributes['itemsJustification'] ) ? array( 'justify-items-' . $attributes['itemsJustification'] ) : array()
+			isset( $attributes['itemsJustification'] ) ? array( 'justify-items-' . $attributes['itemsJustification'] ) : array(),
+			isset( $attributes['orientation'] ) ? array( 'is-orientation-' . $attributes['orientation'] ) : array()
 		);
 
 		$html = '<div class="wp-block-mp-plain-menu ' . implode( ' ', $classes ) . '">';

@@ -52,8 +52,9 @@ function PlainMenu( args ) {
 		}
 	}
 
-	const menuClasses = classnames( 'wp-block-mp-plain-menu' ,{
-		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification
+	const menuClasses = classnames( 'wp-block-mp-plain-menu', {
+		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
+		[ `is-orientation-${attributes.orientation}`]: attributes.orientation
 	});
 
 	// UI State: rendered Block UI
@@ -86,6 +87,19 @@ function PlainMenu( args ) {
 						},
 					] }
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						name="orientation"
+						icon="image-rotate-right"
+						title={ attributes.orientation === 'vertical' ? __('Make horizontal') : __('Make vertical') }
+						isActive={ attributes.orientation === 'vertical' }
+						onClick={ () => {
+							setAttributes( {
+								orientation: attributes.orientation === 'vertical' ? 'horizontal' : 'vertical',
+							} )
+						} }
+					/>
+				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
 			</InspectorControls>

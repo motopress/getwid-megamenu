@@ -1252,16 +1252,6 @@ function MenuItemEdit(props) {
       isItemDropdownOpened = _useState4[0],
       setIsItemDropdownOpened = _useState4[1];
 
-  var toggleItemDropdown = function toggleItemDropdown() {
-    setIsItemDropdownOpened(!isItemDropdownOpened);
-
-    if (hasDescendants) {
-      updateInnerBlocks();
-    }
-
-    return false; // prevents default behaviour for event
-  };
-
   var onToggleOpenInNewTab = useCallback(function (value) {
     var newLinkTarget = value ? '_blank' : undefined;
     var updatedRel = rel;
@@ -1497,6 +1487,8 @@ var TEMPLATE = [['mp-megamenu/plain-menu-item', {}]];
 var ALLOWED_BLOCKS = ['mp-megamenu/plain-menu-item'];
 
 function PlainMenu(args) {
+  var _classnames;
+
   var selectedBlockHasDescendants = args.selectedBlockHasDescendants,
       isImmediateParentOfSelectedBlock = args.isImmediateParentOfSelectedBlock,
       isSelected = args.isSelected,
@@ -1514,7 +1506,7 @@ function PlainMenu(args) {
     };
   }
 
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-plain-menu', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification)); // UI State: rendered Block UI
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames)); // UI State: rendered Block UI
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Toolbar, {
     icon: attributes.itemsJustification ? "editor-align".concat(attributes.itemsJustification) : "editor-alignleft",
@@ -1536,7 +1528,17 @@ function PlainMenu(args) {
       isActive: 'right' === attributes.itemsJustification,
       onClick: setAlignment('right')
     }]
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "orientation",
+    icon: "image-rotate-right",
+    title: attributes.orientation === 'vertical' ? __('Make horizontal') : __('Make vertical'),
+    isActive: attributes.orientation === 'vertical',
+    onClick: function onClick() {
+      setAttributes({
+        orientation: attributes.orientation === 'vertical' ? 'horizontal' : 'vertical'
+      });
+    }
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wp-block-mp-plain-menu__content"

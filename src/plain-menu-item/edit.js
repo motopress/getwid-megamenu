@@ -147,14 +147,6 @@ function MenuItemEdit(props) {
 
     const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
 
-    const toggleItemDropdown = () => {
-	    setIsItemDropdownOpened(!isItemDropdownOpened);
-	    if(hasDescendants){
-		    updateInnerBlocks();
-	    }
-        return false; // prevents default behaviour for event
-    };
-
 	const onToggleOpenInNewTab = useCallback(
 		(value) => {
 			const newLinkTarget = value ? '_blank' : undefined;
