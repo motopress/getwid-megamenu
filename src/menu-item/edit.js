@@ -90,7 +90,6 @@ function MenuItemToolbar(args) {
 					setAttributes({
 						url: newURL,
 						text: ( () => {
-							console.log({text, newTitle});
 							if ( text ) {
 								return text;
 							}

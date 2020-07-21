@@ -17,6 +17,15 @@
 		},
 		"rel": {
 			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
+		"dropdownBackgroundColor": {
+			"type": "string"
 		}
 	},
 	"supports": {

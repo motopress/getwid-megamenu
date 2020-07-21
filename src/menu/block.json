@@ -24,6 +24,24 @@
     "collapseWidth": {
       "type": "string",
       "default": "768"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "customBackgroundColor": {
+      "type": "string"
+    },
+    "dropdownBackgroundColor": {
+      "type": "string"
+    },
+    "menuItemFontSize": {
+      "type": "string"
+    },
+    "menuItemCustomFontSize": {
+      "type": "number"
+    },
+    "menuItemColor": {
+      "type": "string"
     }
   },
   "supports": {

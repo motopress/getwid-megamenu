@@ -19,6 +19,23 @@ class MegaMenu extends AbstractBlock {
 			isset( $attributes['expandDropdown'] ) && $attributes['expandDropdown'] ? array( 'has-full-width-dropdown' ) : array()
 		);
 
+		$menu_styles = '';
+		$has_named_bg_color  = array_key_exists( 'backgroundColor', $attributes );
+		$has_custom_bg_color = array_key_exists( 'customBackgroundColor', $attributes );
+
+		if ( $has_custom_bg_color || $has_named_bg_color ) {
+			$classes = array_merge( $classes, ['has-background'] );
+		}
+
+		if ( $has_named_bg_color ) {
+			// Add the background-color class.
+			$classes = array_merge( $classes, [ sprintf( 'has-%s-background-color', $attributes['backgroundColor'] ) ] );
+		}
+
+		if ( $has_custom_bg_color ) {
+			$menu_styles .= sprintf( 'background-color: %s;', $attributes['customBackgroundColor'] );
+		}
+
 		$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '"';
 		if ( isset( $attributes['dropdownMaxWidth'] ) ) {
 			$html .= ' data-dropdown-width="' . $attributes['dropdownMaxWidth'] . '"';
@@ -26,6 +43,11 @@ class MegaMenu extends AbstractBlock {
 		if ( isset( $attributes['dropdownContentMaxWidth'] ) ) {
 			$html .= ' data-dropdown-content-width="' . $attributes['dropdownContentMaxWidth'] . '"';
 		}
+
+		if($menu_styles){
+			$html .= ' style="'.$menu_styles.'"';
+		}
+
 		$html .= '>';
 		$html .= '<div class="wp-block-mp-megamenu__content"';
 		if ( isset( $attributes['menuMaxWidth'] ) ) {
