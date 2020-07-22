@@ -10,19 +10,19 @@
       "default": false
     },
     "menuMaxWidth": {
-      "type": "string"
+      "type": "number"
     },
     "dropdownMaxWidth": {
-      "type": "string"
+      "type": "number"
     },
     "dropdownContentMaxWidth": {
-      "type": "string"
+      "type": "number"
     },
     "collapseOnMobile": {
       "type": "boolean"
     },
     "collapseWidth": {
-      "type": "string",
+      "type": "number",
       "default": "768"
     },
     "backgroundColor": {
@@ -34,13 +34,19 @@
     "dropdownBackgroundColor": {
       "type": "string"
     },
+    "customDropdownBackgroundColor": {
+      "type": "string"
+    },
     "menuItemFontSize": {
       "type": "string"
     },
-    "menuItemCustomFontSize": {
+    "customMenuItemFontSize": {
       "type": "number"
     },
     "menuItemColor": {
+      "type": "string"
+    },
+    "customMenuItemColor": {
       "type": "string"
     }
   },

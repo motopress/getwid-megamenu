@@ -18,6 +18,14 @@
                 overflow: visible;
             }
         }
+
+        &__link {
+            &.has-text-color {
+                a {
+                    color: inherit;
+                }
+            }
+        }
     }
 
     &.justify-items {

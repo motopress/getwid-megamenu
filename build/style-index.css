@@ -11,6 +11,8 @@
     .wp-block-mp-megamenu-item:hover .wp-block-mp-megamenu-item__dropdown-wrapper {
       height: auto;
       overflow: visible; }
+    .wp-block-mp-megamenu-item__link.has-text-color a {
+      color: inherit; }
   .wp-block-mp-megamenu.justify-items-left .wp-block-mp-megamenu__content {
     justify-content: flex-start; }
   .wp-block-mp-megamenu.justify-items-center .wp-block-mp-megamenu__content {

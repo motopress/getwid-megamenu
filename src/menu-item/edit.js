@@ -203,6 +203,20 @@ function MenuItemEdit(props) {
 		}
 	);
 
+	const itemLinkClasses = classnames(
+		'wp-block-mp-megamenu-item__link',
+		{
+			'has-text-color': attributes.textColor || attributes.customTextColor,
+			[ `has-${ attributes.textColor }-color` ]: !! attributes.textColor,
+			[ `has-${ attributes.fontSize }-font-size` ]: !! attributes.fontSize
+		}
+	);
+
+	const itemLinkStyles = {
+		color: attributes.customTextColor,
+		fontSize: attributes.customFontSize
+	};
+
 	const [dropdownPosition, setDropdownPosition] = useState({left:0, width: 'auto'});
 
 	const updateDropdownPosition = () => {
@@ -239,20 +253,40 @@ function MenuItemEdit(props) {
 		window.addEventListener('resize', updateDropdownPosition);
 	}, []);
 
-	const dropdownStyle = {
+	const dropdownWrapperStyle = {
 		left: dropdownPosition.left,
 		width: dropdownPosition.width,
 		maxWidth: parentAttributes.dropdownMaxWidth
+	};
+
+	const dropdownStyle = {
+		backgroundColor: attributes.customDropdownBackgroundColor
 	};
 
 	const dropdownContentStyle = {
 		maxWidth: parentAttributes.dropdownContentMaxWidth
 	};
 
+	const dropdownClasses = classnames('wp-block-mp-megamenu-item__dropdown', {
+		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
+		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
+	});
+
+	useEffect( () => {
+		setAttributes( {
+			fontSize: parentAttributes.menuItemFontSize,
+			customFontSize: parentAttributes.customMenuItemFontSize,
+			textColor: parentAttributes.menuItemColor,
+			customTextColor: parentAttributes.customMenuItemColor,
+			dropdownBackgroundColor: parentAttributes.dropdownBackgroundColor,
+			customDropdownBackgroundColor: parentAttributes.customDropdownBackgroundColor
+		} );
+	}, [] );
+
 	return (
 		<>
 			<div className={itemClasses}>
-				<div className='wp-block-mp-megamenu-item__link'>
+				<div className={itemLinkClasses} style={itemLinkStyles}>
 					<a
 						href="#"
 						onClick={ () => {
@@ -278,8 +312,8 @@ function MenuItemEdit(props) {
 				</div>
 				{
 					(showDropdown) && (
-						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={dropdownStyle}>
-							<div className='wp-block-mp-megamenu-item__dropdown'>
+						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={dropdownWrapperStyle}>
+							<div className={dropdownClasses} style={dropdownStyle}>
 								<div className='wp-block-mp-megamenu-item__dropdown-content' style={dropdownContentStyle}>
 									<InnerBlocks/>
 								</div>

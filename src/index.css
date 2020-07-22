@@ -1,11 +1,9 @@
 .wp-block-mp-megamenu {
-    border: 2px solid #0d66c2;
     padding: 10px;
     position: relative;
 }
 
 .wp-block-mp-megamenu-item {
-    border: 1px solid #00d082;
     padding: 5px;
     z-index: 10;
 }
@@ -52,7 +50,6 @@
 .wp-block-mp-megamenu-item__dropdown {
     width: 100%;
     padding: 10px;
-    border: 1px solid #6F9C1B;
     background: #fff;
 }
 

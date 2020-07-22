@@ -1,7 +1,7 @@
 import MPMegaMenuColorPalette from '../custom-controls/color-palette';
 
 const { __ } = wp.i18n;
-const { useRef } = wp.element;
+const { useRef, useEffect } = wp.element;
 const {
 	InnerBlocks,
 	BlockControls,
@@ -37,6 +37,10 @@ function Controls(args) {
 		setMenuItemFontSize,
 		backgroundColor,
 		setBackgroundColor,
+		dropdownBackgroundColor,
+		setDropdownBackgroundColor,
+		menuItemColor,
+		setMenuItemColor,
 		updateChildBlocksAttributes
 	} = args;
 
@@ -55,6 +59,28 @@ function Controls(args) {
 			expandDropdown: !attributes.expandDropdown,
 		} );
 	}
+
+	useEffect( () => {
+		updateChildBlocksAttributes( {
+			fontSize: menuItemFontSize.slug,
+			customFontSize: menuItemFontSize.slug ? undefined : menuItemFontSize.size,
+		} )
+	}, [menuItemFontSize.size] );
+
+
+	useEffect( () => {
+		updateChildBlocksAttributes( {
+			textColor: menuItemColor.slug,
+			customTextColor: menuItemColor.slug ? undefined : menuItemColor.color,
+		} )
+	}, [menuItemColor.color] );
+
+	useEffect( () => {
+		updateChildBlocksAttributes( {
+			dropdownBackgroundColor: dropdownBackgroundColor.slug,
+			customDropdownBackgroundColor: dropdownBackgroundColor.slug ? undefined : dropdownBackgroundColor.color
+		} )
+	}, [dropdownBackgroundColor.color] );
 
 	return(
 		<>
@@ -88,7 +114,7 @@ function Controls(args) {
 				<ToolbarGroup>
 					<ToolbarButton
 						name="expand"
-						icon={attributes.expandDropdown ? "editor-contract" : "editor-expand"}
+						icon={ attributes.expandDropdown ? "editor-contract" : "editor-expand" }
 						title={__('Expand dropdown')}
 						onClick={expandDropdown}
 					/>
@@ -99,7 +125,7 @@ function Controls(args) {
 					<RangeControl
 						label={ __( 'Maximum width of top-level menu in pixels' ) }
 						value={ attributes.menuMaxWidth }
-						onChange={ ( menuMaxWidth ) => setAttributes( { menuMaxWidth } ) }
+						onChange={ ( value ) => setAttributes( { menuMaxWidth: value } ) }
 						min={ 0 }
 						max={ 2000 }
 					/>
@@ -135,13 +161,8 @@ function Controls(args) {
 					<MPMegaMenuColorPalette
 						label={__('Menu Item Color')}
 						disableCustomColors={ false }
-						color={ attributes.menuItemColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								menuItemColor: value
-							});
-							updateChildBlocksAttributes( { textColor: value } )
-						} }
+						color={ menuItemColor.color }
+						onChange={ setMenuItemColor }
 						clearable={ true }
 					/>
 				</PanelBody>
@@ -155,13 +176,8 @@ function Controls(args) {
 					<MPMegaMenuColorPalette
 						label={__('Dropdown Background Color')}
 						disableCustomColors={ false }
-						color={ attributes.dropdownBackgroundColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								dropdownBackgroundColor: value
-							});
-							updateChildBlocksAttributes( { dropdownBackgroundColor: value } )
-						} }
+						color={ dropdownBackgroundColor.color }
+						onChange={ setDropdownBackgroundColor }
 						clearable={ true }
 					/>
 				</PanelBody>
@@ -172,7 +188,11 @@ function Controls(args) {
 }
 
 export default compose( [
-	withColors( {backgroundColor: 'background-color'}),
+	withColors( {
+		backgroundColor: 'background-color',
+		dropdownBackgroundColor: 'background-color',
+		menuItemColor: 'color',
+	} ),
 	withFontSizes( 'menuItemFontSize' ),
 	withDispatch( (dispatch, ownProps, registry) => ( {
 		updateChildBlocksAttributes( attributes ) {

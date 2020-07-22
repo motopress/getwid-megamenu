@@ -26,6 +26,15 @@
 		},
 		"dropdownBackgroundColor": {
 			"type": "string"
+		},
+		"customDropdownBackgroundColor": {
+			"type": "string"
+		},
+		"fontSize": {
+			"type": "string"
+		},
+		"customFontSize": {
+			"type": "string"
 		}
 	},
 	"supports": {
