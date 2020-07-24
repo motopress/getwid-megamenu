@@ -20,6 +20,8 @@ const {
 	RangeControl,
 	BaseControl,
 	ColorIndicator,
+	ButtonGroup,
+	Button,
 	ToggleControl
 } = wp.components;
 const { withSelect, withDispatch } = wp.data;
@@ -35,10 +37,7 @@ function Controls(args) {
 		attributes,
 		menuItemFontSize,
 		setMenuItemFontSize,
-		backgroundColor,
-		setBackgroundColor,
 		dropdownBackgroundColor,
-		setDropdownBackgroundColor,
 		menuItemColor,
 		setMenuItemColor,
 		updateChildBlocksAttributes
@@ -74,13 +73,6 @@ function Controls(args) {
 			customTextColor: menuItemColor.slug ? undefined : menuItemColor.color,
 		} )
 	}, [menuItemColor.color] );
-
-	useEffect( () => {
-		updateChildBlocksAttributes( {
-			dropdownBackgroundColor: dropdownBackgroundColor.slug,
-			customDropdownBackgroundColor: dropdownBackgroundColor.slug ? undefined : dropdownBackgroundColor.color
-		} )
-	}, [dropdownBackgroundColor.color] );
 
 	return(
 		<>
@@ -121,7 +113,7 @@ function Controls(args) {
 				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
-				<PanelBody title={ __( 'Width Settings' ) }>
+				<PanelBody title={ __( 'Width Settings' ) } initialOpen={ false }>
 					<RangeControl
 						label={ __( 'Maximum width of top-level menu in pixels' ) }
 						value={ attributes.menuMaxWidth }
@@ -144,16 +136,7 @@ function Controls(args) {
 						max={ 2000 }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Menu Styles' ) }>
-					<MPMegaMenuColorPalette
-						label={__('Menu Background Color')}
-						disableCustomColors={ false }
-						color={ backgroundColor.color }
-						onChange={ setBackgroundColor }
-						clearable={ true }
-					/>
-				</PanelBody>
-				<PanelBody title={ __( 'Menu Item Styles' ) }>
+				<PanelBody title={ __( 'Menu Item Styles' ) } initialOpen={ false }>
 					<FontSizePicker
 						value={ menuItemFontSize.size }
 						onChange={ setMenuItemFontSize }
@@ -166,20 +149,52 @@ function Controls(args) {
 						clearable={ true }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Dropdown Styles' ) }>
+				<PanelBody title={ __( 'Dropdown Styles' ) } initialOpen={ false }>
 					<ToggleControl
 						label={ __( 'Expand dropdown' ) }
 						help={ attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.') }
 						checked={ attributes.expandDropdown }
 						onChange={ expandDropdown }
 					/>
-					<MPMegaMenuColorPalette
-						label={__('Dropdown Background Color')}
-						disableCustomColors={ false }
-						color={ dropdownBackgroundColor.color }
-						onChange={ setDropdownBackgroundColor }
-						clearable={ true }
+				</PanelBody>
+				<PanelBody title={ __( 'Responsive Styles' ) } initialOpen={ false }>
+					<RangeControl
+						label={ __( 'Mobile device breakpoint in pixels' ) }
+						value={ attributes.responsiveBreakpoint }
+						onChange={ ( responsiveBreakpoint ) => setAttributes( { responsiveBreakpoint } ) }
+						min={ 0 }
+						max={ 2000 }
 					/>
+					<ToggleControl
+						label={ __( 'Collapse on mobile?' ) }
+						help={ attributes.collapseOnMobile ? __('Menu will be transformed to burger.') : __('Menu will be as it is.') }
+						checked={ attributes.collapseOnMobile }
+						onChange={ ( collapseOnMobile ) => setAttributes( { collapseOnMobile } ) }
+					/>
+					<BaseControl
+						label={ __( 'Toggle button alignment' ) }
+					>
+						<ButtonGroup>
+							<Button
+								icon="editor-alignleft"
+								isSecondary
+								onClick={ () => { setAttributes( { toggleButtonAlignment: 'left' } ) } }
+								isPrimary={'left' === attributes.toggleButtonAlignment}
+							/>
+							<Button
+								icon="editor-aligncenter"
+								isSecondary
+								onClick={ () => { setAttributes( { toggleButtonAlignment: 'center' } ) } }
+								isPrimary={'center' === attributes.toggleButtonAlignment}
+							/>
+							<Button
+								icon="editor-alignright"
+								isSecondary
+								onClick={ () => { setAttributes( { toggleButtonAlignment: 'right' } ) } }
+								isPrimary={'right' === attributes.toggleButtonAlignment}
+							/>
+						</ButtonGroup>
+					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
 
@@ -189,8 +204,6 @@ function Controls(args) {
 
 export default compose( [
 	withColors( {
-		backgroundColor: 'background-color',
-		dropdownBackgroundColor: 'background-color',
 		menuItemColor: 'color',
 	} ),
 	withFontSizes( 'menuItemFontSize' ),

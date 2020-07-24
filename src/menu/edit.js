@@ -36,39 +36,37 @@ function MegaMenu( args ) {
 	const menuClasses = classnames( 'wp-block-mp-megamenu' ,{
 		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
 		[ `has-full-width-dropdown` ]: attributes.expandDropdown,
-		'has-background': attributes.backgroundColor || attributes.customBackgroundColor,
-		[ `has-${ attributes.backgroundColor }-background-color` ]: !! attributes.backgroundColor,
 	});
 
-	const menuContentStyle = {
+	const menuWrapperStyle = {
 		maxWidth: attributes.menuMaxWidth
-	};
-
-	const menuStyles = {
-		backgroundColor: attributes.customBackgroundColor
 	};
 
 	// UI State: rendered Block UI
 	return (
 		<>
 			<Controls { ...args }/>
-			<div className={ menuClasses } style={ menuStyles }>
-				<div className="wp-block-mp-megamenu__content" style={ menuContentStyle }>
-					<InnerBlocks
-						ref={ ref }
-						template={ TEMPLATE }
-						templateLock={ false }
-						allowedBlocks={ ALLOWED_BLOCKS }
-						templateInsertUpdatesSelection={ false }
-						renderAppender={
-							( isImmediateParentOfSelectedBlock &&
-								! selectedBlockHasDescendants ) ||
-							isSelected
-								? InnerBlocks.DefaultAppender
-								: false
-						}
-						__experimentalMoverDirection="horizontal"
-					/>
+			<div className={ menuClasses }>
+				<div className="wp-block-mp-megamenu__wrapper" style={ menuWrapperStyle }>
+					<div className="wp-block-mp-megamenu__content-wrapper">
+						<div className="wp-block-mp-megamenu__content">
+							<InnerBlocks
+								ref={ ref }
+								template={ TEMPLATE }
+								templateLock={ false }
+								allowedBlocks={ ALLOWED_BLOCKS }
+								templateInsertUpdatesSelection={ false }
+								renderAppender={
+									( isImmediateParentOfSelectedBlock &&
+										! selectedBlockHasDescendants ) ||
+									isSelected
+										? InnerBlocks.DefaultAppender
+										: false
+								}
+								__experimentalMoverDirection="horizontal"
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

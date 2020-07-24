@@ -477,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: name, category, parent, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"dropdownBackgroundColor\":{\"type\":\"string\"},\"customDropdownBackgroundColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -779,9 +779,7 @@ function MenuItemEdit(props) {
       fontSize: parentAttributes.menuItemFontSize,
       customFontSize: parentAttributes.customMenuItemFontSize,
       textColor: parentAttributes.menuItemColor,
-      customTextColor: parentAttributes.customMenuItemColor,
-      dropdownBackgroundColor: parentAttributes.dropdownBackgroundColor,
-      customDropdownBackgroundColor: parentAttributes.customDropdownBackgroundColor
+      customTextColor: parentAttributes.customMenuItemColor
     });
   }, []);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
@@ -933,7 +931,7 @@ function save() {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false},\"menuMaxWidth\":{\"type\":\"number\"},\"dropdownMaxWidth\":{\"type\":\"number\"},\"dropdownContentMaxWidth\":{\"type\":\"number\"},\"collapseOnMobile\":{\"type\":\"boolean\"},\"collapseWidth\":{\"type\":\"number\",\"default\":\"768\"},\"backgroundColor\":{\"type\":\"string\"},\"customBackgroundColor\":{\"type\":\"string\"},\"dropdownBackgroundColor\":{\"type\":\"string\"},\"customDropdownBackgroundColor\":{\"type\":\"string\"},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false},\"menuMaxWidth\":{\"type\":\"number\"},\"dropdownMaxWidth\":{\"type\":\"number\"},\"dropdownContentMaxWidth\":{\"type\":\"number\"},\"collapseOnMobile\":{\"type\":\"boolean\",\"default\":true},\"responsiveBreakpoint\":{\"type\":\"number\",\"default\":600},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"},\"toggleButtonAlignment\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -980,6 +978,8 @@ var _wp$components = wp.components,
     RangeControl = _wp$components.RangeControl,
     BaseControl = _wp$components.BaseControl,
     ColorIndicator = _wp$components.ColorIndicator,
+    ButtonGroup = _wp$components.ButtonGroup,
+    Button = _wp$components.Button,
     ToggleControl = _wp$components.ToggleControl;
 var _wp$data = wp.data,
     withSelect = _wp$data.withSelect,
@@ -995,10 +995,7 @@ function Controls(args) {
       attributes = args.attributes,
       menuItemFontSize = args.menuItemFontSize,
       setMenuItemFontSize = args.setMenuItemFontSize,
-      backgroundColor = args.backgroundColor,
-      setBackgroundColor = args.setBackgroundColor,
       dropdownBackgroundColor = args.dropdownBackgroundColor,
-      setDropdownBackgroundColor = args.setDropdownBackgroundColor,
       menuItemColor = args.menuItemColor,
       setMenuItemColor = args.setMenuItemColor,
       updateChildBlocksAttributes = args.updateChildBlocksAttributes;
@@ -1030,12 +1027,6 @@ function Controls(args) {
       customTextColor: menuItemColor.slug ? undefined : menuItemColor.color
     });
   }, [menuItemColor.color]);
-  useEffect(function () {
-    updateChildBlocksAttributes({
-      dropdownBackgroundColor: dropdownBackgroundColor.slug,
-      customDropdownBackgroundColor: dropdownBackgroundColor.slug ? undefined : dropdownBackgroundColor.color
-    });
-  }, [dropdownBackgroundColor.color]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Toolbar, {
     icon: attributes.itemsJustification ? "editor-align".concat(attributes.itemsJustification) : "editor-alignleft",
     label: __('Change items justification'),
@@ -1062,7 +1053,8 @@ function Controls(args) {
     title: __('Expand dropdown'),
     onClick: expandDropdown
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Width Settings')
+    title: __('Width Settings'),
+    initialOpen: false
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
     label: __('Maximum width of top-level menu in pixels'),
     value: attributes.menuMaxWidth,
@@ -1094,15 +1086,8 @@ function Controls(args) {
     min: 0,
     max: 2000
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Menu Styles')
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_custom_controls_color_palette__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __('Menu Background Color'),
-    disableCustomColors: false,
-    color: backgroundColor.color,
-    onChange: setBackgroundColor,
-    clearable: true
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Menu Item Styles')
+    title: __('Menu Item Styles'),
+    initialOpen: false
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FontSizePicker, {
     value: menuItemFontSize.size,
     onChange: setMenuItemFontSize
@@ -1113,24 +1098,68 @@ function Controls(args) {
     onChange: setMenuItemColor,
     clearable: true
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Dropdown Styles')
+    title: __('Dropdown Styles'),
+    initialOpen: false
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
     label: __('Expand dropdown'),
     help: attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.'),
     checked: attributes.expandDropdown,
     onChange: expandDropdown
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_custom_controls_color_palette__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __('Dropdown Background Color'),
-    disableCustomColors: false,
-    color: dropdownBackgroundColor.color,
-    onChange: setDropdownBackgroundColor,
-    clearable: true
-  }))));
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Responsive Styles'),
+    initialOpen: false
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
+    label: __('Mobile device breakpoint in pixels'),
+    value: attributes.responsiveBreakpoint,
+    onChange: function onChange(responsiveBreakpoint) {
+      return setAttributes({
+        responsiveBreakpoint: responsiveBreakpoint
+      });
+    },
+    min: 0,
+    max: 2000
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
+    label: __('Collapse on mobile?'),
+    help: attributes.collapseOnMobile ? __('Menu will be transformed to burger.') : __('Menu will be as it is.'),
+    checked: attributes.collapseOnMobile,
+    onChange: function onChange(collapseOnMobile) {
+      return setAttributes({
+        collapseOnMobile: collapseOnMobile
+      });
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BaseControl, {
+    label: __('Toggle button alignment')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ButtonGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
+    icon: "editor-alignleft",
+    isSecondary: true,
+    onClick: function onClick() {
+      setAttributes({
+        toggleButtonAlignment: 'left'
+      });
+    },
+    isPrimary: 'left' === attributes.toggleButtonAlignment
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
+    icon: "editor-aligncenter",
+    isSecondary: true,
+    onClick: function onClick() {
+      setAttributes({
+        toggleButtonAlignment: 'center'
+      });
+    },
+    isPrimary: 'center' === attributes.toggleButtonAlignment
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Button, {
+    icon: "editor-alignright",
+    isSecondary: true,
+    onClick: function onClick() {
+      setAttributes({
+        toggleButtonAlignment: 'right'
+      });
+    },
+    isPrimary: 'right' === attributes.toggleButtonAlignment
+  }))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (compose([withColors({
-  backgroundColor: 'background-color',
-  dropdownBackgroundColor: 'background-color',
   menuItemColor: 'color'
 }), withFontSizes('menuItemFontSize'), withDispatch(function (dispatch, ownProps, registry) {
   return {
@@ -1195,20 +1224,20 @@ function MegaMenu(args) {
       isSelected = args.isSelected,
       attributes = args.attributes;
   var ref = useRef();
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'has-background', attributes.backgroundColor || attributes.customBackgroundColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-".concat(attributes.backgroundColor, "-background-color"), !!attributes.backgroundColor), _classnames));
-  var menuContentStyle = {
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
+  var menuWrapperStyle = {
     maxWidth: attributes.menuMaxWidth
-  };
-  var menuStyles = {
-    backgroundColor: attributes.customBackgroundColor
   }; // UI State: rendered Block UI
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: menuClasses,
-    style: menuStyles
+    className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-mp-megamenu__content",
-    style: menuContentStyle
+    className: "wp-block-mp-megamenu__wrapper",
+    style: menuWrapperStyle
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wp-block-mp-megamenu__content-wrapper"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wp-block-mp-megamenu__content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
@@ -1217,7 +1246,7 @@ function MegaMenu(args) {
     templateInsertUpdatesSelection: false,
     renderAppender: isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants || isSelected ? InnerBlocks.DefaultAppender : false,
     __experimentalMoverDirection: "horizontal"
-  }))));
+  }))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (compose([withSelect(function (select, _ref) {

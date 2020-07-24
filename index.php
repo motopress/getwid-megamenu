@@ -4,6 +4,7 @@
  * Plugin Name: MotoPress MegaMenu Block
  * Version: 0.0.1
  * Author: MotoPress
+ * Text Domain: mp-megamenu
  */
 
 defined( 'ABSPATH' ) || exit;

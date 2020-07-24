@@ -99,6 +99,15 @@
 
     function setDropdownsPosition(menus) {
       menus.each(function (index, menu) {
+        if ($(menu).hasClass('is-mobile')) {
+          $(menu).find('.wp-block-mp-megamenu-item__dropdown-wrapper').css({
+            'left': '',
+            'width': '',
+            'max-width': ''
+          });
+          return;
+        }
+
         var dropdowns = $(menu).find('.wp-block-mp-megamenu-item__dropdown-wrapper');
         var menuCoords = $(menu).offset();
         var maxWidth = $(menu).data('dropdown-width');
@@ -119,11 +128,6 @@
       });
     }
 
-    setDropdownsPosition(menus);
-    $(window).resize(function () {
-      setDropdownsPosition(menus);
-    });
-
     function setDropdownsContentWidth(menus) {
       menus.each(function (index, menu) {
         var contentWidth = $(menu).data('dropdown-content-width');
@@ -136,7 +140,51 @@
       });
     }
 
+    function showMenuToggleButton(menus) {
+      menus.each(function (index, menu) {
+        if (!$(menu).hasClass('is-collapsible')) {
+          return;
+        }
+
+        var breakpoint = $(menu).data('responsive-breakpoint');
+        var toggleButtonWrapper = $(menu).find('.wp-block-mp-megamenu__toggle-wrapper');
+        var toggleButton = $(menu).find('.wp-block-mp-megamenu__toggle');
+
+        if (breakpoint >= $(window).width()) {
+          toggleButtonWrapper.removeClass('is-hidden');
+          $(menu).addClass('is-mobile');
+        } else {
+          toggleButtonWrapper.addClass('is-hidden');
+          $(menu).removeClass('is-mobile is-opened');
+        }
+      });
+    }
+
+    function attachToggleActionToButtons(menus) {
+      menus.each(function (index, menu) {
+        $(menu).on('click', '.wp-block-mp-megamenu__toggle', function (event) {
+          toggleMobileMenu($(this), $(menu));
+        });
+        $(menu).on('click', '.wp-block-mp-megamenu-item__toggle', function (event) {
+          var dropdown = $(this).closest('.wp-block-mp-megamenu-item').find('.wp-block-mp-megamenu-item__dropdown-wrapper');
+          toggleMobileMenu($(this), $(dropdown));
+        });
+      });
+    }
+
+    function toggleMobileMenu(toggle_button, menu) {
+      toggle_button.toggleClass('is-opened');
+      menu.toggleClass('is-opened');
+    }
+
+    showMenuToggleButton(menus);
+    attachToggleActionToButtons(menus);
+    setDropdownsPosition(menus);
     setDropdownsContentWidth(menus);
+    $(window).resize(function () {
+      showMenuToggleButton(menus);
+      setDropdownsPosition(menus);
+    });
   });
 })(jQuery);
 

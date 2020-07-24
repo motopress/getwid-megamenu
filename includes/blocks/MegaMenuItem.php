@@ -49,7 +49,12 @@ class MegaMenuItem extends AbstractBlock {
 
 		$item_link_style = $font_style['inline_styles'] . $text_style['inline_styles'];
 
-		$html .= '<div class="wp-block-mp-megamenu-item">';
+		$item_classes = array_merge(
+			[ 'wp-block-mp-megamenu-item' ],
+			$content ? [ 'has-children' ] : []
+		);
+
+		$html .= '<li class="' . implode( ' ', $item_classes ) . '">';
 		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" style="' . $item_link_style . '">';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
@@ -63,29 +68,23 @@ class MegaMenuItem extends AbstractBlock {
 			$html .= ' target="_blank"';
 		}
 
-		$html .= '>' . $attributes['text'];
+		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( $content ) {
-			$html .= '<span class="wp-block-mp-megamenu-item__dropdown-icon"><span class="dashicons dashicons-arrow-down"></span></span>';
+			$html .= '<button class="wp-block-mp-megamenu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
-		$html .= '</a></div>';
+		$html .= '</div>';
 
 		if ( $content ) {
-			$dropdown_styles  = $this->generateDropdownBGStyles( $attributes );
-			$dropdown_classes = array_merge(
-				[ 'wp-block-mp-megamenu-item__dropdown' ],
-				[ $dropdown_styles['css_classes'] ]
-			);
-
 			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-wrapper">';
-			$html .= '<div class="' . implode( ' ', $dropdown_classes ) . '" style="' . $dropdown_styles['inline_styles'] . '">';
+			$html .= '<div class="wp-block-mp-megamenu-item__dropdown">';
 			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-content">';
 			$html .= $content;
 			$html .= '</div></div></div>';
 		}
 
-		$html .= '</div>';
+		$html .= '</li>';
 
 		return $html;
 	}
@@ -132,33 +131,6 @@ class MegaMenuItem extends AbstractBlock {
 		} elseif ( $has_custom_text_color ) {
 			// Add the custom color inline style.
 			$colors['inline_styles'] .= sprintf( 'color: %s;', $attributes['customTextColor'] );
-		}
-
-		return $colors;
-	}
-
-	private function generateDropdownBGStyles( $attributes ) {
-		$colors = array(
-			'css_classes'   => '',
-			'inline_styles' => '',
-		);
-
-		// Text color.
-		$has_named_text_color  = array_key_exists( 'dropdownBackgroundColor', $attributes );
-		$has_custom_text_color = array_key_exists( 'customDropdownBackgroundColor', $attributes );
-
-		// If has text color.
-		if ( $has_custom_text_color || $has_named_text_color ) {
-			// Add has-text-color class.
-			$colors['css_classes'] .= ' has-background';
-		}
-
-		if ( $has_named_text_color ) {
-			// Add the color class.
-			$colors['css_classes'] .= sprintf( ' has-%s-background-color', $attributes['dropdownBackgroundColor'] );
-		} elseif ( $has_custom_text_color ) {
-			// Add the custom color inline style.
-			$colors['inline_styles'] .= sprintf( 'background-color: %s;', $attributes['customDropdownBackgroundColor'] );
 		}
 
 		return $colors;

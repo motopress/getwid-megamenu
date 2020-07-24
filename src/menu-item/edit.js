@@ -278,8 +278,6 @@ function MenuItemEdit(props) {
 			customFontSize: parentAttributes.customMenuItemFontSize,
 			textColor: parentAttributes.menuItemColor,
 			customTextColor: parentAttributes.customMenuItemColor,
-			dropdownBackgroundColor: parentAttributes.dropdownBackgroundColor,
-			customDropdownBackgroundColor: parentAttributes.customDropdownBackgroundColor
 		} );
 	}, [] );
 
