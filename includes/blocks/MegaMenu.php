@@ -50,13 +50,6 @@ class MegaMenu extends AbstractBlock {
 		}
 
 		$html .= '<div class="wp-block-mp-megamenu__content-wrapper">';
-
-		if ( $collapse_on_mobile ) {
-			$html .= '<div class="wp-block-mp-megamenu__toggle-wrapper is-close">';
-			$html .= '<button class="wp-block-mp-megamenu__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Close', 'mp-megamenu' ) . '</button>';
-			$html .= '</div>';
-		}
-
 		$html .= '<ul class="wp-block-mp-megamenu__content">';
 
 

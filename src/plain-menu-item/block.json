@@ -17,6 +17,18 @@
 		},
 		"rel": {
 			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		},
+		"customTextColor": {
+			"type": "string"
+		},
+		"fontSize": {
+			"type": "string"
+		},
+		"customFontSize": {
+			"type": "string"
 		}
 	},
 	"supports": {

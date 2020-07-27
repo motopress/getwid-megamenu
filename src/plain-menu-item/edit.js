@@ -78,7 +78,7 @@ function MenuItemToolbar(args) {
 	const linkControl = isURLPickerOpen && (
 		<Popover position="bottom center" onClose={() => setIsURLPickerOpen(false)}>
 			<__experimentalLinkControl
-				className="wp-block-plain-menu-item-link__inline-link-input"
+				className="wp-block-plain-menu-item__inline-link-input"
 				value={{
 					url,
 					opensInNewTab
@@ -146,7 +146,8 @@ function MenuItemEdit(props) {
 		insertPlainMenuItem,
 		selectedBlockHasDescendants,
 		clientId,
-		parentAttributes
+		parentAttributes,
+		parentItemClientId
 	} = props;
 	const {
 		linkTarget,
@@ -198,10 +199,33 @@ function MenuItemEdit(props) {
 		}
 	);
 
+	useEffect( () => {
+		setAttributes( {
+			fontSize: parentItemClientId ? undefined : parentAttributes.menuItemFontSize,
+			customFontSize: parentItemClientId ? undefined : parentAttributes.customMenuItemFontSize,
+			textColor: parentItemClientId ? undefined : parentAttributes.menuItemColor,
+			customTextColor: parentItemClientId ? undefined : parentAttributes.customMenuItemColor,
+		} );
+	}, [] );
+
+	const itemLinkClasses = classnames(
+		'wp-block-mp-plain-menu-item__link',
+		{
+			'has-text-color': attributes.textColor || attributes.customTextColor,
+			[ `has-${ attributes.textColor }-color` ]: !! attributes.textColor,
+			[ `has-${ attributes.fontSize }-font-size` ]: !! attributes.fontSize
+		}
+	);
+
+	const itemLinkStyles = {
+		color: attributes.customTextColor,
+		fontSize: attributes.customFontSize
+	};
+
 	return (
 		<>
-			<div className={itemClasses}>
-				<div className='wp-block-mp-plain-menu-item__link'>
+			<div className={ itemClasses }>
+				<div className={ itemLinkClasses } style={ itemLinkStyles }>
 					<a
 						href="#"
 						onClick={ () => {
@@ -287,6 +311,9 @@ export default compose([
 		const rootBlockClientId = head(
 			getBlockParentsByBlockName( clientId, 'mp-megamenu/plain-menu' )
 		);
+		const parentItemClientId = head(
+			getBlockParentsByBlockName( clientId, 'mp-megamenu/plain-menu-item' )
+		);
 
 		const parentAttributes = getBlock(rootBlockClientId).attributes;
 
@@ -297,7 +324,8 @@ export default compose([
 			hasDescendants,
 			rootBlockClientId,
 			clientId,
-			parentAttributes
+			parentAttributes,
+			parentItemClientId
 		};
 	}),
 	withDispatch( ( dispatch, ownProps, registry ) => {

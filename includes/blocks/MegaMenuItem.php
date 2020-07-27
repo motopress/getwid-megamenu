@@ -68,15 +68,19 @@ class MegaMenuItem extends AbstractBlock {
 			$html .= ' target="_blank"';
 		}
 
+		if ( isset( $attributes['rel'] ) ) {
+			$html .= ' rel="' . $attributes['rel'] . '"';
+		}
+
 		$html .= '>' . $attributes['text'] . '</a>';
 
-		if ( $content ) {
+		if ( trim( $content ) ) {
 			$html .= '<button class="wp-block-mp-megamenu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
 		$html .= '</div>';
 
-		if ( $content ) {
+		if ( trim( $content ) ) {
 			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-wrapper">';
 			$html .= '<div class="wp-block-mp-megamenu-item__dropdown">';
 			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-content">';

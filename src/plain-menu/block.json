@@ -8,6 +8,18 @@
     "orientation": {
       "type": "string",
       "default": "horizontal"
+    },
+    "menuItemFontSize": {
+      "type": "string"
+    },
+    "customMenuItemFontSize": {
+      "type": "number"
+    },
+    "menuItemColor": {
+      "type": "string"
+    },
+    "customMenuItemColor": {
+      "type": "string"
     }
   },
   "supports": {

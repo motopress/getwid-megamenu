@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import Controls from './controls';
 
 /**
  * WordPress dependencies
@@ -9,17 +10,8 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { useRef } = wp.element;
 const {
-	InnerBlocks,
-	BlockControls,
-	InspectorControls
+	InnerBlocks
 } = wp.blockEditor;
-const {
-	PanelBody,
-	Toolbar,
-	ToolbarButton,
-	ToolbarGroup,
-	RangeControl
-} = wp.components;
 const { withSelect } = wp.data;
 const { compose } = wp.compose;
 
@@ -60,49 +52,7 @@ function PlainMenu( args ) {
 	// UI State: rendered Block UI
 	return (
 		<>
-			<BlockControls>
-				<Toolbar
-					icon={ attributes.itemsJustification ? `editor-align${attributes.itemsJustification}` : "editor-alignleft" }
-					label={ __( 'Change items justification' ) }
-					isCollapsed
-					controls={ [
-						{
-							icon: "editor-alignleft",
-							title: __( 'Justify items left' ),
-							isActive: 'left' === attributes.itemsJustification,
-							onClick: setAlignment( 'left' ),
-						},
-						{
-							icon: "editor-aligncenter",
-							title: __( 'Justify items center' ),
-							isActive:
-								'center' === attributes.itemsJustification,
-							onClick: setAlignment( 'center' ),
-						},
-						{
-							icon: "editor-alignright",
-							title: __( 'Justify items right' ),
-							isActive: 'right' === attributes.itemsJustification,
-							onClick: setAlignment( 'right' ),
-						},
-					] }
-				/>
-				<ToolbarGroup>
-					<ToolbarButton
-						name="orientation"
-						icon="image-rotate-right"
-						title={ attributes.orientation === 'vertical' ? __('Make horizontal') : __('Make vertical') }
-						isActive={ attributes.orientation === 'vertical' }
-						onClick={ () => {
-							setAttributes( {
-								orientation: attributes.orientation === 'vertical' ? 'horizontal' : 'vertical',
-							} )
-						} }
-					/>
-				</ToolbarGroup>
-			</BlockControls>
-			<InspectorControls>
-			</InspectorControls>
+			<Controls { ...args }/>
 			<div className={ menuClasses }>
 				<div className="wp-block-mp-plain-menu__content">
 					<InnerBlocks

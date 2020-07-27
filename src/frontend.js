@@ -82,14 +82,38 @@
 			menu.toggleClass('is-opened');
 		}
 
+		function setMobileMenuPosition(menus) {
+			menus.each((index, menu) => {
+				const dropdown = $(menu).find('.wp-block-mp-megamenu__content-wrapper');
+
+				if (!$(menu).hasClass('is-mobile')) {
+					$(dropdown).css({
+						'left': '',
+						'width': '',
+					});
+					return false;
+				}
+
+				const menuCoords = $(menu).offset();
+				const left = -menuCoords.left;
+
+				$(dropdown).css({
+					'left': left,
+					'width': $(window).width(),
+				});
+			});
+		}
+
 		showMenuToggleButton(menus);
 		attachToggleActionToButtons(menus);
 		setDropdownsPosition(menus);
 		setDropdownsContentWidth(menus);
+		setMobileMenuPosition(menus);
 
 		$(window).resize(function () {
 			showMenuToggleButton(menus);
 			setDropdownsPosition(menus);
+			setMobileMenuPosition(menus);
 		});
 
 	});

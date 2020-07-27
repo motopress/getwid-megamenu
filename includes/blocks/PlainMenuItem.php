@@ -42,8 +42,19 @@ class PlainMenuItem extends AbstractBlock {
 			trim( $content ) ? [ 'has-children' ] : []
 		);
 
+		$font_size = $this->generateFontSizeStyles( $attributes );
+		$colors    = $this->generateTextStyles( $attributes );
+
+		$item_link_classes = array_merge(
+			[ 'wp-block-mp-plain-menu-item__link' ],
+			[ $font_size['css_classes'] ],
+			[ $colors['css_classes'] ]
+		);
+
+		$item_link_style = ' style="' . $font_size['inline_styles'] . $colors['inline_styles'] . '" ';
+
 		$html .= '<div class="' . implode( ' ', $item_classes ) . '">';
-		$html .= '<div class="wp-block-mp-plain-menu-item__link">';
+		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" ' . $item_link_style . '>';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
 			$html .= esc_url( $attributes['url'] );
@@ -60,13 +71,13 @@ class PlainMenuItem extends AbstractBlock {
 			$html .= ' rel="' . $attributes['rel'] . '"';
 		}
 
-		$html .= '>' . $attributes['text'];
+		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( trim( $content ) ) {
-			$html .= '<span class="wp-block-mp-plain-menu-item__dropdown-icon"><span class="dashicons dashicons-arrow-down"></span></span>';
+			$html .= '<button class="wp-block-mp-plain-menu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
-		$html .= '</a></div>';
+		$html .= '</div>';
 
 		if ( trim( $content ) ) {
 			$html .= '<div class="wp-block-mp-plain-menu-item__dropdown">';
@@ -78,6 +89,53 @@ class PlainMenuItem extends AbstractBlock {
 		$html .= '</div>';
 
 		return $html;
+	}
+
+	private function generateFontSizeStyles( $attributes ) {
+		$font_sizes = array(
+			'css_classes'   => '',
+			'inline_styles' => '',
+		);
+
+		$has_named_font_size  = array_key_exists( 'fontSize', $attributes );
+		$has_custom_font_size = array_key_exists( 'customFontSize', $attributes );
+
+		if ( $has_named_font_size ) {
+			// Add the font size class.
+			$font_sizes['css_classes'] = sprintf( 'has-%s-font-size', $attributes['fontSize'] );
+		} elseif ( $has_custom_font_size ) {
+			// Add the custom font size inline style.
+			$font_sizes['inline_styles'] = sprintf( 'font-size: %spx;', $attributes['customFontSize'] );
+		}
+
+		return $font_sizes;
+	}
+
+	private function generateTextStyles( $attributes ) {
+		$colors = array(
+			'css_classes'   => '',
+			'inline_styles' => '',
+		);
+
+		// Text color.
+		$has_named_text_color  = array_key_exists( 'textColor', $attributes );
+		$has_custom_text_color = array_key_exists( 'customTextColor', $attributes );
+
+		// If has text color.
+		if ( $has_custom_text_color || $has_named_text_color ) {
+			// Add has-text-color class.
+			$colors['css_classes'] .= ' has-text-color';
+		}
+
+		if ( $has_named_text_color ) {
+			// Add the color class.
+			$colors['css_classes'] .= sprintf( ' has-%s-color', $attributes['textColor'] );
+		} elseif ( $has_custom_text_color ) {
+			// Add the custom color inline style.
+			$colors['inline_styles'] .= sprintf( 'color: %s;', $attributes['customTextColor'] );
+		}
+
+		return $colors;
 	}
 
 	protected function setName() {
