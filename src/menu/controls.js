@@ -1,16 +1,13 @@
 import MPMegaMenuColorPalette from '../custom-controls/color-palette';
 
 const { __ } = wp.i18n;
-const { useRef, useEffect } = wp.element;
+const { useEffect } = wp.element;
 const {
-	InnerBlocks,
 	BlockControls,
 	InspectorControls,
-	ColorPalette,
 	FontSizePicker,
 	withFontSizes,
-	withColors,
-	PanelColorSettings
+	withColors
 } = wp.blockEditor;
 const {
 	PanelBody,
@@ -19,25 +16,19 @@ const {
 	ToolbarGroup,
 	RangeControl,
 	BaseControl,
-	ColorIndicator,
 	ButtonGroup,
 	Button,
 	ToggleControl
 } = wp.components;
-const { withSelect, withDispatch } = wp.data;
+const { withDispatch } = wp.data;
 const { compose } = wp.compose;
 
 function Controls(args) {
 	const {
-		selectedBlockHasDescendants,
-		isImmediateParentOfSelectedBlock,
-		isSelected,
 		setAttributes,
-		className,
 		attributes,
 		menuItemFontSize,
 		setMenuItemFontSize,
-		dropdownBackgroundColor,
 		menuItemColor,
 		setMenuItemColor,
 		updateChildBlocksAttributes
@@ -107,12 +98,31 @@ function Controls(args) {
 					<ToolbarButton
 						name="expand"
 						icon={ attributes.expandDropdown ? "editor-contract" : "editor-expand" }
-						title={__('Expand dropdown')}
-						onClick={expandDropdown}
+						title={ __( 'Expand dropdown' ) }
+						onClick={ expandDropdown }
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
+				<PanelBody title={ __( 'Styles' ) } initialOpen={ true }>
+					<FontSizePicker
+						value={ menuItemFontSize.size }
+						onChange={ setMenuItemFontSize }
+					/>
+					<MPMegaMenuColorPalette
+						label={ __('Menu Item Color') }
+						disableCustomColors={ false }
+						color={ menuItemColor.color }
+						onChange={ setMenuItemColor }
+						clearable={ true }
+					/>
+					<ToggleControl
+						label={ __( 'Expand dropdown' ) }
+						help={ attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.') }
+						checked={ attributes.expandDropdown }
+						onChange={ expandDropdown }
+					/>
+				</PanelBody>
 				<PanelBody title={ __( 'Width Settings' ) } initialOpen={ false }>
 					<RangeControl
 						label={ __( 'Maximum width of top-level menu in pixels' ) }
@@ -136,28 +146,7 @@ function Controls(args) {
 						max={ 2000 }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Menu Item Styles' ) } initialOpen={ false }>
-					<FontSizePicker
-						value={ menuItemFontSize.size }
-						onChange={ setMenuItemFontSize }
-					/>
-					<MPMegaMenuColorPalette
-						label={__('Menu Item Color')}
-						disableCustomColors={ false }
-						color={ menuItemColor.color }
-						onChange={ setMenuItemColor }
-						clearable={ true }
-					/>
-				</PanelBody>
-				<PanelBody title={ __( 'Dropdown Styles' ) } initialOpen={ false }>
-					<ToggleControl
-						label={ __( 'Expand dropdown' ) }
-						help={ attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.') }
-						checked={ attributes.expandDropdown }
-						onChange={ expandDropdown }
-					/>
-				</PanelBody>
-				<PanelBody title={ __( 'Responsive Styles' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Responsive Settings' ) } initialOpen={ false }>
 					<RangeControl
 						label={ __( 'Mobile device breakpoint in pixels' ) }
 						value={ attributes.responsiveBreakpoint }
@@ -179,19 +168,19 @@ function Controls(args) {
 								icon="editor-alignleft"
 								isSecondary
 								onClick={ () => { setAttributes( { toggleButtonAlignment: 'left' } ) } }
-								isPrimary={'left' === attributes.toggleButtonAlignment}
+								isPrimary={ 'left' === attributes.toggleButtonAlignment }
 							/>
 							<Button
 								icon="editor-aligncenter"
 								isSecondary
 								onClick={ () => { setAttributes( { toggleButtonAlignment: 'center' } ) } }
-								isPrimary={'center' === attributes.toggleButtonAlignment}
+								isPrimary={ 'center' === attributes.toggleButtonAlignment }
 							/>
 							<Button
 								icon="editor-alignright"
 								isSecondary
 								onClick={ () => { setAttributes( { toggleButtonAlignment: 'right' } ) } }
-								isPrimary={'right' === attributes.toggleButtonAlignment}
+								isPrimary={ 'right' === attributes.toggleButtonAlignment }
 							/>
 						</ButtonGroup>
 					</BaseControl>
@@ -207,7 +196,7 @@ export default compose( [
 		menuItemColor: 'color',
 	} ),
 	withFontSizes( 'menuItemFontSize' ),
-	withDispatch( (dispatch, ownProps, registry) => ( {
+	withDispatch( ( dispatch, ownProps, registry ) => ( {
 		updateChildBlocksAttributes( attributes ) {
 			const { updateBlockAttributes } = dispatch( 'core/block-editor' );
 			const {

@@ -96,6 +96,7 @@
 (function ($) {
   $(document).ready(function () {
     var menus = $('.wp-block-mp-megamenu');
+    var plainMenus = $('.wp-block-mp-plain-menu');
 
     function setDropdownsPosition(menus) {
       menus.each(function (index, menu) {
@@ -198,15 +199,38 @@
       });
     }
 
+    function setPlainMenusDropdownPosition(menus) {
+      menus.each(function (index, menu) {
+        var dropdowns = $(menu).find('.wp-block-mp-plain-menu-item__dropdown');
+        var isInsideMegaMenu = $(menu).closest('.wp-block-mp-megamenu').length;
+        dropdowns.each(function (index, dropdown) {
+          $(dropdown).removeClass('toleft');
+          var rightEdgePosition = $(dropdown).offset().left + $(dropdown).width();
+          var rootWidth = isInsideMegaMenu ? $(menu).closest('.wp-block-mp-megamenu-item__dropdown-wrapper').offset().left + $(menu).closest('.wp-block-mp-megamenu-item__dropdown-wrapper').width() : $(window).width();
+          var isLeft = false;
+
+          if (rightEdgePosition >= rootWidth) {
+            isLeft = true;
+          }
+
+          if (isLeft) {
+            $(dropdown).addClass('toleft');
+          }
+        });
+      });
+    }
+
     showMenuToggleButton(menus);
     attachToggleActionToButtons(menus);
     setDropdownsPosition(menus);
     setDropdownsContentWidth(menus);
     setMobileMenuPosition(menus);
+    setPlainMenusDropdownPosition(plainMenus);
     $(window).resize(function () {
       showMenuToggleButton(menus);
       setDropdownsPosition(menus);
       setMobileMenuPosition(menus);
+      setPlainMenusDropdownPosition(plainMenus);
     });
   });
 })(jQuery);

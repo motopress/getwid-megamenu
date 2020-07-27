@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MPMegaMenu;
+namespace GetwidMegaMenu;
 
 
 class PlainMenu extends AbstractBlock {
@@ -17,10 +17,10 @@ class PlainMenu extends AbstractBlock {
 			isset( $attributes['orientation'] ) ? array( 'is-orientation-' . $attributes['orientation'] ) : array()
 		);
 
-		$html = '<div class="wp-block-mp-plain-menu ' . implode( ' ', $classes ) . '">';
-		$html .= '<div class="wp-block-mp-plain-menu__content">';
+		$html = '<nav class="wp-block-mp-plain-menu ' . implode( ' ', $classes ) . '">';
+		$html .= '<ul class="wp-block-mp-plain-menu__content">';
 		$html .= $content;
-		$html .= '</div></div>';
+		$html .= '</ul></nav>';
 
 		return $html;
 	}

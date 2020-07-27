@@ -1,11 +1,6 @@
-.wp-block-mp-megamenu {
-    padding: 10px;
-    position: relative;
-}
-
-.wp-block-mp-megamenu-item {
-    padding: 5px;
-    z-index: 10;
+.wp-block-mp-plain-menu-item__dropdown-icon > *,
+.wp-block-mp-megamenu-item__dropdown-icon > *{
+    vertical-align: text-bottom;
 }
 
 .wp-block-mp-plain-menu__content > .block-editor-inner-blocks > .block-editor-block-list__layout,

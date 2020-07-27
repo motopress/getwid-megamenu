@@ -7,7 +7,6 @@ import Controls from './controls';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
 const { useRef } = wp.element;
 const {
 	InnerBlocks
@@ -27,29 +26,16 @@ function PlainMenu( args ) {
 		selectedBlockHasDescendants,
 		isImmediateParentOfSelectedBlock,
 		isSelected,
-		setAttributes,
-		className,
 		attributes
 	} = args;
 
 	const ref = useRef();
-
-	function setAlignment(alignment) {
-		return () => {
-			const itemsJustification =
-				attributes.itemsJustification === alignment ? undefined : alignment;
-			setAttributes( {
-				itemsJustification,
-			} );
-		}
-	}
 
 	const menuClasses = classnames( 'wp-block-mp-plain-menu', {
 		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
 		[ `is-orientation-${attributes.orientation}`]: attributes.orientation
 	});
 
-	// UI State: rendered Block UI
 	return (
 		<>
 			<Controls { ...args }/>

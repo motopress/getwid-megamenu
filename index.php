@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name: MotoPress MegaMenu Block
+ * Plugin Name: Gutenberg Mega Menu Block
  * Version: 0.0.1
  * Author: MotoPress
- * Text Domain: mp-megamenu
+ * Text Domain: getwid-megamenu
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,11 +12,11 @@ defined( 'ABSPATH' ) || exit;
 define( 'MP_MEGAMENU_VERSION', '0.0.1' );
 define( 'MP_MEGAMENU_FILE', __FILE__ );
 
-if ( ! function_exists( 'mp_megamenu_init' ) && function_exists( 'register_block_type' ) ) {
-	function mp_megamenu_init() {
+if ( ! function_exists( 'getwid_megamenu_init' ) && function_exists( 'register_block_type' ) ) {
+	function getwid_megamenu_init() {
 		include( plugin_dir_path( MP_MEGAMENU_FILE ) . 'includes/BlockRegister.php' );
-		new MPMegaMenu\BlockRegister();
+		new GetwidMegaMenu\BlockRegister();
 	}
 
-	mp_megamenu_init();
+	getwid_megamenu_init();
 }

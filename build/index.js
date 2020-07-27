@@ -232,6 +232,35 @@ module.exports = _defineProperty;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/extends.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/extends.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
@@ -481,54 +510,34 @@ module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"
 
 /***/ }),
 
-/***/ "./src/menu-item/edit.js":
-/*!*******************************!*\
-  !*** ./src/menu-item/edit.js ***!
-  \*******************************/
+/***/ "./src/menu-item/controls.js":
+/*!***********************************!*\
+  !*** ./src/menu-item/controls.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-
-/**
- * External dependencies
- */
 
 /**
  * WordPress dependencies
  */
-
 var _lodash = lodash,
-    head = _lodash.head,
-    isEqual = _lodash.isEqual,
     escape = _lodash.escape;
 var __ = wp.i18n.__;
 var _wp$element = wp.element,
     useCallback = _wp$element.useCallback,
     useState = _wp$element.useState,
-    useRef = _wp$element.useRef,
-    useEffect = _wp$element.useEffect,
-    useLayoutEffect = _wp$element.useLayoutEffect;
-var compose = wp.compose.compose;
-var _wp$data = wp.data,
-    withSelect = _wp$data.withSelect,
-    withDispatch = _wp$data.withDispatch;
+    useEffect = _wp$element.useEffect;
 var _wp$components = wp.components,
-    KeyboardShortcuts = _wp$components.KeyboardShortcuts,
     PanelBody = _wp$components.PanelBody,
-    RangeControl = _wp$components.RangeControl,
     TextControl = _wp$components.TextControl,
     ToggleControl = _wp$components.ToggleControl,
     ToolbarButton = _wp$components.ToolbarButton,
@@ -537,33 +546,21 @@ var _wp$components = wp.components,
 var _wp$blockEditor = wp.blockEditor,
     BlockControls = _wp$blockEditor.BlockControls,
     InspectorControls = _wp$blockEditor.InspectorControls,
-    RichText = _wp$blockEditor.RichText,
-    InnerBlocks = _wp$blockEditor.InnerBlocks,
-    __experimentalBlock = _wp$blockEditor.__experimentalBlock,
     __experimentalLinkControl = _wp$blockEditor.__experimentalLinkControl;
-var _wp$keycodes = wp.keycodes,
-    rawShortcut = _wp$keycodes.rawShortcut,
-    displayShortcut = _wp$keycodes.displayShortcut;
-var createBlock = wp.blocks.createBlock;
-/**
- * Internal dependencies
- */
-
 var NEW_TAB_REL = 'noreferrer noopener';
 
-function MenuItemToolbar(args) {
+function Controls(args) {
   var isSelected = args.isSelected,
-      url = args.url,
+      attributes = args.attributes,
       setAttributes = args.setAttributes,
-      opensInNewTab = args.opensInNewTab,
-      onToggleOpenInNewTab = args.onToggleOpenInNewTab,
-      toggleItemDropdown = args.toggleItemDropdown,
-      isItemDropdownOpened = args.isItemDropdownOpened,
-      hasDescendants = args.hasDescendants,
-      text = args.text;
+      toggleItemDropdown = args.toggleItemDropdown;
+  var linkTarget = attributes.linkTarget,
+      rel = attributes.rel,
+      text = attributes.text,
+      url = attributes.url;
 
   var _useState = useState(false),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
       isURLPickerOpen = _useState2[0],
       setIsURLPickerOpen = _useState2[1];
 
@@ -571,7 +568,7 @@ function MenuItemToolbar(args) {
 
   var openLinkControl = function openLinkControl() {
     setIsURLPickerOpen(true);
-    return false; // prevents default behaviour for event
+    return false;
   };
 
   var unlinkItem = function unlinkItem() {
@@ -583,21 +580,58 @@ function MenuItemToolbar(args) {
     setIsURLPickerOpen(false);
   };
 
+  var onToggleOpenInNewTab = useCallback(function (value) {
+    var newLinkTarget = value ? '_blank' : undefined;
+    var updatedRel = rel;
+
+    if (newLinkTarget && !rel) {
+      updatedRel = NEW_TAB_REL;
+    } else if (!newLinkTarget && rel === NEW_TAB_REL) {
+      updatedRel = undefined;
+    }
+
+    setAttributes({
+      linkTarget: newLinkTarget,
+      rel: updatedRel
+    });
+  }, [rel, setAttributes]);
+  var onSetLinkRel = useCallback(function (value) {
+    setAttributes({
+      rel: value
+    });
+  }, [setAttributes]);
   useEffect(function () {
     if (isSelected && !url) {
       setIsURLPickerOpen(true);
     }
   }, [isSelected]);
-  var linkControl = isURLPickerOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Popover, {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "link",
+    icon: "admin-links",
+    title: __('Edit Link'),
+    onClick: openLinkControl,
+    isActive: isURLSet
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "unlink",
+    icon: "editor-unlink",
+    title: __('Unlink'),
+    onClick: unlinkItem,
+    isDisabled: !isURLSet
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "submenu",
+    icon: "download",
+    title: __('Add submenu'),
+    onClick: toggleItemDropdown
+  }))), isURLPickerOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Popover, {
     position: "top center",
     onClose: function onClose() {
       return setIsURLPickerOpen(false);
     }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(__experimentalLinkControl, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(__experimentalLinkControl, {
     className: "wp-block-navigation-link__inline-link-input",
     value: {
       url: url,
-      opensInNewTab: opensInNewTab
+      opensInNewTab: linkTarget === '_blank'
     },
     onChange: function onChange(_ref) {
       var _ref$title = _ref.title,
@@ -618,39 +652,86 @@ function MenuItemToolbar(args) {
         }()
       });
 
-      if (opensInNewTab !== newOpensInNewTab) {
+      if (linkTarget === "_blank" !== newOpensInNewTab) {
         onToggleOpenInNewTab(newOpensInNewTab);
       }
 
       setIsURLPickerOpen(false);
     }
-  }));
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "link",
-    icon: "admin-links",
-    title: __('Edit Link'),
-    onClick: openLinkControl,
-    isActive: isURLSet
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "unlink",
-    icon: "editor-unlink",
-    title: __('Unlink'),
-    onClick: unlinkItem,
-    isDisabled: !isURLSet
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "submenu",
-    icon: "download",
-    title: __('Add submenu'),
-    onClick: toggleItemDropdown
-  }))), linkControl);
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Link settings')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
+    label: __('Open in new tab'),
+    onChange: onToggleOpenInNewTab,
+    checked: linkTarget === '_blank'
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TextControl, {
+    label: __('Link rel'),
+    value: rel || '',
+    onChange: onSetLinkRel
+  }))));
 }
 
+/* harmony default export */ __webpack_exports__["default"] = (Controls);
+
+/***/ }),
+
+/***/ "./src/menu-item/edit.js":
+/*!*******************************!*\
+  !*** ./src/menu-item/edit.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./controls */ "./src/menu-item/controls.js");
+
+
+
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+var _lodash = lodash,
+    head = _lodash.head,
+    isEqual = _lodash.isEqual;
+var __ = wp.i18n.__;
+var _wp$element = wp.element,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect;
+var compose = wp.compose.compose;
+var _wp$data = wp.data,
+    withSelect = _wp$data.withSelect,
+    withDispatch = _wp$data.withDispatch;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    InnerBlocks = _wp$blockEditor.InnerBlocks;
+/**
+ * Internal dependencies
+ */
+
 function MenuItemEdit(props) {
-  var _classnames;
+  var _classnames2;
 
   var attributes = props.attributes,
       setAttributes = props.setAttributes,
-      className = props.className,
       isSelected = props.isSelected,
       onReplace = props.onReplace,
       mergeBlocks = props.mergeBlocks,
@@ -660,22 +741,26 @@ function MenuItemEdit(props) {
       rootBlockClientId = props.rootBlockClientId,
       clientId = props.clientId,
       parentAttributes = props.parentAttributes;
-  var linkTarget = attributes.linkTarget,
-      rel = attributes.rel,
-      text = attributes.text,
-      url = attributes.url;
-  var onSetLinkRel = useCallback(function (value) {
-    setAttributes({
-      rel: value
-    });
-  }, [setAttributes]);
+  var text = attributes.text;
 
   var itemLabelPlaceholder = __('Add link…');
 
-  var _useState3 = useState(hasDescendants),
-      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
-      isItemDropdownOpened = _useState4[0],
-      setIsItemDropdownOpened = _useState4[1];
+  var _useState = useState(hasDescendants),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState, 2),
+      isItemDropdownOpened = _useState2[0],
+      setIsItemDropdownOpened = _useState2[1];
+
+  var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
+  var menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
+  var showDropdown = isMenuItemSelected && menuItemHasChildrens;
+
+  var _useState3 = useState({
+    left: 0,
+    width: 'auto'
+  }),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState3, 2),
+      dropdownPosition = _useState4[0],
+      setDropdownPosition = _useState4[1];
 
   var toggleItemDropdown = function toggleItemDropdown() {
     setIsItemDropdownOpened(!isItemDropdownOpened);
@@ -684,52 +769,14 @@ function MenuItemEdit(props) {
       updateInnerBlocks();
     }
 
-    return false; // prevents default behaviour for event
+    return false;
   };
-
-  var onToggleOpenInNewTab = useCallback(function (value) {
-    var newLinkTarget = value ? '_blank' : undefined;
-    var updatedRel = rel;
-
-    if (newLinkTarget && !rel) {
-      updatedRel = NEW_TAB_REL;
-    } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-      updatedRel = undefined;
-    }
-
-    setAttributes({
-      linkTarget: newLinkTarget,
-      rel: updatedRel
-    });
-  }, [rel, setAttributes]);
-  var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
-  var menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
-  var showDropdown = isMenuItemSelected && menuItemHasChildrens;
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('wp-block-mp-megamenu-item', {
-    'has-child': hasDescendants,
-    'is-opened': showDropdown
-  });
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('wp-block-mp-megamenu-item__link', (_classnames = {
-    'has-text-color': attributes.textColor || attributes.customTextColor
-  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames));
-  var itemLinkStyles = {
-    color: attributes.customTextColor,
-    fontSize: attributes.customFontSize
-  };
-
-  var _useState5 = useState({
-    left: 0,
-    width: 'auto'
-  }),
-      _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState5, 2),
-      dropdownPosition = _useState6[0],
-      setDropdownPosition = _useState6[1];
 
   var updateDropdownPosition = function updateDropdownPosition() {
     var newDropdownPosition = {};
+    var rootBlockNode;
     var blockNode = document.querySelector('[data-block="' + clientId + '"]');
     var blockCoords = blockNode.getBoundingClientRect();
-    var rootBlockNode;
 
     if (parentAttributes.expandDropdown) {
       rootBlockNode = document.querySelector('.editor-styles-wrapper');
@@ -760,6 +807,14 @@ function MenuItemEdit(props) {
   useEffect(function () {
     window.addEventListener('resize', updateDropdownPosition);
   }, []);
+  useEffect(function () {
+    setAttributes({
+      fontSize: parentAttributes.menuItemFontSize,
+      customFontSize: parentAttributes.customMenuItemFontSize,
+      textColor: parentAttributes.menuItemColor,
+      customTextColor: parentAttributes.customMenuItemColor
+    });
+  }, []);
   var dropdownWrapperStyle = {
     left: dropdownPosition.left,
     width: dropdownPosition.width,
@@ -771,28 +826,31 @@ function MenuItemEdit(props) {
   var dropdownContentStyle = {
     maxWidth: parentAttributes.dropdownContentMaxWidth
   };
-  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('wp-block-mp-megamenu-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({
     'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor
   }, "has-".concat(attributes.dropdownBackgroundColor, "-background-color"), !!attributes.dropdownBackgroundColor));
-  useEffect(function () {
-    setAttributes({
-      fontSize: parentAttributes.menuItemFontSize,
-      customFontSize: parentAttributes.customMenuItemFontSize,
-      textColor: parentAttributes.menuItemColor,
-      customTextColor: parentAttributes.customMenuItemColor
-    });
-  }, []);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item', {
+    'has-child': hasDescendants,
+    'is-opened': showDropdown
+  });
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item__link', (_classnames2 = {
+    'has-text-color': attributes.textColor || attributes.customTextColor
+  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames2));
+  var itemLinkStyles = {
+    color: attributes.customTextColor,
+    fontSize: attributes.customFontSize
+  };
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: itemClasses
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: itemLinkClasses,
     style: itemLinkStyles
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("a", {
     href: "#",
     onClick: function onClick() {
       return false;
     }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RichText, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(RichText, {
     placeholder: itemLabelPlaceholder,
     value: text,
     onChange: function onChange(value) {
@@ -804,40 +862,23 @@ function MenuItemEdit(props) {
     onReplace: onReplace,
     onMerge: mergeBlocks,
     identifier: "text"
-  }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+  }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "wp-block-mp-megamenu-item__dropdown-icon"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
-  })))), showDropdown && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  })))), showDropdown && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: "wp-block-mp-megamenu-item__dropdown-wrapper",
     style: dropdownWrapperStyle
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: dropdownClasses,
     style: dropdownStyle
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: "wp-block-mp-megamenu-item__dropdown-content",
     style: dropdownContentStyle
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InnerBlocks, null))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(MenuItemToolbar, {
-    url: url,
-    text: text,
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, null))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     toggleItemDropdown: toggleItemDropdown,
-    isItemDropdownOpened: isItemDropdownOpened,
-    setAttributes: setAttributes,
-    isSelected: isSelected,
-    hasDescendants: true,
-    opensInNewTab: linkTarget === '_blank',
-    onToggleOpenInNewTab: onToggleOpenInNewTab
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(PanelBody, {
-    title: __('Link settings')
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToggleControl, {
-    label: __('Open in new tab'),
-    onChange: onToggleOpenInNewTab,
-    checked: linkTarget === '_blank'
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(TextControl, {
-    label: __('Link rel'),
-    value: rel || '',
-    onChange: onSetLinkRel
-  }))));
+    isItemDropdownOpened: isItemDropdownOpened
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (compose([withSelect(function (select, ownProps) {
@@ -859,8 +900,8 @@ function MenuItemEdit(props) {
     clientId: clientId,
     parentAttributes: parentAttributes
   };
-}), withDispatch(function (dispatch, _ref2) {
-  var clientId = _ref2.clientId;
+}), withDispatch(function (dispatch, _ref) {
+  var clientId = _ref.clientId;
   return {
     updateInnerBlocks: function updateInnerBlocks(blocks) {
       dispatch('core/block-editor').replaceInnerBlocks(clientId, [], false);
@@ -958,18 +999,13 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 var __ = wp.i18n.__;
-var _wp$element = wp.element,
-    useRef = _wp$element.useRef,
-    useEffect = _wp$element.useEffect;
+var useEffect = wp.element.useEffect;
 var _wp$blockEditor = wp.blockEditor,
-    InnerBlocks = _wp$blockEditor.InnerBlocks,
     BlockControls = _wp$blockEditor.BlockControls,
     InspectorControls = _wp$blockEditor.InspectorControls,
-    ColorPalette = _wp$blockEditor.ColorPalette,
     FontSizePicker = _wp$blockEditor.FontSizePicker,
     withFontSizes = _wp$blockEditor.withFontSizes,
-    withColors = _wp$blockEditor.withColors,
-    PanelColorSettings = _wp$blockEditor.PanelColorSettings;
+    withColors = _wp$blockEditor.withColors;
 var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
     Toolbar = _wp$components.Toolbar,
@@ -977,25 +1013,17 @@ var _wp$components = wp.components,
     ToolbarGroup = _wp$components.ToolbarGroup,
     RangeControl = _wp$components.RangeControl,
     BaseControl = _wp$components.BaseControl,
-    ColorIndicator = _wp$components.ColorIndicator,
     ButtonGroup = _wp$components.ButtonGroup,
     Button = _wp$components.Button,
     ToggleControl = _wp$components.ToggleControl;
-var _wp$data = wp.data,
-    withSelect = _wp$data.withSelect,
-    withDispatch = _wp$data.withDispatch;
+var withDispatch = wp.data.withDispatch;
 var compose = wp.compose.compose;
 
 function Controls(args) {
-  var selectedBlockHasDescendants = args.selectedBlockHasDescendants,
-      isImmediateParentOfSelectedBlock = args.isImmediateParentOfSelectedBlock,
-      isSelected = args.isSelected,
-      setAttributes = args.setAttributes,
-      className = args.className,
+  var setAttributes = args.setAttributes,
       attributes = args.attributes,
       menuItemFontSize = args.menuItemFontSize,
       setMenuItemFontSize = args.setMenuItemFontSize,
-      dropdownBackgroundColor = args.dropdownBackgroundColor,
       menuItemColor = args.menuItemColor,
       setMenuItemColor = args.setMenuItemColor,
       updateChildBlocksAttributes = args.updateChildBlocksAttributes;
@@ -1053,6 +1081,23 @@ function Controls(args) {
     title: __('Expand dropdown'),
     onClick: expandDropdown
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Styles'),
+    initialOpen: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FontSizePicker, {
+    value: menuItemFontSize.size,
+    onChange: setMenuItemFontSize
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_custom_controls_color_palette__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: __('Menu Item Color'),
+    disableCustomColors: false,
+    color: menuItemColor.color,
+    onChange: setMenuItemColor,
+    clearable: true
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
+    label: __('Expand dropdown'),
+    help: attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.'),
+    checked: attributes.expandDropdown,
+    onChange: expandDropdown
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
     title: __('Width Settings'),
     initialOpen: false
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
@@ -1086,27 +1131,7 @@ function Controls(args) {
     min: 0,
     max: 2000
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Menu Item Styles'),
-    initialOpen: false
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FontSizePicker, {
-    value: menuItemFontSize.size,
-    onChange: setMenuItemFontSize
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_custom_controls_color_palette__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __('Menu Item Color'),
-    disableCustomColors: false,
-    color: menuItemColor.color,
-    onChange: setMenuItemColor,
-    clearable: true
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Dropdown Styles'),
-    initialOpen: false
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
-    label: __('Expand dropdown'),
-    help: attributes.expandDropdown ? __('Dropdown width same as window width.') : __('Dropdown width same as menu width.'),
-    checked: attributes.expandDropdown,
-    onChange: expandDropdown
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
-    title: __('Responsive Styles'),
+    title: __('Responsive Settings'),
     initialOpen: false
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(RangeControl, {
     label: __('Mobile device breakpoint in pixels'),
@@ -1227,8 +1252,7 @@ function MegaMenu(args) {
   var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
   var menuWrapperStyle = {
     maxWidth: attributes.menuMaxWidth
-  }; // UI State: rendered Block UI
-
+  };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
@@ -1337,6 +1361,169 @@ module.exports = JSON.parse("{\"name\":\"mp-megamenu/plain-menu-item\",\"categor
 
 /***/ }),
 
+/***/ "./src/plain-menu-item/controls.js":
+/*!*****************************************!*\
+  !*** ./src/plain-menu-item/controls.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+/**
+ * WordPress dependencies
+ */
+var _lodash = lodash,
+    escape = _lodash.escape;
+var __ = wp.i18n.__;
+var _wp$element = wp.element,
+    useCallback = _wp$element.useCallback,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    TextControl = _wp$components.TextControl,
+    ToggleControl = _wp$components.ToggleControl,
+    ToolbarButton = _wp$components.ToolbarButton,
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    Popover = _wp$components.Popover;
+var _wp$blockEditor = wp.blockEditor,
+    BlockControls = _wp$blockEditor.BlockControls,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    __experimentalLinkControl = _wp$blockEditor.__experimentalLinkControl;
+var NEW_TAB_REL = 'noreferrer noopener';
+
+function Controls(args) {
+  var isSelected = args.isSelected,
+      attributes = args.attributes,
+      setAttributes = args.setAttributes,
+      insertPlainMenuItem = args.insertPlainMenuItem;
+  var linkTarget = attributes.linkTarget,
+      rel = attributes.rel,
+      text = attributes.text,
+      url = attributes.url;
+
+  var _useState = useState(false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      isURLPickerOpen = _useState2[0],
+      setIsURLPickerOpen = _useState2[1];
+
+  var isURLSet = !(url === undefined || url.trim().length === 0);
+
+  var openLinkControl = function openLinkControl() {
+    setIsURLPickerOpen(true);
+    return false;
+  };
+
+  var unlinkItem = function unlinkItem() {
+    setAttributes({
+      url: undefined,
+      linkTarget: undefined,
+      rel: undefined
+    });
+    setIsURLPickerOpen(false);
+  };
+
+  var onSetLinkRel = useCallback(function (value) {
+    setAttributes({
+      rel: value
+    });
+  }, [setAttributes]);
+  var onToggleOpenInNewTab = useCallback(function (value) {
+    var newLinkTarget = value ? '_blank' : undefined;
+    var updatedRel = rel;
+
+    if (newLinkTarget && !rel) {
+      updatedRel = NEW_TAB_REL;
+    } else if (!newLinkTarget && rel === NEW_TAB_REL) {
+      updatedRel = undefined;
+    }
+
+    setAttributes({
+      linkTarget: newLinkTarget,
+      rel: updatedRel
+    });
+  }, [rel, setAttributes]);
+  useEffect(function () {
+    if (isSelected && !url) {
+      setIsURLPickerOpen(true);
+    }
+  }, [isSelected]);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "link",
+    icon: "admin-links",
+    title: __('Edit Link'),
+    onClick: openLinkControl,
+    isActive: isURLSet
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "unlink",
+    icon: "editor-unlink",
+    title: __('Unlink'),
+    onClick: unlinkItem,
+    isDisabled: !isURLSet
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToolbarButton, {
+    name: "submenu",
+    icon: "download",
+    title: __('Add submenu'),
+    onClick: insertPlainMenuItem
+  }))), isURLPickerOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Popover, {
+    position: "bottom center",
+    onClose: function onClose() {
+      return setIsURLPickerOpen(false);
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(__experimentalLinkControl, {
+    className: "wp-block-plain-menu-item__inline-link-input",
+    value: {
+      url: url,
+      opensInNewTab: linkTarget === "_blank"
+    },
+    onChange: function onChange(_ref) {
+      var _ref$title = _ref.title,
+          newTitle = _ref$title === void 0 ? '' : _ref$title,
+          _ref$url = _ref.url,
+          newURL = _ref$url === void 0 ? '' : _ref$url,
+          newOpensInNewTab = _ref.opensInNewTab;
+      setAttributes({
+        url: newURL,
+        text: function () {
+          if (text) {
+            return text;
+          }
+
+          if (newTitle !== '' && text !== newTitle) {
+            return escape(newTitle);
+          }
+        }()
+      });
+
+      if (linkTarget === "_blank" !== newOpensInNewTab) {
+        onToggleOpenInNewTab(newOpensInNewTab);
+      }
+    }
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PanelBody, {
+    title: __('Link settings')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ToggleControl, {
+    label: __('Open in new tab'),
+    onChange: onToggleOpenInNewTab,
+    checked: linkTarget === '_blank'
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TextControl, {
+    label: __('Link rel'),
+    value: rel || '',
+    onChange: onSetLinkRel
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Controls);
+
+/***/ }),
+
 /***/ "./src/plain-menu-item/edit.js":
 /*!*************************************!*\
   !*** ./src/plain-menu-item/edit.js ***!
@@ -1346,14 +1533,18 @@ module.exports = JSON.parse("{\"name\":\"mp-megamenu/plain-menu-item\",\"categor
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _controls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./controls */ "./src/plain-menu-item/controls.js");
+
 
 
 
@@ -1361,6 +1552,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * External dependencies
  */
+
 
 /**
  * WordPress dependencies
@@ -1401,104 +1593,6 @@ var _wp$keycodes = wp.keycodes,
     rawShortcut = _wp$keycodes.rawShortcut,
     displayShortcut = _wp$keycodes.displayShortcut;
 var createBlock = wp.blocks.createBlock;
-/**
- * Internal dependencies
- */
-
-var NEW_TAB_REL = 'noreferrer noopener';
-
-function MenuItemToolbar(args) {
-  var isSelected = args.isSelected,
-      url = args.url,
-      text = args.text,
-      setAttributes = args.setAttributes,
-      opensInNewTab = args.opensInNewTab,
-      onToggleOpenInNewTab = args.onToggleOpenInNewTab,
-      toggleItemDropdown = args.toggleItemDropdown,
-      isItemDropdownOpened = args.isItemDropdownOpened,
-      insertPlainMenuItem = args.insertPlainMenuItem,
-      hasDescendants = args.hasDescendants;
-
-  var _useState = useState(false),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
-      isURLPickerOpen = _useState2[0],
-      setIsURLPickerOpen = _useState2[1];
-
-  var isURLSet = !(url === undefined || url.trim().length === 0);
-
-  var openLinkControl = function openLinkControl() {
-    setIsURLPickerOpen(true);
-    return false; // prevents default behaviour for event
-  };
-
-  var unlinkItem = function unlinkItem() {
-    setAttributes({
-      url: undefined,
-      linkTarget: undefined,
-      rel: undefined
-    });
-    setIsURLPickerOpen(false);
-  };
-
-  useEffect(function () {
-    if (isSelected && !url) {
-      setIsURLPickerOpen(true);
-    }
-  }, [isSelected]);
-  var linkControl = isURLPickerOpen && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Popover, {
-    position: "bottom center",
-    onClose: function onClose() {
-      return setIsURLPickerOpen(false);
-    }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(__experimentalLinkControl, {
-    className: "wp-block-plain-menu-item__inline-link-input",
-    value: {
-      url: url,
-      opensInNewTab: opensInNewTab
-    },
-    onChange: function onChange(_ref) {
-      var _ref$title = _ref.title,
-          newTitle = _ref$title === void 0 ? '' : _ref$title,
-          _ref$url = _ref.url,
-          newURL = _ref$url === void 0 ? '' : _ref$url,
-          newOpensInNewTab = _ref.opensInNewTab;
-      setAttributes({
-        url: newURL,
-        text: function () {
-          if (text) {
-            return text;
-          }
-
-          if (newTitle !== '' && text !== newTitle) {
-            return escape(newTitle);
-          }
-        }()
-      });
-
-      if (opensInNewTab !== newOpensInNewTab) {
-        onToggleOpenInNewTab(newOpensInNewTab);
-      }
-    }
-  }));
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BlockControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "link",
-    icon: "admin-links",
-    title: __('Edit Link'),
-    onClick: openLinkControl,
-    isActive: isURLSet
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "unlink",
-    icon: "editor-unlink",
-    title: __('Unlink'),
-    onClick: unlinkItem,
-    isDisabled: !isURLSet
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarGroup, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToolbarButton, {
-    name: "submenu",
-    icon: "download",
-    title: __('Add submenu'),
-    onClick: insertPlainMenuItem
-  }))), linkControl);
-}
 
 function MenuItemEdit(props) {
   var _classnames;
@@ -1523,38 +1617,18 @@ function MenuItemEdit(props) {
       rel = attributes.rel,
       text = attributes.text,
       url = attributes.url;
-  var onSetLinkRel = useCallback(function (value) {
-    setAttributes({
-      rel: value
-    });
-  }, [setAttributes]);
 
   var itemLabelPlaceholder = __('Add link…');
 
-  var _useState3 = useState(hasDescendants),
-      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
-      isItemDropdownOpened = _useState4[0],
-      setIsItemDropdownOpened = _useState4[1];
+  var _useState = useState(hasDescendants),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState, 2),
+      isItemDropdownOpened = _useState2[0],
+      setIsItemDropdownOpened = _useState2[1];
 
-  var onToggleOpenInNewTab = useCallback(function (value) {
-    var newLinkTarget = value ? '_blank' : undefined;
-    var updatedRel = rel;
-
-    if (newLinkTarget && !rel) {
-      updatedRel = NEW_TAB_REL;
-    } else if (!newLinkTarget && rel === NEW_TAB_REL) {
-      updatedRel = undefined;
-    }
-
-    setAttributes({
-      linkTarget: newLinkTarget,
-      rel: updatedRel
-    });
-  }, [rel, setAttributes]);
   var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
   var menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
   var showDropdown = isMenuItemSelected && menuItemHasChildrens;
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('wp-block-mp-plain-menu-item', {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-plain-menu-item', {
     'has-child': hasDescendants,
     'has-child-selected': isParentOfSelectedBlock,
     'is-opened': showDropdown
@@ -1567,24 +1641,24 @@ function MenuItemEdit(props) {
       customTextColor: parentItemClientId ? undefined : parentAttributes.customMenuItemColor
     });
   }, []);
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()('wp-block-mp-plain-menu-item__link', (_classnames = {
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-plain-menu-item__link', (_classnames = {
     'has-text-color': attributes.textColor || attributes.customTextColor
-  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames));
+  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames));
   var itemLinkStyles = {
     color: attributes.customTextColor,
     fontSize: attributes.customFontSize
   };
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: itemClasses
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: itemLinkClasses,
     style: itemLinkStyles
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("a", {
     href: "#",
     onClick: function onClick() {
       return false;
     }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RichText, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(RichText, {
     placeholder: itemLabelPlaceholder,
     value: text,
     onChange: function onChange(value) {
@@ -1596,38 +1670,20 @@ function MenuItemEdit(props) {
     onReplace: onReplace,
     onMerge: mergeBlocks,
     identifier: "text"
-  }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+  }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "wp-block-mp-plain-menu-item__dropdown-icon"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
-  })))), isMenuItemSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  })))), isMenuItemSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: "wp-block-mp-plain-menu-item__dropdown"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: "wp-block-mp-plain-menu-item__dropdown-content"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InnerBlocks, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, {
     allowedBlocks: ['mp-megamenu/plain-menu-item'],
     renderAppender: isSelected && hasDescendants || isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants ? InnerBlocks.DefaultAppender : false
-  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(MenuItemToolbar, {
-    url: url,
-    text: text,
-    insertPlainMenuItem: insertPlainMenuItem,
-    isItemDropdownOpened: isItemDropdownOpened,
-    setAttributes: setAttributes,
-    isSelected: isSelected,
-    hasDescendants: true,
-    opensInNewTab: linkTarget === '_blank',
-    onToggleOpenInNewTab: onToggleOpenInNewTab
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(PanelBody, {
-    title: __('Link settings')
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ToggleControl, {
-    label: __('Open in new tab'),
-    onChange: onToggleOpenInNewTab,
-    checked: linkTarget === '_blank'
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(TextControl, {
-    label: __('Link rel'),
-    value: rel || '',
-    onChange: onSetLinkRel
-  }))));
+  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
+    insertPlainMenuItem: insertPlainMenuItem
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (compose([withSelect(function (select, ownProps) {
@@ -1769,24 +1825,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 var __ = wp.i18n.__;
-var _wp$element = wp.element,
-    useRef = _wp$element.useRef,
-    useEffect = _wp$element.useEffect;
+var useEffect = wp.element.useEffect;
 var _wp$blockEditor = wp.blockEditor,
-    InnerBlocks = _wp$blockEditor.InnerBlocks,
     BlockControls = _wp$blockEditor.BlockControls,
     InspectorControls = _wp$blockEditor.InspectorControls,
-    ColorPalette = _wp$blockEditor.ColorPalette,
     FontSizePicker = _wp$blockEditor.FontSizePicker,
     withFontSizes = _wp$blockEditor.withFontSizes,
-    withColors = _wp$blockEditor.withColors,
-    PanelColorSettings = _wp$blockEditor.PanelColorSettings;
+    withColors = _wp$blockEditor.withColors;
 var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
     Toolbar = _wp$components.Toolbar,
     ToolbarButton = _wp$components.ToolbarButton,
-    ToolbarGroup = _wp$components.ToolbarGroup,
-    ToggleControl = _wp$components.ToggleControl;
+    ToolbarGroup = _wp$components.ToolbarGroup;
 var withDispatch = wp.data.withDispatch;
 var compose = wp.compose.compose;
 
@@ -1914,7 +1964,6 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
-var __ = wp.i18n.__;
 var useRef = wp.element.useRef;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 var withSelect = wp.data.withSelect;
@@ -1928,22 +1977,9 @@ function PlainMenu(args) {
   var selectedBlockHasDescendants = args.selectedBlockHasDescendants,
       isImmediateParentOfSelectedBlock = args.isImmediateParentOfSelectedBlock,
       isSelected = args.isSelected,
-      setAttributes = args.setAttributes,
-      className = args.className,
       attributes = args.attributes;
   var ref = useRef();
-
-  function setAlignment(alignment) {
-    return function () {
-      var itemsJustification = attributes.itemsJustification === alignment ? undefined : alignment;
-      setAttributes({
-        itemsJustification: itemsJustification
-      });
-    };
-  }
-
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames)); // UI State: rendered Block UI
-
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames));
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {

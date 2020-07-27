@@ -33,16 +33,15 @@ function MegaMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames( 'wp-block-mp-megamenu' ,{
-		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
-		[ `has-full-width-dropdown` ]: attributes.expandDropdown,
+	const menuClasses = classnames( 'wp-block-mp-megamenu', {
+		[ `justify-items-${ attributes.itemsJustification }` ] : attributes.itemsJustification,
+		[ `has-full-width-dropdown` ] : attributes.expandDropdown,
 	});
 
 	const menuWrapperStyle = {
 		maxWidth: attributes.menuMaxWidth
 	};
 
-	// UI State: rendered Block UI
 	return (
 		<>
 			<Controls { ...args }/>
@@ -89,7 +88,7 @@ export default compose( [
 		const selectedBlockHasDescendants = !! getClientIdsOfDescendants( [
 			selectedBlockId,
 		] )?.length;
-		const menuItems = getBlocksByClientId(clientId)[0].innerBlocks;
+		const menuItems = getBlocksByClientId( clientId )[0].innerBlocks;
 
 		return {
 			isImmediateParentOfSelectedBlock,

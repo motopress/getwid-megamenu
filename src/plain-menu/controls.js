@@ -1,23 +1,19 @@
 import MPMegaMenuColorPalette from '../custom-controls/color-palette';
 
 const { __ } = wp.i18n;
-const { useRef, useEffect } = wp.element;
+const { useEffect } = wp.element;
 const {
-	InnerBlocks,
 	BlockControls,
 	InspectorControls,
-	ColorPalette,
 	FontSizePicker,
 	withFontSizes,
 	withColors,
-	PanelColorSettings
 } = wp.blockEditor;
 const {
 	PanelBody,
 	Toolbar,
 	ToolbarButton,
 	ToolbarGroup,
-	ToggleControl
 } = wp.components;
 const { withDispatch } = wp.data;
 const { compose } = wp.compose;
@@ -48,7 +44,7 @@ function Controls(args) {
 			fontSize: menuItemFontSize.slug,
 			customFontSize: menuItemFontSize.slug ? undefined : menuItemFontSize.size,
 		} )
-	}, [menuItemFontSize.size] );
+	}, [ menuItemFontSize.size ] );
 
 
 	useEffect( () => {
@@ -56,7 +52,7 @@ function Controls(args) {
 			textColor: menuItemColor.slug,
 			customTextColor: menuItemColor.slug ? undefined : menuItemColor.color,
 		} )
-	}, [menuItemColor.color] );
+	}, [ menuItemColor.color ] );
 
 	return(
 		<>

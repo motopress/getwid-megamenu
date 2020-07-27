@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MPMegaMenu;
+namespace GetwidMegaMenu;
 
 
 class MegaMenu extends AbstractBlock {
@@ -45,7 +45,7 @@ class MegaMenu extends AbstractBlock {
 			$toggle_button_alignment_style = isset( $attributes['toggleButtonAlignment'] ) ? 'style="text-align: ' . $attributes['toggleButtonAlignment'] . ';"' : '';
 
 			$html .= '<div class="wp-block-mp-megamenu__toggle-wrapper is-hidden" ' . $toggle_button_alignment_style . '>';
-			$html .= '<button class="wp-block-mp-megamenu__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'mp-megamenu' ) . '</button>';
+			$html .= '<button class="wp-block-mp-megamenu__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
 			$html .= '</div>';
 		}
 

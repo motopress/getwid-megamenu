@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MPMegaMenu;
+namespace GetwidMegaMenu;
 
 
 class MegaMenuItem extends AbstractBlock {
@@ -64,8 +64,8 @@ class MegaMenuItem extends AbstractBlock {
 		}
 		$html .= '"';
 
-		if ( isset( $attributes['opensInNewTab'] ) && true === $attributes['opensInNewTab'] ) {
-			$html .= ' target="_blank"';
+		if ( isset( $attributes['linkTarget'] ) ) {
+			$html .= ' target="' . $attributes['linkTarget'] . '"';
 		}
 
 		if ( isset( $attributes['rel'] ) ) {

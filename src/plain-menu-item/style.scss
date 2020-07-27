@@ -5,7 +5,8 @@
     &.has-child-selected,
     &:hover {
         > .wp-block-mp-plain-menu-item__dropdown {
-            display: block;
+            visibility: visible;
+            z-index: 10;
         }
     }
 
@@ -29,7 +30,7 @@
         }
     }
 
-    &__link{
+    &__link {
         display: flex;
     }
 
@@ -54,8 +55,8 @@
     }
 
     &__dropdown {
-        z-index: 10;
-        display: none;
+        z-index: -1;
+        visibility: hidden;
         width: 200px;
         position: absolute;
         top: 100%;
@@ -63,9 +64,19 @@
         background: #fff;
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .05);
 
+        &.toleft {
+            left: auto;
+            right: 0;
+        }
+
         & & {
             left: 100%;
             top: 0;
+
+            &.toleft {
+                right: 100%;
+                left: auto;
+            }
         }
     }
 

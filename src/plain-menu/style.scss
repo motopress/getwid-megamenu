@@ -1,4 +1,26 @@
 .wp-block-mp-plain-menu {
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin: 0;
+            padding: 0;
+
+            &:after,
+            &:before {
+                display: none;
+            }
+        }
+
+        &:after,
+        &:before {
+            display: none;
+        }
+    }
+
     &.justify-items {
         &-left {
             .wp-block-mp-plain-menu__content {
@@ -46,6 +68,11 @@
         .wp-block-mp-plain-menu-item__dropdown {
             left: 100%;
             top: 0;
+
+            &.toleft {
+                right: 100%;
+                left: auto;
+            }
         }
     }
 }

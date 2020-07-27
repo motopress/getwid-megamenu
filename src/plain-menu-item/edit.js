@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import Controls from "./controls";
 
 /**
  * WordPress dependencies
@@ -32,104 +33,6 @@ const {
 const {rawShortcut, displayShortcut} = wp.keycodes;
 const {createBlock} = wp.blocks;
 
-/**
- * Internal dependencies
- */
-
-const NEW_TAB_REL = 'noreferrer noopener';
-
-function MenuItemToolbar(args) {
-    const {
-        isSelected,
-        url,
-	    text,
-        setAttributes,
-        opensInNewTab,
-        onToggleOpenInNewTab,
-	    toggleItemDropdown,
-        isItemDropdownOpened,
-	    insertPlainMenuItem,
-	    hasDescendants
-    } = args;
-	const [isURLPickerOpen, setIsURLPickerOpen] = useState(false);
-
-	const isURLSet = !(url === undefined || url.trim().length === 0);
-
-	const openLinkControl = () => {
-		setIsURLPickerOpen(true);
-		return false; // prevents default behaviour for event
-	};
-
-	const unlinkItem = () => {
-		setAttributes( {
-			url: undefined,
-			linkTarget: undefined,
-			rel: undefined,
-		} );
-		setIsURLPickerOpen( false );
-	};
-
-	useEffect( () => {
-		if ( isSelected && ! url ) {
-			setIsURLPickerOpen( true );
-		}
-	}, [ isSelected ] );
-
-	const linkControl = isURLPickerOpen && (
-		<Popover position="bottom center" onClose={() => setIsURLPickerOpen(false)}>
-			<__experimentalLinkControl
-				className="wp-block-plain-menu-item__inline-link-input"
-				value={{
-					url,
-					opensInNewTab
-				}}
-				onChange={ ( {
-					title: newTitle = '',
-	                url: newURL = '',
-	                opensInNewTab: newOpensInNewTab,
-                } ) => {
-					setAttributes({
-						url: newURL,
-						text: ( () => {
-							if ( text ) {
-								return text;
-							}
-
-							if ( newTitle !== '' && text !== newTitle) {
-								return escape( newTitle );
-							}
-						} )()
-					});
-
-					if (opensInNewTab !== newOpensInNewTab) {
-						onToggleOpenInNewTab(newOpensInNewTab);
-					}
-				} }
-			/>
-		</Popover>
-	);
-
-	return (
-		<>
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton name="link" icon="admin-links" title={__('Edit Link')} onClick={openLinkControl} isActive={isURLSet}/>
-					<ToolbarButton name="unlink" icon="editor-unlink" title={__('Unlink')} onClick={unlinkItem} isDisabled={!isURLSet}/>
-				</ToolbarGroup>
-				<ToolbarGroup>
-	                <ToolbarButton
-	                    name="submenu"
-	                    icon="download"
-	                    title={ __( 'Add submenu' ) }
-	                    onClick={ insertPlainMenuItem }
-	                />
-				</ToolbarGroup>
-			</BlockControls>
-			{linkControl}
-		</>
-	);
-}
-
 function MenuItemEdit(props) {
 	const {
 		attributes,
@@ -156,35 +59,13 @@ function MenuItemEdit(props) {
 		url,
 	} = attributes;
 
-	const onSetLinkRel = useCallback(
-		(value) => {
-			setAttributes({rel: value});
-		},
-		[setAttributes]
-	);
+
 
 	const itemLabelPlaceholder = __( 'Add link…' );
 
     const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
 
-	const onToggleOpenInNewTab = useCallback(
-		(value) => {
-			const newLinkTarget = value ? '_blank' : undefined;
 
-			let updatedRel = rel;
-			if (newLinkTarget && !rel) {
-				updatedRel = NEW_TAB_REL;
-			} else if (!newLinkTarget && rel === NEW_TAB_REL) {
-				updatedRel = undefined;
-			}
-
-			setAttributes({
-				linkTarget: newLinkTarget,
-				rel: updatedRel,
-			});
-		},
-		[rel, setAttributes]
-	);
 
 	const isMenuItemSelected = isSelected || isParentOfSelectedBlock;
 	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
@@ -266,23 +147,11 @@ function MenuItemEdit(props) {
 					)
 				}
 			</div>
+			<Controls
+				{ ...props }
+				insertPlainMenuItem={ insertPlainMenuItem }
+			/>
 
-			<MenuItemToolbar
-                url={url}
-                text={text}
-				insertPlainMenuItem={insertPlainMenuItem}
-                isItemDropdownOpened={isItemDropdownOpened}
-                setAttributes={setAttributes}
-                isSelected={isSelected}
-				hasDescendants
-                opensInNewTab={linkTarget === '_blank'}
-                onToggleOpenInNewTab={onToggleOpenInNewTab}/>
-			<InspectorControls>
-				<PanelBody title={__('Link settings')}>
-					<ToggleControl label={__('Open in new tab')} onChange={onToggleOpenInNewTab} checked={linkTarget === '_blank'}/>
-					<TextControl label={__('Link rel')} value={rel || ''} onChange={onSetLinkRel}/>
-				</PanelBody>
-			</InspectorControls>
 		</>
 	);
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MPMegaMenu;
+namespace GetwidMegaMenu;
 
 
 class PlainMenuItem extends AbstractBlock {
@@ -53,7 +53,7 @@ class PlainMenuItem extends AbstractBlock {
 
 		$item_link_style = ' style="' . $font_size['inline_styles'] . $colors['inline_styles'] . '" ';
 
-		$html .= '<div class="' . implode( ' ', $item_classes ) . '">';
+		$html .= '<li class="' . implode( ' ', $item_classes ) . '">';
 		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" ' . $item_link_style . '>';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
@@ -81,12 +81,12 @@ class PlainMenuItem extends AbstractBlock {
 
 		if ( trim( $content ) ) {
 			$html .= '<div class="wp-block-mp-plain-menu-item__dropdown">';
-			$html .= '<div class="wp-block-mp-plain-menu-item__dropdown-content">';
+			$html .= '<ul class="wp-block-mp-plain-menu-item__dropdown-content">';
 			$html .= $content;
-			$html .= '</div></div>';
+			$html .= '</ul></div>';
 		}
 
-		$html .= '</div>';
+		$html .= '</li>';
 
 		return $html;
 	}

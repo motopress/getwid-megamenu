@@ -2,140 +2,31 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import Controls from "./controls";
 
 /**
  * WordPress dependencies
  */
-const { head, isEqual, escape } = lodash;
-const {__} = wp.i18n;
-const {useCallback, useState, useRef, useEffect, useLayoutEffect} = wp.element;
-const {compose} = wp.compose;
-const {withSelect, withDispatch} = wp.data;
+const { head, isEqual } = lodash;
+const { __ } = wp.i18n;
 const {
-	KeyboardShortcuts,
-	PanelBody,
-	RangeControl,
-	TextControl,
-	ToggleControl,
-	ToolbarButton,
-	ToolbarGroup,
-	Popover,
-} = wp.components;
+	useState,
+	useEffect
+} = wp.element;
+const { compose } = wp.compose;
+const { withSelect, withDispatch } = wp.data;
 const {
-	BlockControls,
-	InspectorControls,
 	RichText,
 	InnerBlocks,
-	__experimentalBlock,
-	__experimentalLinkControl,
 } = wp.blockEditor;
-const {rawShortcut, displayShortcut} = wp.keycodes;
-const {createBlock} = wp.blocks;
 
 /**
  * Internal dependencies
  */
-
-const NEW_TAB_REL = 'noreferrer noopener';
-
-function MenuItemToolbar(args) {
-    const {
-        isSelected,
-        url,
-        setAttributes,
-        opensInNewTab,
-        onToggleOpenInNewTab,
-	    toggleItemDropdown,
-        isItemDropdownOpened,
-	    hasDescendants,
-	    text
-    } = args;
-	const [isURLPickerOpen, setIsURLPickerOpen] = useState(false);
-
-	const isURLSet = !(url === undefined || url.trim().length === 0);
-
-	const openLinkControl = () => {
-		setIsURLPickerOpen(true);
-		return false; // prevents default behaviour for event
-	};
-
-	const unlinkItem = () => {
-		setAttributes( {
-			url: undefined,
-			linkTarget: undefined,
-			rel: undefined,
-		} );
-		setIsURLPickerOpen( false );
-	};
-
-	useEffect( () => {
-		if ( isSelected && ! url ) {
-			setIsURLPickerOpen( true );
-		}
-	}, [ isSelected ] );
-
-	const linkControl = isURLPickerOpen && (
-		<Popover position="top center" onClose={() => setIsURLPickerOpen(false)}>
-			<__experimentalLinkControl
-				className="wp-block-navigation-link__inline-link-input"
-				value={{
-					url,
-					opensInNewTab
-				}}
-				onChange={ ( {
-					title: newTitle = '',
-	                url: newURL = '',
-	                opensInNewTab: newOpensInNewTab,
-                } ) => {
-					setAttributes({
-						url: newURL,
-						text: ( () => {
-							if ( text ) {
-								return text;
-							}
-
-							if ( newTitle !== '' && text !== newTitle) {
-								return escape( newTitle );
-							}
-						} )()
-					});
-
-					if (opensInNewTab !== newOpensInNewTab) {
-						onToggleOpenInNewTab(newOpensInNewTab);
-					}
-
-					setIsURLPickerOpen(false);
-				} }
-			/>
-		</Popover>
-	);
-
-	return (
-		<>
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton name="link" icon="admin-links" title={__('Edit Link')} onClick={openLinkControl} isActive={isURLSet}/>
-					<ToolbarButton name="unlink" icon="editor-unlink" title={__('Unlink')} onClick={unlinkItem} isDisabled={!isURLSet}/>
-				</ToolbarGroup>
-				<ToolbarGroup>
-	                <ToolbarButton
-	                    name="submenu"
-	                    icon="download"
-	                    title={ __( 'Add submenu' ) }
-	                    onClick={ toggleItemDropdown }
-	                />
-				</ToolbarGroup>
-			</BlockControls>
-			{linkControl}
-		</>
-	);
-}
-
-function MenuItemEdit(props) {
+function MenuItemEdit( props ) {
 	const {
 		attributes,
 		setAttributes,
-		className,
 		isSelected,
 		onReplace,
 		mergeBlocks,
@@ -147,53 +38,85 @@ function MenuItemEdit(props) {
 		parentAttributes
 	} = props;
 	const {
-		linkTarget,
-		rel,
 		text,
-		url,
 	} = attributes;
 
-	const onSetLinkRel = useCallback(
-		(value) => {
-			setAttributes({rel: value});
-		},
-		[setAttributes]
-	);
-
 	const itemLabelPlaceholder = __( 'Add link…' );
-
-    const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
-
-    const toggleItemDropdown = () => {
-	    setIsItemDropdownOpened(!isItemDropdownOpened);
-	    if(hasDescendants){
-		    updateInnerBlocks();
-	    }
-        return false; // prevents default behaviour for event
-    };
-
-	const onToggleOpenInNewTab = useCallback(
-		(value) => {
-			const newLinkTarget = value ? '_blank' : undefined;
-
-			let updatedRel = rel;
-			if (newLinkTarget && !rel) {
-				updatedRel = NEW_TAB_REL;
-			} else if (!newLinkTarget && rel === NEW_TAB_REL) {
-				updatedRel = undefined;
-			}
-
-			setAttributes({
-				linkTarget: newLinkTarget,
-				rel: updatedRel,
-			});
-		},
-		[rel, setAttributes]
-	);
-
+	const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
 	const isMenuItemSelected = isSelected || isParentOfSelectedBlock;
 	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
 	const showDropdown = isMenuItemSelected && menuItemHasChildrens;
+	const [dropdownPosition, setDropdownPosition] = useState( { left:0, width: 'auto' } );
+
+	const toggleItemDropdown = () => {
+		setIsItemDropdownOpened(!isItemDropdownOpened);
+		if(hasDescendants){
+			updateInnerBlocks();
+		}
+		return false;
+	};
+
+	const updateDropdownPosition = () => {
+		let newDropdownPosition = {};
+		let rootBlockNode;
+		const blockNode = document.querySelector( '[data-block="' + clientId + '"]' );
+		const blockCoords = blockNode.getBoundingClientRect();
+
+		if ( parentAttributes.expandDropdown ) {
+			rootBlockNode = document.querySelector('.editor-styles-wrapper');
+		} else {
+			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
+		}
+		const rootCoords = rootBlockNode.getBoundingClientRect();
+
+		let left = -(blockCoords.x - rootCoords.x);
+
+		if ( parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth ) {
+			left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
+		}
+
+		newDropdownPosition = {left: left, width: rootCoords.width};
+
+		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
+			setDropdownPosition(newDropdownPosition);
+		}
+	};
+
+	useEffect( () => {
+		updateDropdownPosition();
+	}, [ isSelected ] );
+
+	useEffect( () => {
+		window.addEventListener('resize', updateDropdownPosition);
+	}, [] );
+
+	useEffect( () => {
+		setAttributes( {
+			fontSize: parentAttributes.menuItemFontSize,
+			customFontSize: parentAttributes.customMenuItemFontSize,
+			textColor: parentAttributes.menuItemColor,
+			customTextColor: parentAttributes.customMenuItemColor,
+		} );
+	}, [] );
+
+	const dropdownWrapperStyle = {
+		left: dropdownPosition.left,
+		width: dropdownPosition.width,
+		maxWidth: parentAttributes.dropdownMaxWidth
+	};
+
+	const dropdownStyle = {
+		backgroundColor: attributes.customDropdownBackgroundColor
+	};
+
+	const dropdownContentStyle = {
+		maxWidth: parentAttributes.dropdownContentMaxWidth
+	};
+
+	const dropdownClasses = classnames('wp-block-mp-megamenu-item__dropdown', {
+		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
+		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
+	});
 
 	const itemClasses = classnames(
 		'wp-block-mp-megamenu-item',
@@ -217,70 +140,6 @@ function MenuItemEdit(props) {
 		fontSize: attributes.customFontSize
 	};
 
-	const [dropdownPosition, setDropdownPosition] = useState({left:0, width: 'auto'});
-
-	const updateDropdownPosition = () => {
-		let newDropdownPosition = {};
-		const blockNode = document.querySelector( '[data-block="' + clientId + '"]' );
-		const blockCoords = blockNode.getBoundingClientRect();
-
-		let rootBlockNode;
-		if ( parentAttributes.expandDropdown ) {
-			rootBlockNode = document.querySelector('.editor-styles-wrapper');
-		} else {
-			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
-		}
-		const rootCoords = rootBlockNode.getBoundingClientRect();
-
-		let left = -(blockCoords.x - rootCoords.x);
-
-		if ( parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth ) {
-			left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
-		}
-
-		newDropdownPosition = {left: left, width: rootCoords.width};
-
-		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
-			setDropdownPosition(newDropdownPosition);
-		}
-	};
-
-	useEffect(() => {
-		updateDropdownPosition();
-	}, [isSelected]);
-
-	useEffect(() => {
-		window.addEventListener('resize', updateDropdownPosition);
-	}, []);
-
-	const dropdownWrapperStyle = {
-		left: dropdownPosition.left,
-		width: dropdownPosition.width,
-		maxWidth: parentAttributes.dropdownMaxWidth
-	};
-
-	const dropdownStyle = {
-		backgroundColor: attributes.customDropdownBackgroundColor
-	};
-
-	const dropdownContentStyle = {
-		maxWidth: parentAttributes.dropdownContentMaxWidth
-	};
-
-	const dropdownClasses = classnames('wp-block-mp-megamenu-item__dropdown', {
-		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
-		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
-	});
-
-	useEffect( () => {
-		setAttributes( {
-			fontSize: parentAttributes.menuItemFontSize,
-			customFontSize: parentAttributes.customMenuItemFontSize,
-			textColor: parentAttributes.menuItemColor,
-			customTextColor: parentAttributes.customMenuItemColor,
-		} );
-	}, [] );
-
 	return (
 		<>
 			<div className={itemClasses}>
@@ -292,12 +151,12 @@ function MenuItemEdit(props) {
 						} }
 					>
 						<RichText
-							placeholder={itemLabelPlaceholder}
-							value={text}
-							onChange={(value) => setAttributes({text: value})}
+							placeholder={ itemLabelPlaceholder }
+							value={ text }
+							onChange={ ( value ) => setAttributes( { text: value } ) }
 							withoutInteractiveFormatting
-							onReplace={onReplace}
-							onMerge={mergeBlocks}
+							onReplace={ onReplace }
+							onMerge={ mergeBlocks }
 							identifier="text"/>
 						{
 							(menuItemHasChildrens) && (
@@ -310,9 +169,9 @@ function MenuItemEdit(props) {
 				</div>
 				{
 					(showDropdown) && (
-						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={dropdownWrapperStyle}>
-							<div className={dropdownClasses} style={dropdownStyle}>
-								<div className='wp-block-mp-megamenu-item__dropdown-content' style={dropdownContentStyle}>
+						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={ dropdownWrapperStyle }>
+							<div className={ dropdownClasses } style={ dropdownStyle }>
+								<div className='wp-block-mp-megamenu-item__dropdown-content' style={ dropdownContentStyle }>
 									<InnerBlocks/>
 								</div>
 							</div>
@@ -320,23 +179,11 @@ function MenuItemEdit(props) {
 					)
 				}
 			</div>
-
-			<MenuItemToolbar
-                url={url}
-				text={text}
-				toggleItemDropdown={toggleItemDropdown}
-                isItemDropdownOpened={isItemDropdownOpened}
-                setAttributes={setAttributes}
-                isSelected={isSelected}
-				hasDescendants
-                opensInNewTab={linkTarget === '_blank'}
-                onToggleOpenInNewTab={onToggleOpenInNewTab}/>
-			<InspectorControls>
-				<PanelBody title={__('Link settings')}>
-					<ToggleControl label={__('Open in new tab')} onChange={onToggleOpenInNewTab} checked={linkTarget === '_blank'}/>
-					<TextControl label={__('Link rel')} value={rel || ''} onChange={onSetLinkRel}/>
-				</PanelBody>
-			</InspectorControls>
+			<Controls
+				{ ...props }
+				toggleItemDropdown={ toggleItemDropdown }
+				isItemDropdownOpened={ isItemDropdownOpened }
+			/>
 		</>
 	);
 }
@@ -349,7 +196,7 @@ export default compose([
 			getBlockParentsByBlockName,
 			getBlock
 		} = select('core/block-editor');
-		const {clientId} = ownProps;
+		const { clientId } = ownProps;
 		const isParentOfSelectedBlock = hasSelectedInnerBlock(clientId, true);
 		const hasDescendants = !!getClientIdsOfDescendants([clientId])
 			.length;

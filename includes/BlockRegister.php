@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MPMegaMenu;
+namespace GetwidMegaMenu;
 
 
 class BlockRegister {
