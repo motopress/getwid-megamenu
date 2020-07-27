@@ -22,7 +22,7 @@ class MegaMenu extends AbstractBlock {
 			$collapse_on_mobile ? array('is-collapsible') : array()
 		);
 
-		$html = '<div class="wp-block-mp-megamenu ' . implode( ' ', $classes ) . '"';
+		$html = '<div class="wp-block-getwid-megamenu ' . implode( ' ', $classes ) . '"';
 		if ( isset( $attributes['dropdownMaxWidth'] ) ) {
 			$html .= ' data-dropdown-width="' . $attributes['dropdownMaxWidth'] . '"';
 		}
@@ -35,7 +35,7 @@ class MegaMenu extends AbstractBlock {
 		$html .= ' data-responsive-breakpoint="' . $responsive_breakpoint . '"';
 		$html .= '>';
 
-		$html .= '<nav class="wp-block-mp-megamenu__wrapper"';
+		$html .= '<nav class="wp-block-getwid-megamenu__wrapper"';
 		if ( isset( $attributes['menuMaxWidth'] ) ) {
 			$html .= ' style="max-width:' . $attributes['menuMaxWidth'] . 'px"';
 		}
@@ -44,13 +44,13 @@ class MegaMenu extends AbstractBlock {
 		if ( $collapse_on_mobile ) {
 			$toggle_button_alignment_style = isset( $attributes['toggleButtonAlignment'] ) ? 'style="text-align: ' . $attributes['toggleButtonAlignment'] . ';"' : '';
 
-			$html .= '<div class="wp-block-mp-megamenu__toggle-wrapper is-hidden" ' . $toggle_button_alignment_style . '>';
-			$html .= '<button class="wp-block-mp-megamenu__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
+			$html .= '<div class="wp-block-getwid-megamenu__toggle-wrapper is-hidden" ' . $toggle_button_alignment_style . '>';
+			$html .= '<button class="wp-block-getwid-megamenu__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
 			$html .= '</div>';
 		}
 
-		$html .= '<div class="wp-block-mp-megamenu__content-wrapper">';
-		$html .= '<ul class="wp-block-mp-megamenu__content">';
+		$html .= '<div class="wp-block-getwid-megamenu__content-wrapper">';
+		$html .= '<ul class="wp-block-getwid-megamenu__content">';
 
 
 		$html .= $content;
@@ -60,18 +60,18 @@ class MegaMenu extends AbstractBlock {
 	}
 
 	protected function setName() {
-		$this->name = 'mp-megamenu/menu';
+		$this->name = 'getwid-megamenu/menu';
 	}
 
 	protected function setStyle() {
-		$this->style = 'mp-megamenu-block-style';
+		$this->style = 'getwid-megamenu-block-style';
 	}
 
 	protected function setEditorStyle() {
-		$this->editor_style = 'mp-megamenu-block-editor';
+		$this->editor_style = 'getwid-megamenu-block-editor';
 	}
 
 	protected function setEditorScript() {
-		$this->editor_script = 'mp-megamenu-block';
+		$this->editor_script = 'getwid-megamenu-block';
 	}
 }

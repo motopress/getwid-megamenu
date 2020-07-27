@@ -506,7 +506,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: name, category, parent, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"getwid-megamenu/menu-item\",\"category\":\"layout\",\"parent\":[\"getwid-megamenu/menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -781,7 +781,7 @@ function MenuItemEdit(props) {
     if (parentAttributes.expandDropdown) {
       rootBlockNode = document.querySelector('.editor-styles-wrapper');
     } else {
-      rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu');
+      rootBlockNode = document.querySelector('[data-block="' + rootBlockClientId + '"] .wp-block-getwid-megamenu');
     }
 
     var rootCoords = rootBlockNode.getBoundingClientRect();
@@ -826,14 +826,14 @@ function MenuItemEdit(props) {
   var dropdownContentStyle = {
     maxWidth: parentAttributes.dropdownContentMaxWidth
   };
-  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({
+  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({
     'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor
   }, "has-".concat(attributes.dropdownBackgroundColor, "-background-color"), !!attributes.dropdownBackgroundColor));
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item', {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item', {
     'has-child': hasDescendants,
     'is-opened': showDropdown
   });
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-megamenu-item__link', (_classnames2 = {
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item__link', (_classnames2 = {
     'has-text-color': attributes.textColor || attributes.customTextColor
   }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames2));
   var itemLinkStyles = {
@@ -863,17 +863,17 @@ function MenuItemEdit(props) {
     onMerge: mergeBlocks,
     identifier: "text"
   }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
-    className: "wp-block-mp-megamenu-item__dropdown-icon"
+    className: "wp-block-getwid-megamenu-item__dropdown-icon"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
   })))), showDropdown && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-mp-megamenu-item__dropdown-wrapper",
+    className: "wp-block-getwid-megamenu-item__dropdown-wrapper",
     style: dropdownWrapperStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: dropdownClasses,
     style: dropdownStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-mp-megamenu-item__dropdown-content",
+    className: "wp-block-getwid-megamenu-item__dropdown-content",
     style: dropdownContentStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, null))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     toggleItemDropdown: toggleItemDropdown,
@@ -891,7 +891,7 @@ function MenuItemEdit(props) {
   var clientId = ownProps.clientId;
   var isParentOfSelectedBlock = hasSelectedInnerBlock(clientId, true);
   var hasDescendants = !!getClientIdsOfDescendants([clientId]).length;
-  var rootBlockClientId = head(getBlockParentsByBlockName(clientId, 'mp-megamenu/menu'));
+  var rootBlockClientId = head(getBlockParentsByBlockName(clientId, 'getwid-megamenu/menu'));
   var parentAttributes = getBlock(rootBlockClientId).attributes;
   return {
     isParentOfSelectedBlock: isParentOfSelectedBlock,
@@ -930,7 +930,8 @@ var __ = wp.i18n.__;
 
 
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
-  title: __('Menu Item'),
+  title: __('Menu Item', 'getwid-megamenu'),
+  icon: 'admin-links',
   category: _block_json__WEBPACK_IMPORTED_MODULE_0__.category,
   parent: _block_json__WEBPACK_IMPORTED_MODULE_0__.parent,
   attributes: _block_json__WEBPACK_IMPORTED_MODULE_0__.attributes,
@@ -972,7 +973,7 @@ function save() {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false},\"menuMaxWidth\":{\"type\":\"number\"},\"dropdownMaxWidth\":{\"type\":\"number\"},\"dropdownContentMaxWidth\":{\"type\":\"number\"},\"collapseOnMobile\":{\"type\":\"boolean\",\"default\":true},\"responsiveBreakpoint\":{\"type\":\"number\",\"default\":600},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"},\"toggleButtonAlignment\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"getwid-megamenu/menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"expandDropdown\":{\"type\":\"boolean\",\"default\":false},\"menuMaxWidth\":{\"type\":\"number\"},\"dropdownMaxWidth\":{\"type\":\"number\"},\"dropdownContentMaxWidth\":{\"type\":\"number\"},\"collapseOnMobile\":{\"type\":\"boolean\",\"default\":true},\"responsiveBreakpoint\":{\"type\":\"number\",\"default\":600},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"},\"toggleButtonAlignment\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":[\"wide\",\"full\"],\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -1238,8 +1239,8 @@ var useRef = wp.element.useRef;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 var withSelect = wp.data.withSelect;
 var compose = wp.compose.compose;
-var TEMPLATE = [['mp-megamenu/menu-item', {}]];
-var ALLOWED_BLOCKS = ['mp-megamenu/menu-item'];
+var TEMPLATE = [['getwid-megamenu/menu-item', {}]];
+var ALLOWED_BLOCKS = ['getwid-megamenu/menu-item'];
 
 function MegaMenu(args) {
   var _classnames;
@@ -1249,19 +1250,19 @@ function MegaMenu(args) {
       isSelected = args.isSelected,
       attributes = args.attributes;
   var ref = useRef();
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
   var menuWrapperStyle = {
     maxWidth: attributes.menuMaxWidth
   };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-mp-megamenu__wrapper",
+    className: "wp-block-getwid-megamenu__wrapper",
     style: menuWrapperStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-mp-megamenu__content-wrapper"
+    className: "wp-block-getwid-megamenu__content-wrapper"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-mp-megamenu__content"
+    className: "wp-block-getwid-megamenu__content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
@@ -1316,7 +1317,9 @@ var __ = wp.i18n.__;
 
 
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
-  title: __('Menu'),
+  title: __('Mega Menu', 'getwid-megamenu'),
+  keywords: [__('navigation', 'getwid-megamenu'), __('links', 'getwid-megamenu')],
+  icon: 'menu',
   category: _block_json__WEBPACK_IMPORTED_MODULE_0__.category,
   attributes: _block_json__WEBPACK_IMPORTED_MODULE_0__.attributes,
   supports: _block_json__WEBPACK_IMPORTED_MODULE_0__.supports,
@@ -1357,7 +1360,7 @@ function save() {
 /*! exports provided: name, category, parent, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/plain-menu-item\",\"category\":\"layout\",\"parent\":[\"mp-megamenu/plain-menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"getwid-megamenu/plain-menu-item\",\"category\":\"layout\",\"parent\":[\"getwid-megamenu/plain-menu\"],\"attributes\":{\"url\":{\"type\":\"string\",\"default\":\"\"},\"text\":{\"type\":\"string\"},\"linkTarget\":{\"type\":\"string\"},\"rel\":{\"type\":\"string\"},\"textColor\":{\"type\":\"string\"},\"customTextColor\":{\"type\":\"string\"},\"fontSize\":{\"type\":\"string\"},\"customFontSize\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"alignWide\":false,\"reusable\":false,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -1628,7 +1631,7 @@ function MenuItemEdit(props) {
   var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
   var menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
   var showDropdown = isMenuItemSelected && menuItemHasChildrens;
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-plain-menu-item', {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-plain-menu-item', {
     'has-child': hasDescendants,
     'has-child-selected': isParentOfSelectedBlock,
     'is-opened': showDropdown
@@ -1641,7 +1644,7 @@ function MenuItemEdit(props) {
       customTextColor: parentItemClientId ? undefined : parentAttributes.customMenuItemColor
     });
   }, []);
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-mp-plain-menu-item__link', (_classnames = {
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-plain-menu-item__link', (_classnames = {
     'has-text-color': attributes.textColor || attributes.customTextColor
   }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames));
   var itemLinkStyles = {
@@ -1671,15 +1674,15 @@ function MenuItemEdit(props) {
     onMerge: mergeBlocks,
     identifier: "text"
   }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
-    className: "wp-block-mp-plain-menu-item__dropdown-icon"
+    className: "wp-block-getwid-plain-menu-item__dropdown-icon"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
   })))), isMenuItemSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-mp-plain-menu-item__dropdown"
+    className: "wp-block-getwid-plain-menu-item__dropdown"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-mp-plain-menu-item__dropdown-content"
+    className: "wp-block-getwid-plain-menu-item__dropdown-content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, {
-    allowedBlocks: ['mp-megamenu/plain-menu-item'],
+    allowedBlocks: ['getwid-megamenu/plain-menu-item'],
     renderAppender: isSelected && hasDescendants || isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants ? InnerBlocks.DefaultAppender : false
   })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     insertPlainMenuItem: insertPlainMenuItem
@@ -1702,8 +1705,8 @@ function MenuItemEdit(props) {
   var hasDescendants = !!getClientIdsOfDescendants([clientId]).length;
   var selectedBlockId = getSelectedBlockClientId();
   var selectedBlockHasDescendants = !!((_getClientIdsOfDescen = getClientIdsOfDescendants([selectedBlockId])) === null || _getClientIdsOfDescen === void 0 ? void 0 : _getClientIdsOfDescen.length);
-  var rootBlockClientId = head(getBlockParentsByBlockName(clientId, 'mp-megamenu/plain-menu'));
-  var parentItemClientId = head(getBlockParentsByBlockName(clientId, 'mp-megamenu/plain-menu-item'));
+  var rootBlockClientId = head(getBlockParentsByBlockName(clientId, 'getwid-megamenu/plain-menu'));
+  var parentItemClientId = head(getBlockParentsByBlockName(clientId, 'getwid-megamenu/plain-menu-item'));
   var parentAttributes = getBlock(rootBlockClientId).attributes;
   return {
     isParentOfSelectedBlock: isParentOfSelectedBlock,
@@ -1729,7 +1732,7 @@ function MenuItemEdit(props) {
 
       var navItems = getClientIdsOfDescendants([ownProps.clientId]);
       var insertionPoint = navItems.length ? navItems.length : 0;
-      var blockToInsert = createBlock('mp-megamenu/plain-menu-item');
+      var blockToInsert = createBlock('getwid-megamenu/plain-menu-item');
       insertBlock(blockToInsert, insertionPoint, ownProps.clientId);
     }
   };
@@ -1756,7 +1759,8 @@ var __ = wp.i18n.__;
 
 
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
-  title: __('Plain Menu Item'),
+  title: __('Plain Menu Item', 'getwid-megamenu'),
+  icon: 'admin-links',
   category: _block_json__WEBPACK_IMPORTED_MODULE_0__.category,
   parent: _block_json__WEBPACK_IMPORTED_MODULE_0__.parent,
   attributes: _block_json__WEBPACK_IMPORTED_MODULE_0__.attributes,
@@ -1798,7 +1802,7 @@ function save() {
 /*! exports provided: name, category, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"mp-megamenu/plain-menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"orientation\":{\"type\":\"string\",\"default\":\"horizontal\"},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
+module.exports = JSON.parse("{\"name\":\"getwid-megamenu/plain-menu\",\"category\":\"layout\",\"attributes\":{\"itemsJustification\":{\"type\":\"string\"},\"orientation\":{\"type\":\"string\",\"default\":\"horizontal\"},\"menuItemFontSize\":{\"type\":\"string\"},\"customMenuItemFontSize\":{\"type\":\"number\"},\"menuItemColor\":{\"type\":\"string\"},\"customMenuItemColor\":{\"type\":\"string\"}},\"supports\":{\"anchor\":false,\"align\":false,\"reusable\":false,\"customClassName\":true,\"lightBlockWrapper\":true}}");
 
 /***/ }),
 
@@ -1968,8 +1972,8 @@ var useRef = wp.element.useRef;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 var withSelect = wp.data.withSelect;
 var compose = wp.compose.compose;
-var TEMPLATE = [['mp-megamenu/plain-menu-item', {}]];
-var ALLOWED_BLOCKS = ['mp-megamenu/plain-menu-item'];
+var TEMPLATE = [['getwid-megamenu/plain-menu-item', {}]];
+var ALLOWED_BLOCKS = ['getwid-megamenu/plain-menu-item'];
 
 function PlainMenu(args) {
   var _classnames;
@@ -1979,11 +1983,11 @@ function PlainMenu(args) {
       isSelected = args.isSelected,
       attributes = args.attributes;
   var ref = useRef();
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-mp-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames));
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames));
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-mp-plain-menu__content"
+    className: "wp-block-getwid-plain-menu__content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
@@ -2035,7 +2039,8 @@ var __ = wp.i18n.__;
 
 
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
-  title: __('Plain Menu'),
+  title: __('Plain Menu', 'getwid-megamenu'),
+  icon: 'menu',
   category: _block_json__WEBPACK_IMPORTED_MODULE_0__.category,
   attributes: _block_json__WEBPACK_IMPORTED_MODULE_0__.attributes,
   supports: _block_json__WEBPACK_IMPORTED_MODULE_0__.supports,

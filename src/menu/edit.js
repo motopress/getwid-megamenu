@@ -16,11 +16,11 @@ const { withSelect } = wp.data;
 const { compose } = wp.compose;
 
 const TEMPLATE = [
-	['mp-megamenu/menu-item', {}],
+	['getwid-megamenu/menu-item', {}],
 ];
 
 const ALLOWED_BLOCKS = [
-	'mp-megamenu/menu-item'
+	'getwid-megamenu/menu-item'
 ];
 
 function MegaMenu( args ) {
@@ -33,7 +33,7 @@ function MegaMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames( 'wp-block-mp-megamenu', {
+	const menuClasses = classnames( 'wp-block-getwid-megamenu', {
 		[ `justify-items-${ attributes.itemsJustification }` ] : attributes.itemsJustification,
 		[ `has-full-width-dropdown` ] : attributes.expandDropdown,
 	});
@@ -46,9 +46,9 @@ function MegaMenu( args ) {
 		<>
 			<Controls { ...args }/>
 			<div className={ menuClasses }>
-				<div className="wp-block-mp-megamenu__wrapper" style={ menuWrapperStyle }>
-					<div className="wp-block-mp-megamenu__content-wrapper">
-						<div className="wp-block-mp-megamenu__content">
+				<div className="wp-block-getwid-megamenu__wrapper" style={ menuWrapperStyle }>
+					<div className="wp-block-getwid-megamenu__content-wrapper">
+						<div className="wp-block-getwid-megamenu__content">
 							<InnerBlocks
 								ref={ ref }
 								template={ TEMPLATE }

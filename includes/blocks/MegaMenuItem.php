@@ -42,7 +42,7 @@ class MegaMenuItem extends AbstractBlock {
 		$text_style = $this->generateTextStyles( $attributes );
 
 		$item_link_classes = array_merge(
-			[ 'wp-block-mp-megamenu-item__link' ],
+			[ 'wp-block-getwid-megamenu-item__link' ],
 			[ $font_style['css_classes'] ],
 			[ $text_style['css_classes'] ]
 		);
@@ -50,7 +50,7 @@ class MegaMenuItem extends AbstractBlock {
 		$item_link_style = $font_style['inline_styles'] . $text_style['inline_styles'];
 
 		$item_classes = array_merge(
-			[ 'wp-block-mp-megamenu-item' ],
+			[ 'wp-block-getwid-megamenu-item' ],
 			$content ? [ 'has-children' ] : []
 		);
 
@@ -75,15 +75,15 @@ class MegaMenuItem extends AbstractBlock {
 		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( trim( $content ) ) {
-			$html .= '<button class="wp-block-mp-megamenu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
+			$html .= '<button class="wp-block-getwid-megamenu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
 		$html .= '</div>';
 
 		if ( trim( $content ) ) {
-			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-wrapper">';
-			$html .= '<div class="wp-block-mp-megamenu-item__dropdown">';
-			$html .= '<div class="wp-block-mp-megamenu-item__dropdown-content">';
+			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown-wrapper">';
+			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown">';
+			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown-content">';
 			$html .= $content;
 			$html .= '</div></div></div>';
 		}
@@ -141,18 +141,18 @@ class MegaMenuItem extends AbstractBlock {
 	}
 
 	protected function setName() {
-		$this->name = 'mp-megamenu/menu-item';
+		$this->name = 'getwid-megamenu/menu-item';
 	}
 
 	protected function setStyle() {
-		$this->style = 'mp-megamenu-block-style';
+		$this->style = 'getwid-megamenu-block-style';
 	}
 
 	protected function setEditorStyle() {
-		$this->editor_style = 'mp-megamenu-block-editor';
+		$this->editor_style = 'getwid-megamenu-block-editor';
 	}
 
 	protected function setEditorScript() {
-		$this->editor_script = 'mp-megamenu-block';
+		$this->editor_script = 'getwid-megamenu-block';
 	}
 }

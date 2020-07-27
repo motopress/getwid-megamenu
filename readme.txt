@@ -1,0 +1,61 @@
+=== WordPress Mega Menu Block ===
+Contributors: MotoPress
+Donate link: https://motopress.com/
+Tags: mega menu, megamenu, WordPress menu, navigation, block
+Requires at least: 5.0
+Tested up to: 5.3
+Requires PHP: 5.6
+Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Build better navigation menus with the WordPress mega menu blocks.
+
+== Description ==
+
+This WordPress mega menu plugin enables you to build tailor-made site navigation menus in Gutenberg. 
+
+*Note: this WP navigation block is made for the full-site editing experiences in WordPress. Until full-site editing is available in Core, the plugin provides limited options since it can't fully integrate with the navigation menu.*
+
+The WordPress navigation menu plugin adds a few free mega menu Gutenberg blocks for different purposes:
+
+* Mega menu block.
+* Mega menu item block.
+* Plain menu block.
+* Plain menu item block.
+
+The mega menu item block is very flexible - it allows you to add drop-down menus that can handle any WordPress block, giving you full control over the look and feel of your menus.
+
+= How you can approach the WordPress mega menu plugin: =
+
+* The mega menu block is a container that can handle only mega menu items, which, in their turn, can handle nested drop-downs, i.e. contain any other blocks.
+* Plain menu blocks can contain plain menu items that can handle drop-downs with other plain menu items.
+* The width, color, font size, layouts (horizontal and vertical) of some navigation blocks are fully customizable.
+* You can optionally transform a WordPress navigation menu into the "hamburger button" for mobile devices.
+
+Searching for the best Gutenberg addon?
+
+Check out [Getwid WordPress Blocks](https://wordpress.org/plugins/getwid/) - a top-rated block & template library for the block editor.
+
+== Frequently Asked Questions ==
+
+== Screenshots ==
+
+== Installation ==
+
+1. Upload the plugin to the /wp-content/plugins/ directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+
+
+== Copyright ==
+
+WordPress Mega Menu Block, Copyright (C) 2020, MotoPress https://motopress.com/
+WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
+
+== Credits ==
+
+
+== Changelog ==
+
+= 0.0.1, Jul 27 2020 =
+* Initial release.

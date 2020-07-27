@@ -15,10 +15,10 @@ const { withSelect } = wp.data;
 const { compose } = wp.compose;
 
 const TEMPLATE = [
-	['mp-megamenu/plain-menu-item', {}],
+	['getwid-megamenu/plain-menu-item', {}],
 ];
 const ALLOWED_BLOCKS = [
-	'mp-megamenu/plain-menu-item',
+	'getwid-megamenu/plain-menu-item',
 ];
 
 function PlainMenu( args ) {
@@ -31,7 +31,7 @@ function PlainMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames( 'wp-block-mp-plain-menu', {
+	const menuClasses = classnames( 'wp-block-getwid-plain-menu', {
 		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
 		[ `is-orientation-${attributes.orientation}`]: attributes.orientation
 	});
@@ -40,7 +40,7 @@ function PlainMenu( args ) {
 		<>
 			<Controls { ...args }/>
 			<div className={ menuClasses }>
-				<div className="wp-block-mp-plain-menu__content">
+				<div className="wp-block-getwid-plain-menu__content">
 					<InnerBlocks
 						ref={ ref }
 						template={ TEMPLATE }

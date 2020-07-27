@@ -38,7 +38,7 @@ class PlainMenuItem extends AbstractBlock {
 		);
 
 		$item_classes = array_merge(
-			[ 'wp-block-mp-plain-menu-item' ],
+			[ 'wp-block-getwid-plain-menu-item' ],
 			trim( $content ) ? [ 'has-children' ] : []
 		);
 
@@ -46,7 +46,7 @@ class PlainMenuItem extends AbstractBlock {
 		$colors    = $this->generateTextStyles( $attributes );
 
 		$item_link_classes = array_merge(
-			[ 'wp-block-mp-plain-menu-item__link' ],
+			[ 'wp-block-getwid-plain-menu-item__link' ],
 			[ $font_size['css_classes'] ],
 			[ $colors['css_classes'] ]
 		);
@@ -74,14 +74,14 @@ class PlainMenuItem extends AbstractBlock {
 		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( trim( $content ) ) {
-			$html .= '<button class="wp-block-mp-plain-menu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
+			$html .= '<button class="wp-block-getwid-plain-menu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
 		$html .= '</div>';
 
 		if ( trim( $content ) ) {
-			$html .= '<div class="wp-block-mp-plain-menu-item__dropdown">';
-			$html .= '<ul class="wp-block-mp-plain-menu-item__dropdown-content">';
+			$html .= '<div class="wp-block-getwid-plain-menu-item__dropdown">';
+			$html .= '<ul class="wp-block-getwid-plain-menu-item__dropdown-content">';
 			$html .= $content;
 			$html .= '</ul></div>';
 		}
@@ -139,18 +139,18 @@ class PlainMenuItem extends AbstractBlock {
 	}
 
 	protected function setName() {
-		$this->name = 'mp-megamenu/plain-menu-item';
+		$this->name = 'getwid-megamenu/plain-menu-item';
 	}
 
 	protected function setStyle() {
-		$this->style = 'mp-megamenu-block-style';
+		$this->style = 'getwid-megamenu-block-style';
 	}
 
 	protected function setEditorStyle() {
-		$this->editor_style = 'mp-megamenu-block-editor';
+		$this->editor_style = 'getwid-megamenu-block-editor';
 	}
 
 	protected function setEditorScript() {
-		$this->editor_script = 'mp-megamenu-block';
+		$this->editor_script = 'getwid-megamenu-block';
 	}
 }

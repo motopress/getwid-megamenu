@@ -6,7 +6,8 @@ import save from './save';
 import edit from './edit';
 
 registerBlockType( metadata.name, {
-	title: __( 'Plain Menu' ),
+	title: __( 'Plain Menu', 'getwid-megamenu' ),
+	icon: 'menu',
 	category: metadata.category,
 	attributes: metadata.attributes,
 	supports: metadata.supports,

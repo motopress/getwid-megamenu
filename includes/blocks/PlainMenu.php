@@ -17,8 +17,8 @@ class PlainMenu extends AbstractBlock {
 			isset( $attributes['orientation'] ) ? array( 'is-orientation-' . $attributes['orientation'] ) : array()
 		);
 
-		$html = '<nav class="wp-block-mp-plain-menu ' . implode( ' ', $classes ) . '">';
-		$html .= '<ul class="wp-block-mp-plain-menu__content">';
+		$html = '<nav class="wp-block-getwid-plain-menu ' . implode( ' ', $classes ) . '">';
+		$html .= '<ul class="wp-block-getwid-plain-menu__content">';
 		$html .= $content;
 		$html .= '</ul></nav>';
 
@@ -26,18 +26,18 @@ class PlainMenu extends AbstractBlock {
 	}
 
 	protected function setName() {
-		$this->name = 'mp-megamenu/plain-menu';
+		$this->name = 'getwid-megamenu/plain-menu';
 	}
 
 	protected function setStyle() {
-		$this->style = 'mp-megamenu-block-style';
+		$this->style = 'getwid-megamenu-block-style';
 	}
 
 	protected function setEditorStyle() {
-		$this->editor_style = 'mp-megamenu-block-editor';
+		$this->editor_style = 'getwid-megamenu-block-editor';
 	}
 
 	protected function setEditorScript() {
-		$this->editor_script = 'mp-megamenu-block';
+		$this->editor_script = 'getwid-megamenu-block';
 	}
 }

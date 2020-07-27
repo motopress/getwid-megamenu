@@ -1,18 +1,18 @@
-.wp-block-mp-plain-menu-item {
+.wp-block-getwid-plain-menu-item {
     position: relative;
 
     &.is-opened,
     &.has-child-selected,
     &:hover {
-        > .wp-block-mp-plain-menu-item__dropdown {
+        > .wp-block-getwid-plain-menu-item__dropdown {
             visibility: visible;
             z-index: 10;
         }
     }
 
     &:first-child {
-        .wp-block-mp-plain-menu-item__dropdown & {
-            > .wp-block-mp-plain-menu-item__link {
+        .wp-block-getwid-plain-menu-item__dropdown & {
+            > .wp-block-getwid-plain-menu-item__link {
                 > a {
                     padding-top: .5em;
                 }
@@ -21,8 +21,8 @@
     }
 
     &:last-child {
-        .wp-block-mp-plain-menu-item__dropdown & {
-            > .wp-block-mp-plain-menu-item__link {
+        .wp-block-getwid-plain-menu-item__dropdown & {
+            > .wp-block-getwid-plain-menu-item__link {
                 > a {
                     padding-bottom: .5em;
                 }
@@ -41,7 +41,7 @@
     }
 
     &.has-children {
-        > .wp-block-mp-plain-menu-item__link {
+        > .wp-block-getwid-plain-menu-item__link {
             a {
                 padding-right: 5px;
             }

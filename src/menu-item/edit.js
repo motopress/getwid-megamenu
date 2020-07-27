@@ -65,7 +65,7 @@ function MenuItemEdit( props ) {
 		if ( parentAttributes.expandDropdown ) {
 			rootBlockNode = document.querySelector('.editor-styles-wrapper');
 		} else {
-			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-mp-megamenu' );
+			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-getwid-megamenu' );
 		}
 		const rootCoords = rootBlockNode.getBoundingClientRect();
 
@@ -113,13 +113,13 @@ function MenuItemEdit( props ) {
 		maxWidth: parentAttributes.dropdownContentMaxWidth
 	};
 
-	const dropdownClasses = classnames('wp-block-mp-megamenu-item__dropdown', {
+	const dropdownClasses = classnames('wp-block-getwid-megamenu-item__dropdown', {
 		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
 		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
 	});
 
 	const itemClasses = classnames(
-		'wp-block-mp-megamenu-item',
+		'wp-block-getwid-megamenu-item',
 		{
 			'has-child': hasDescendants,
 			'is-opened': showDropdown
@@ -127,7 +127,7 @@ function MenuItemEdit( props ) {
 	);
 
 	const itemLinkClasses = classnames(
-		'wp-block-mp-megamenu-item__link',
+		'wp-block-getwid-megamenu-item__link',
 		{
 			'has-text-color': attributes.textColor || attributes.customTextColor,
 			[ `has-${ attributes.textColor }-color` ]: !! attributes.textColor,
@@ -160,7 +160,7 @@ function MenuItemEdit( props ) {
 							identifier="text"/>
 						{
 							(menuItemHasChildrens) && (
-								<span className="wp-block-mp-megamenu-item__dropdown-icon">
+								<span className="wp-block-getwid-megamenu-item__dropdown-icon">
 									<span className="dashicons dashicons-arrow-down"></span>
 								</span>
 							)
@@ -169,9 +169,9 @@ function MenuItemEdit( props ) {
 				</div>
 				{
 					(showDropdown) && (
-						<div className='wp-block-mp-megamenu-item__dropdown-wrapper' style={ dropdownWrapperStyle }>
+						<div className='wp-block-getwid-megamenu-item__dropdown-wrapper' style={ dropdownWrapperStyle }>
 							<div className={ dropdownClasses } style={ dropdownStyle }>
-								<div className='wp-block-mp-megamenu-item__dropdown-content' style={ dropdownContentStyle }>
+								<div className='wp-block-getwid-megamenu-item__dropdown-content' style={ dropdownContentStyle }>
 									<InnerBlocks/>
 								</div>
 							</div>
@@ -201,7 +201,7 @@ export default compose([
 		const hasDescendants = !!getClientIdsOfDescendants([clientId])
 			.length;
 		const rootBlockClientId = head(
-			getBlockParentsByBlockName( clientId, 'mp-megamenu/menu' )
+			getBlockParentsByBlockName( clientId, 'getwid-megamenu/menu' )
 		);
 
 		const parentAttributes = getBlock(rootBlockClientId).attributes;

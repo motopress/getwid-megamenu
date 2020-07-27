@@ -1,8 +1,8 @@
 {
-	"name": "mp-megamenu",
+	"name": "getwid-megamenu",
 	"version": "0.0.1",
 	"private": true,
-	"description": "MP MegaMenu.",
+	"description": "WordPress Mega Menu Block",
 	"author": "MotoPress",
 	"license": "GPL-2.0-or-later",
 	"keywords": [

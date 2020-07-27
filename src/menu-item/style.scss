@@ -1,4 +1,4 @@
-.wp-block-mp-megamenu-item {
+.wp-block-getwid-megamenu-item {
     &__dropdown-wrapper {
         position: absolute;
         left: 0;
@@ -84,7 +84,7 @@
     }
 
     &.has-children {
-        .wp-block-mp-megamenu-item__link {
+        .wp-block-getwid-megamenu-item__link {
             a {
                 padding-right: 5px;
             }
