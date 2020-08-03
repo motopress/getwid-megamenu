@@ -7,56 +7,31 @@ import Controls from "./controls";
 /**
  * WordPress dependencies
  */
-const { head, isEqual, escape } = lodash;
-const {__} = wp.i18n;
-const {useCallback, useState, useRef, useEffect, useLayoutEffect} = wp.element;
-const {compose} = wp.compose;
-const {withSelect, withDispatch} = wp.data;
-const {
-	KeyboardShortcuts,
-	PanelBody,
-	RangeControl,
-	TextControl,
-	ToggleControl,
-	ToolbarButton,
-	ToolbarGroup,
-	Popover,
-} = wp.components;
-const {
-	BlockControls,
-	InspectorControls,
-	RichText,
-	InnerBlocks,
-	__experimentalBlock,
-	__experimentalLinkControl,
-} = wp.blockEditor;
-const {rawShortcut, displayShortcut} = wp.keycodes;
-const {createBlock} = wp.blocks;
+const { head } = lodash;
+const { __ } = wp.i18n;
+const { useState, useEffect } = wp.element;
+const { compose } = wp.compose;
+const { withSelect, withDispatch } = wp.data;
+const {	RichText, InnerBlocks } = wp.blockEditor;
+const { createBlock } = wp.blocks;
 
 function MenuItemEdit(props) {
 	const {
 		attributes,
 		setAttributes,
-		className,
 		isSelected,
 		onReplace,
 		mergeBlocks,
 		isParentOfSelectedBlock,
 		isImmediateParentOfSelectedBlock,
 		hasDescendants,
-		updateInnerBlocks,
-		rootBlockClientId,
 		insertPlainMenuItem,
 		selectedBlockHasDescendants,
-		clientId,
 		parentAttributes,
 		parentItemClientId
 	} = props;
 	const {
-		linkTarget,
-		rel,
 		text,
-		url,
 	} = attributes;
 
 	const itemLabelPlaceholder = __( 'Add link…' );
@@ -148,13 +123,12 @@ function MenuItemEdit(props) {
 				{ ...props }
 				insertPlainMenuItem={ insertPlainMenuItem }
 			/>
-
 		</>
 	);
 }
 
-export default compose([
-	withSelect((select, ownProps) => {
+export default compose( [
+	withSelect( (select, ownProps) => {
 		const {
 			hasSelectedInnerBlock,
 			getClientIdsOfDescendants,
@@ -218,4 +192,4 @@ export default compose([
 			},
 		};
 	} ),
-])(MenuItemEdit);
+] ) ( MenuItemEdit );
