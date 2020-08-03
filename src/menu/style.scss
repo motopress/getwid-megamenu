@@ -1,4 +1,4 @@
-.wp-block-getwid-megamenu {
+.gw-mm {
     position: relative;
 
     &__content {
@@ -50,28 +50,28 @@
 
     &.justify-items {
         &-left {
-            .wp-block-getwid-megamenu__content {
+            .gw-mm__content {
                 justify-content: flex-start;
             }
         }
 
         &-center {
-            .wp-block-getwid-megamenu__content {
+            .gw-mm__content {
                 justify-content: center;
             }
         }
 
         &-right {
-            .wp-block-getwid-megamenu__content {
+            .gw-mm__content {
                 justify-content: flex-end;
             }
         }
     }
 
     &:not(.is-mobile) {
-        .wp-block-getwid-megamenu-item {
+        .gw-mm-item {
             &:hover {
-                .wp-block-getwid-megamenu-item__dropdown-wrapper {
+                .gw-mm-item__dropdown-wrapper {
                     height: auto;
                     overflow: visible;
                 }
@@ -80,7 +80,7 @@
     }
 
     &.is-mobile {
-        .wp-block-getwid-megamenu__content-wrapper {
+        .gw-mm__content-wrapper {
             visibility: hidden;
             height: 0;
             position: absolute;
@@ -95,14 +95,14 @@
             overflow: hidden;
         }
 
-        .wp-block-getwid-megamenu__content {
+        .gw-mm__content {
             width: 100%;
             max-width: 600px;
             margin-right: auto;
             margin-left: auto;
         }
 
-        .wp-block-getwid-megamenu-item {
+        .gw-mm-item {
             width: 100%;
 
             &__link {
@@ -114,7 +114,7 @@
         }
 
         &.is-opened {
-            .wp-block-getwid-megamenu__content-wrapper {
+            .gw-mm__content-wrapper {
                 visibility: visible;
                 z-index: 100;
                 overflow: visible;
@@ -122,12 +122,12 @@
                 height: auto;
             }
 
-            .wp-block-getwid-megamenu__toggle-wrapper.is-close {
+            .gw-mm__toggle-wrapper.is-close {
                 display: block;
             }
         }
 
-        .wp-block-getwid-megamenu-item__dropdown-wrapper {
+        .gw-mm-item__dropdown-wrapper {
             position: static;
 
             &.is-opened {
@@ -136,7 +136,7 @@
             }
         }
 
-        .wp-block-getwid-megamenu-item__dropdown {
+        .gw-mm-item__dropdown {
             box-shadow: none;
         }
     }

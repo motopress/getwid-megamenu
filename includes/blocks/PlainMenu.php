@@ -17,8 +17,8 @@ class PlainMenu extends AbstractBlock {
 			isset( $attributes['orientation'] ) ? array( 'is-orientation-' . $attributes['orientation'] ) : array()
 		);
 
-		$html = '<nav class="wp-block-getwid-plain-menu ' . implode( ' ', $classes ) . '">';
-		$html .= '<ul class="wp-block-getwid-plain-menu__content">';
+		$html = '<nav class="wp-block-getwid-plain-menu gw-pm ' . implode( ' ', $classes ) . '">';
+		$html .= '<ul class="gw-pm__content">';
 		$html .= $content;
 		$html .= '</ul></nav>';
 

@@ -95,13 +95,13 @@
 
 (function ($) {
   $(document).ready(function () {
-    var menus = $('.wp-block-getwid-megamenu');
-    var plainMenus = $('.wp-block-getwid-plain-menu');
+    var menus = $('.gw-mm');
+    var plainMenus = $('.gw-pm');
 
     function setDropdownsPosition(menus) {
       menus.each(function (index, menu) {
         if ($(menu).hasClass('is-mobile')) {
-          $(menu).find('.wp-block-getwid-megamenu-item__dropdown-wrapper').css({
+          $(menu).find('.gw-mm-item__dropdown-wrapper').css({
             'left': '',
             'width': '',
             'max-width': ''
@@ -109,7 +109,7 @@
           return;
         }
 
-        var dropdowns = $(menu).find('.wp-block-getwid-megamenu-item__dropdown-wrapper');
+        var dropdowns = $(menu).find('.gw-mm-item__dropdown-wrapper');
         var menuCoords = $(menu).offset();
         var maxWidth = $(menu).data('dropdown-width');
         var width = $(menu).hasClass('has-full-width-dropdown') ? $(window).width() : $(menu).width();
@@ -134,7 +134,7 @@
         var contentWidth = $(menu).data('dropdown-content-width');
 
         if (contentWidth) {
-          $(menu).find('.wp-block-getwid-megamenu-item__dropdown-content').css({
+          $(menu).find('.gw-mm-item__dropdown-content').css({
             'max-width': contentWidth
           });
         }
@@ -148,8 +148,8 @@
         }
 
         var breakpoint = $(menu).data('responsive-breakpoint');
-        var toggleButtonWrapper = $(menu).find('.wp-block-getwid-megamenu__toggle-wrapper');
-        var toggleButton = $(menu).find('.wp-block-getwid-megamenu__toggle');
+        var toggleButtonWrapper = $(menu).find('.gw-mm__toggle-wrapper');
+        var toggleButton = $(menu).find('.gw-mm__toggle');
 
         if (breakpoint >= $(window).width()) {
           toggleButtonWrapper.removeClass('is-hidden');
@@ -163,11 +163,11 @@
 
     function attachToggleActionToButtons(menus) {
       menus.each(function (index, menu) {
-        $(menu).on('click', '.wp-block-getwid-megamenu__toggle', function (event) {
+        $(menu).on('click', '.gw-mm__toggle', function (event) {
           toggleMobileMenu($(this), $(menu));
         });
-        $(menu).on('click', '.wp-block-getwid-megamenu-item__toggle', function (event) {
-          var dropdown = $(this).closest('.wp-block-getwid-megamenu-item').find('.wp-block-getwid-megamenu-item__dropdown-wrapper');
+        $(menu).on('click', '.gw-mm-item__toggle', function (event) {
+          var dropdown = $(this).closest('.gw-mm-item').find('.gw-mm-item__dropdown-wrapper');
           toggleMobileMenu($(this), $(dropdown));
         });
       });
@@ -180,7 +180,7 @@
 
     function setMobileMenuPosition(menus) {
       menus.each(function (index, menu) {
-        var dropdown = $(menu).find('.wp-block-getwid-megamenu__content-wrapper');
+        var dropdown = $(menu).find('.gw-mm__content-wrapper');
 
         if (!$(menu).hasClass('is-mobile')) {
           $(dropdown).css({
@@ -201,12 +201,12 @@
 
     function setPlainMenusDropdownPosition(menus) {
       menus.each(function (index, menu) {
-        var dropdowns = $(menu).find('.wp-block-getwid-plain-menu-item__dropdown');
-        var isInsideMegaMenu = $(menu).closest('.wp-block-getwid-megamenu').length;
+        var dropdowns = $(menu).find('.gw-pm-item__dropdown');
+        var isInsideMegaMenu = $(menu).closest('.gw-mm').length;
         dropdowns.each(function (index, dropdown) {
           $(dropdown).removeClass('toleft');
           var rightEdgePosition = $(dropdown).offset().left + $(dropdown).width();
-          var rootWidth = isInsideMegaMenu ? $(menu).closest('.wp-block-getwid-megamenu-item__dropdown-wrapper').offset().left + $(menu).closest('.wp-block-getwid-megamenu-item__dropdown-wrapper').width() : $(window).width();
+          var rootWidth = isInsideMegaMenu ? $(menu).closest('.gw-mm-item__dropdown-wrapper').offset().left + $(menu).closest('.gw-mm-item__dropdown-wrapper').width() : $(window).width();
           var isLeft = false;
 
           if (rightEdgePosition >= rootWidth) {

@@ -1,12 +1,12 @@
 (function ($) {
 	$(document).ready(function () {
-		const menus = $('.wp-block-getwid-megamenu');
-		const plainMenus = $('.wp-block-getwid-plain-menu');
+		const menus = $('.gw-mm');
+		const plainMenus = $('.gw-pm');
 
 		function setDropdownsPosition(menus) {
 			menus.each((index, menu) => {
 				if ($(menu).hasClass('is-mobile')) {
-					$(menu).find('.wp-block-getwid-megamenu-item__dropdown-wrapper').css({
+					$(menu).find('.gw-mm-item__dropdown-wrapper').css({
 						'left': '',
 						'width': '',
 						'max-width': ''
@@ -14,7 +14,7 @@
 					return;
 				}
 
-				const dropdowns = $(menu).find('.wp-block-getwid-megamenu-item__dropdown-wrapper');
+				const dropdowns = $(menu).find('.gw-mm-item__dropdown-wrapper');
 				const menuCoords = $(menu).offset();
 				const maxWidth = $(menu).data('dropdown-width');
 				const width = $(menu).hasClass('has-full-width-dropdown') ? $(window).width() : $(menu).width();
@@ -38,7 +38,7 @@
 			menus.each((index, menu) => {
 				const contentWidth = $(menu).data('dropdown-content-width');
 				if (contentWidth) {
-					$(menu).find('.wp-block-getwid-megamenu-item__dropdown-content').css({
+					$(menu).find('.gw-mm-item__dropdown-content').css({
 						'max-width': contentWidth
 					});
 				}
@@ -51,8 +51,8 @@
 					return;
 				}
 				const breakpoint = $(menu).data('responsive-breakpoint');
-				const toggleButtonWrapper = $(menu).find('.wp-block-getwid-megamenu__toggle-wrapper');
-				const toggleButton = $(menu).find('.wp-block-getwid-megamenu__toggle');
+				const toggleButtonWrapper = $(menu).find('.gw-mm__toggle-wrapper');
+				const toggleButton = $(menu).find('.gw-mm__toggle');
 
 				if (breakpoint >= $(window).width()) {
 					toggleButtonWrapper.removeClass('is-hidden');
@@ -66,12 +66,12 @@
 
 		function attachToggleActionToButtons(menus) {
 			menus.each((index, menu) => {
-				$(menu).on('click', '.wp-block-getwid-megamenu__toggle', function (event) {
+				$(menu).on('click', '.gw-mm__toggle', function (event) {
 					toggleMobileMenu($(this), $(menu));
 				});
 
-				$(menu).on('click', '.wp-block-getwid-megamenu-item__toggle', function (event) {
-					let dropdown = $(this).closest('.wp-block-getwid-megamenu-item').find('.wp-block-getwid-megamenu-item__dropdown-wrapper');
+				$(menu).on('click', '.gw-mm-item__toggle', function (event) {
+					let dropdown = $(this).closest('.gw-mm-item').find('.gw-mm-item__dropdown-wrapper');
 					toggleMobileMenu($(this), $(dropdown));
 				});
 			});
@@ -84,7 +84,7 @@
 
 		function setMobileMenuPosition(menus) {
 			menus.each((index, menu) => {
-				const dropdown = $(menu).find('.wp-block-getwid-megamenu__content-wrapper');
+				const dropdown = $(menu).find('.gw-mm__content-wrapper');
 
 				if (!$(menu).hasClass('is-mobile')) {
 					$(dropdown).css({
@@ -106,14 +106,14 @@
 
 		function setPlainMenusDropdownPosition(menus) {
 			menus.each((index, menu) => {
-				const dropdowns = $(menu).find('.wp-block-getwid-plain-menu-item__dropdown');
-				const isInsideMegaMenu = $(menu).closest('.wp-block-getwid-megamenu').length;
+				const dropdowns = $(menu).find('.gw-pm-item__dropdown');
+				const isInsideMegaMenu = $(menu).closest('.gw-mm').length;
 				dropdowns.each((index, dropdown) => {
 					$(dropdown).removeClass('toleft');
 
 					const rightEdgePosition = $(dropdown).offset().left + $(dropdown).width();
 					const rootWidth = isInsideMegaMenu
-						? $(menu).closest('.wp-block-getwid-megamenu-item__dropdown-wrapper').offset().left + $(menu).closest('.wp-block-getwid-megamenu-item__dropdown-wrapper').width()
+						? $(menu).closest('.gw-mm-item__dropdown-wrapper').offset().left + $(menu).closest('.gw-mm-item__dropdown-wrapper').width()
 						: $(window).width();
 					let isLeft = false;
 

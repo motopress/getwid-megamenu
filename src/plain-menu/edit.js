@@ -31,16 +31,20 @@ function PlainMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames( 'wp-block-getwid-plain-menu', {
-		[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
-		[ `is-orientation-${attributes.orientation}`]: attributes.orientation
-	});
+	const menuClasses = classnames(
+		'wp-block-getwid-plain-menu',
+		'gw-pm',
+		{
+			[ `justify-items-${ attributes.itemsJustification }` ]: attributes.itemsJustification,
+			[ `is-orientation-${attributes.orientation}`]: attributes.orientation
+		}
+	);
 
 	return (
 		<>
 			<Controls { ...args }/>
 			<div className={ menuClasses }>
-				<div className="wp-block-getwid-plain-menu__content">
+				<div className="gw-pm__content">
 					<InnerBlocks
 						ref={ ref }
 						template={ TEMPLATE }

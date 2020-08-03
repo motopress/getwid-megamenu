@@ -33,10 +33,14 @@ function MegaMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames( 'wp-block-getwid-megamenu', {
-		[ `justify-items-${ attributes.itemsJustification }` ] : attributes.itemsJustification,
-		[ `has-full-width-dropdown` ] : attributes.expandDropdown,
-	});
+	const menuClasses = classnames(
+		'wp-block-getwid-megamenu',
+		'gw-mm',
+		{
+			[ `justify-items-${ attributes.itemsJustification }` ] : attributes.itemsJustification,
+			[ `has-full-width-dropdown` ] : attributes.expandDropdown,
+		}
+	);
 
 	const menuWrapperStyle = {
 		maxWidth: attributes.menuMaxWidth
@@ -46,9 +50,9 @@ function MegaMenu( args ) {
 		<>
 			<Controls { ...args }/>
 			<div className={ menuClasses }>
-				<div className="wp-block-getwid-megamenu__wrapper" style={ menuWrapperStyle }>
-					<div className="wp-block-getwid-megamenu__content-wrapper">
-						<div className="wp-block-getwid-megamenu__content">
+				<div className="gw-mm__wrapper" style={ menuWrapperStyle }>
+					<div className="gw-mm__content-wrapper">
+						<div className="gw-mm__content">
 							<InnerBlocks
 								ref={ ref }
 								template={ TEMPLATE }

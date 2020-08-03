@@ -42,7 +42,7 @@ class MegaMenuItem extends AbstractBlock {
 		$text_style = $this->generateTextStyles( $attributes );
 
 		$item_link_classes = array_merge(
-			[ 'wp-block-getwid-megamenu-item__link' ],
+			[ 'gw-mm-item__link' ],
 			[ $font_style['css_classes'] ],
 			[ $text_style['css_classes'] ]
 		);
@@ -51,6 +51,7 @@ class MegaMenuItem extends AbstractBlock {
 
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-megamenu-item' ],
+			[ 'gw-mm-item' ],
 			$content ? [ 'has-children' ] : []
 		);
 
@@ -75,15 +76,15 @@ class MegaMenuItem extends AbstractBlock {
 		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( trim( $content ) ) {
-			$html .= '<button class="wp-block-getwid-megamenu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
+			$html .= '<button class="gw-mm-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
 		$html .= '</div>';
 
 		if ( trim( $content ) ) {
-			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown-wrapper">';
-			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown">';
-			$html .= '<div class="wp-block-getwid-megamenu-item__dropdown-content">';
+			$html .= '<div class="gw-mm-item__dropdown-wrapper">';
+			$html .= '<div class="gw-mm-item__dropdown">';
+			$html .= '<div class="gw-mm-item__dropdown-content">';
 			$html .= $content;
 			$html .= '</div></div></div>';
 		}

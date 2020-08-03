@@ -59,13 +59,9 @@ function MenuItemEdit(props) {
 		url,
 	} = attributes;
 
-
-
 	const itemLabelPlaceholder = __( 'Add link…' );
 
     const [isItemDropdownOpened, setIsItemDropdownOpened] = useState(hasDescendants);
-
-
 
 	const isMenuItemSelected = isSelected || isParentOfSelectedBlock;
 	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
@@ -73,6 +69,7 @@ function MenuItemEdit(props) {
 
 	const itemClasses = classnames(
 		'wp-block-getwid-plain-menu-item',
+		'gw-pm-item',
 		{
 			'has-child': hasDescendants,
 			'has-child-selected': isParentOfSelectedBlock,
@@ -90,7 +87,7 @@ function MenuItemEdit(props) {
 	}, [] );
 
 	const itemLinkClasses = classnames(
-		'wp-block-getwid-plain-menu-item__link',
+		'gw-pm-item__link',
 		{
 			'has-text-color': attributes.textColor || attributes.customTextColor,
 			[ `has-${ attributes.textColor }-color` ]: !! attributes.textColor,
@@ -123,7 +120,7 @@ function MenuItemEdit(props) {
 							identifier="text"/>
 						{
 							(menuItemHasChildrens) && (
-								<span className="wp-block-getwid-plain-menu-item__dropdown-icon">
+								<span className="gw-pm-item__dropdown-icon">
 									<span className="dashicons dashicons-arrow-down"></span>
 								</span>
 							)
@@ -132,8 +129,8 @@ function MenuItemEdit(props) {
 				</div>
 				{
 					(isMenuItemSelected) && (
-						<div className='wp-block-getwid-plain-menu-item__dropdown'>
-							<div className='wp-block-getwid-plain-menu-item__dropdown-content'>
+						<div className='gw-pm-item__dropdown'>
+							<div className='gw-pm-item__dropdown-content'>
 								<InnerBlocks
 									allowedBlocks={ [ 'getwid-megamenu/plain-menu-item' ] }
 									renderAppender={ ( isSelected && hasDescendants ) ||
