@@ -67,6 +67,7 @@ function MegaMenu( args ) {
 										: false
 								}
 								__experimentalMoverDirection="horizontal"
+								orientation="horizontal"
 							/>
 						</div>
 					</div>

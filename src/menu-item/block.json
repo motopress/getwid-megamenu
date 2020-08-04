@@ -36,6 +36,6 @@
 		"align": false,
 		"alignWide": false,
 		"reusable": false,
-		"lightBlockWrapper": true
+		"lightBlockWrapper": false
 	}
 }

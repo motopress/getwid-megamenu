@@ -59,6 +59,7 @@ function PlainMenu( args ) {
 								: false
 						}
 						__experimentalMoverDirection={ attributes.orientation }
+						orientation={ attributes.orientation }
 					/>
 				</div>
 			</div>
