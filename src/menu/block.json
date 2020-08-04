@@ -47,6 +47,6 @@
     "align": ["wide", "full"],
     "reusable": false,
     "customClassName": true,
-    "lightBlockWrapper": true
+    "lightBlockWrapper": false
   }
 }

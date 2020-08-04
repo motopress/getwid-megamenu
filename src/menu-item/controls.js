@@ -120,7 +120,6 @@ function Controls( args ) {
 					onClose={ () => setIsURLPickerOpen( false ) }
 				>
 					<__experimentalLinkControl
-						className="wp-block-navigation-link__inline-link-input"
 						value={ {
 							url,
 							opensInNewTab: linkTarget === '_blank'

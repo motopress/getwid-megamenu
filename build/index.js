@@ -628,7 +628,6 @@ function Controls(args) {
       return setIsURLPickerOpen(false);
     }
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(__experimentalLinkControl, {
-    className: "wp-block-navigation-link__inline-link-input",
     value: {
       url: url,
       opensInNewTab: linkTarget === '_blank'
@@ -826,14 +825,14 @@ function MenuItemEdit(props) {
   var dropdownContentStyle = {
     maxWidth: parentAttributes.dropdownContentMaxWidth
   };
-  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({
+  var dropdownClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('gw-mm-item__dropdown', _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({
     'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor
   }, "has-".concat(attributes.dropdownBackgroundColor, "-background-color"), !!attributes.dropdownBackgroundColor));
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item', {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item', 'gw-mm-item', {
     'has-child': hasDescendants,
     'is-opened': showDropdown
   });
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-megamenu-item__link', (_classnames2 = {
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('gw-mm-item__link', (_classnames2 = {
     'has-text-color': attributes.textColor || attributes.customTextColor
   }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames2, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames2));
   var itemLinkStyles = {
@@ -863,17 +862,17 @@ function MenuItemEdit(props) {
     onMerge: mergeBlocks,
     identifier: "text"
   }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
-    className: "wp-block-getwid-megamenu-item__dropdown-icon"
+    className: "gw-mm-item__dropdown-icon"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
   })))), showDropdown && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-getwid-megamenu-item__dropdown-wrapper",
+    className: "gw-mm-item__dropdown-wrapper",
     style: dropdownWrapperStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
     className: dropdownClasses,
     style: dropdownStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-getwid-megamenu-item__dropdown-content",
+    className: "gw-mm-item__dropdown-content",
     style: dropdownContentStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, null))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
     toggleItemDropdown: toggleItemDropdown,
@@ -1250,19 +1249,19 @@ function MegaMenu(args) {
       isSelected = args.isSelected,
       attributes = args.attributes;
   var ref = useRef();
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-megamenu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-megamenu', 'gw-mm', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "has-full-width-dropdown", attributes.expandDropdown), _classnames));
   var menuWrapperStyle = {
     maxWidth: attributes.menuMaxWidth
   };
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-getwid-megamenu__wrapper",
+    className: "gw-mm__wrapper",
     style: menuWrapperStyle
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-getwid-megamenu__content-wrapper"
+    className: "gw-mm__content-wrapper"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-getwid-megamenu__content"
+    className: "gw-mm__content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,
@@ -1482,7 +1481,6 @@ function Controls(args) {
       return setIsURLPickerOpen(false);
     }
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(__experimentalLinkControl, {
-    className: "wp-block-plain-menu-item__inline-link-input",
     value: {
       url: url,
       opensInNewTab: linkTarget === "_blank"
@@ -1631,7 +1629,7 @@ function MenuItemEdit(props) {
   var isMenuItemSelected = isSelected || isParentOfSelectedBlock;
   var menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
   var showDropdown = isMenuItemSelected && menuItemHasChildrens;
-  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-plain-menu-item', {
+  var itemClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-plain-menu-item', 'gw-pm-item', {
     'has-child': hasDescendants,
     'has-child-selected': isParentOfSelectedBlock,
     'is-opened': showDropdown
@@ -1644,7 +1642,7 @@ function MenuItemEdit(props) {
       customTextColor: parentItemClientId ? undefined : parentAttributes.customMenuItemColor
     });
   }, []);
-  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('wp-block-getwid-plain-menu-item__link', (_classnames = {
+  var itemLinkClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()('gw-pm-item__link', (_classnames = {
     'has-text-color': attributes.textColor || attributes.customTextColor
   }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.textColor, "-color"), !!attributes.textColor), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_classnames, "has-".concat(attributes.fontSize, "-font-size"), !!attributes.fontSize), _classnames));
   var itemLinkStyles = {
@@ -1674,13 +1672,13 @@ function MenuItemEdit(props) {
     onMerge: mergeBlocks,
     identifier: "text"
   }), menuItemHasChildrens && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
-    className: "wp-block-getwid-plain-menu-item__dropdown-icon"
+    className: "gw-pm-item__dropdown-icon"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("span", {
     className: "dashicons dashicons-arrow-down"
   })))), isMenuItemSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-getwid-plain-menu-item__dropdown"
+    className: "gw-pm-item__dropdown"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wp-block-getwid-plain-menu-item__dropdown-content"
+    className: "gw-pm-item__dropdown-content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(InnerBlocks, {
     allowedBlocks: ['getwid-megamenu/plain-menu-item'],
     renderAppender: isSelected && hasDescendants || isImmediateParentOfSelectedBlock && !selectedBlockHasDescendants ? InnerBlocks.DefaultAppender : false
@@ -1983,11 +1981,11 @@ function PlainMenu(args) {
       isSelected = args.isSelected,
       attributes = args.attributes;
   var ref = useRef();
-  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-plain-menu', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames));
+  var menuClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-getwid-plain-menu', 'gw-pm', (_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "justify-items-".concat(attributes.itemsJustification), attributes.itemsJustification), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, "is-orientation-".concat(attributes.orientation), attributes.orientation), _classnames));
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_controls__WEBPACK_IMPORTED_MODULE_3__["default"], args), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: menuClasses
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "wp-block-getwid-plain-menu__content"
+    className: "gw-pm__content"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(InnerBlocks, {
     ref: ref,
     template: TEMPLATE,

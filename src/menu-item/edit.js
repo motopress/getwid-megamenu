@@ -113,13 +113,14 @@ function MenuItemEdit( props ) {
 		maxWidth: parentAttributes.dropdownContentMaxWidth
 	};
 
-	const dropdownClasses = classnames('wp-block-getwid-megamenu-item__dropdown', {
+	const dropdownClasses = classnames('gw-mm-item__dropdown', {
 		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
 		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
 	});
 
 	const itemClasses = classnames(
 		'wp-block-getwid-megamenu-item',
+		'gw-mm-item',
 		{
 			'has-child': hasDescendants,
 			'is-opened': showDropdown
@@ -127,7 +128,7 @@ function MenuItemEdit( props ) {
 	);
 
 	const itemLinkClasses = classnames(
-		'wp-block-getwid-megamenu-item__link',
+		'gw-mm-item__link',
 		{
 			'has-text-color': attributes.textColor || attributes.customTextColor,
 			[ `has-${ attributes.textColor }-color` ]: !! attributes.textColor,
@@ -160,7 +161,7 @@ function MenuItemEdit( props ) {
 							identifier="text"/>
 						{
 							(menuItemHasChildrens) && (
-								<span className="wp-block-getwid-megamenu-item__dropdown-icon">
+								<span className="gw-mm-item__dropdown-icon">
 									<span className="dashicons dashicons-arrow-down"></span>
 								</span>
 							)
@@ -169,9 +170,9 @@ function MenuItemEdit( props ) {
 				</div>
 				{
 					(showDropdown) && (
-						<div className='wp-block-getwid-megamenu-item__dropdown-wrapper' style={ dropdownWrapperStyle }>
+						<div className='gw-mm-item__dropdown-wrapper' style={ dropdownWrapperStyle }>
 							<div className={ dropdownClasses } style={ dropdownStyle }>
-								<div className='wp-block-getwid-megamenu-item__dropdown-content' style={ dropdownContentStyle }>
+								<div className='gw-mm-item__dropdown-content' style={ dropdownContentStyle }>
 									<InnerBlocks/>
 								</div>
 							</div>

@@ -39,6 +39,7 @@ class PlainMenuItem extends AbstractBlock {
 
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-plain-menu-item' ],
+			[ 'gw-pm-item' ],
 			trim( $content ) ? [ 'has-children' ] : []
 		);
 
@@ -46,7 +47,7 @@ class PlainMenuItem extends AbstractBlock {
 		$colors    = $this->generateTextStyles( $attributes );
 
 		$item_link_classes = array_merge(
-			[ 'wp-block-getwid-plain-menu-item__link' ],
+			[ 'gw-pm-item__link' ],
 			[ $font_size['css_classes'] ],
 			[ $colors['css_classes'] ]
 		);
@@ -74,14 +75,14 @@ class PlainMenuItem extends AbstractBlock {
 		$html .= '>' . $attributes['text'] . '</a>';
 
 		if ( trim( $content ) ) {
-			$html .= '<button class="wp-block-getwid-plain-menu-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
+			$html .= '<button class="gw-pm-item__toggle"><span class="dashicons dashicons-arrow-down"></span></button>';
 		}
 
 		$html .= '</div>';
 
 		if ( trim( $content ) ) {
-			$html .= '<div class="wp-block-getwid-plain-menu-item__dropdown">';
-			$html .= '<ul class="wp-block-getwid-plain-menu-item__dropdown-content">';
+			$html .= '<div class="gw-pm-item__dropdown">';
+			$html .= '<ul class="gw-pm-item__dropdown-content">';
 			$html .= $content;
 			$html .= '</ul></div>';
 		}

@@ -27,6 +27,6 @@
     "align": false,
     "reusable": false,
     "customClassName": true,
-    "lightBlockWrapper": true
+    "lightBlockWrapper": false
   }
 }
