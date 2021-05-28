@@ -52,7 +52,8 @@ class MegaMenuItem extends AbstractBlock {
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-megamenu-item' ],
 			[ 'gw-mm-item' ],
-			$content ? [ 'has-children' ] : []
+			$content ? [ 'has-children' ] : [],
+			isset( $attributes['className'] ) ? [ $attributes['className'] ] : []
 		);
 
 		$html .= '<li class="' . implode( ' ', $item_classes ) . '">';

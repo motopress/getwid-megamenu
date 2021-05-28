@@ -40,7 +40,8 @@ class PlainMenuItem extends AbstractBlock {
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-plain-menu-item' ],
 			[ 'gw-pm-item' ],
-			trim( $content ) ? [ 'has-children' ] : []
+			trim( $content ) ? [ 'has-children' ] : [],
+			isset( $attributes['className'] ) ? [ $attributes['className'] ] : []
 		);
 
 		$font_size = $this->generateFontSizeStyles( $attributes );
