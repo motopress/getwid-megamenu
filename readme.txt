@@ -1,4 +1,4 @@
-=== Mega Menu Block ===
+=== Navigation Block with Mega Menu ===
 Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block

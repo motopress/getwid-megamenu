@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Mega Menu Block
+ * Plugin Name: Navigation Block with Mega Menu
  * Plugin URI: https://motopress.com/products/wordpress-mega-menu-block/
  * Description: Build better navigation menus with the WordPress mega menu blocks.
  * Version: 1.0.0
