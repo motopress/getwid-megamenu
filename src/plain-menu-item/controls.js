@@ -125,11 +125,15 @@ function Controls(args) {
 							opensInNewTab: linkTarget === "_blank"
 						}}
 						onChange={ ( {
-					             title: newTitle = '',
-					             url: newURL = '',
-					             opensInNewTab: newOpensInNewTab,
-				             } ) => {
+								title: newTitle = '',
+								url: newURL = '',
+								opensInNewTab: newOpensInNewTab,
+								id: newId = '',
+								kind: newKind = '',
+							} ) => {
 							setAttributes({
+								id: newId,
+								kind: newKind,
 								url: newURL,
 								text: ( () => {
 									if ( text ) {

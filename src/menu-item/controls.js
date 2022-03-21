@@ -128,8 +128,12 @@ function Controls( args ) {
 					             title: newTitle = '',
 					             url: newURL = '',
 					             opensInNewTab: newOpensInNewTab,
+								 id: newId = '',
+								 kind: newKind = '',
 				             } ) => {
 							setAttributes( {
+								id: newId,
+								kind: newKind,
 								url: newURL,
 								text: ( () => {
 									if ( text ) {

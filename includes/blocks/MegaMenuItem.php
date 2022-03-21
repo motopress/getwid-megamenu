@@ -48,15 +48,19 @@ class MegaMenuItem extends AbstractBlock {
 		);
 
 		$item_link_style = $font_style['inline_styles'] . $text_style['inline_styles'];
+		$is_active = $attributes['kind'] == 'post-type' && $attributes['id'] === get_the_ID();
 
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-megamenu-item' ],
 			[ 'gw-mm-item' ],
 			$content ? [ 'has-children' ] : [],
+			$is_active ? [ 'is-current' ] : [],
 			isset( $attributes['className'] ) ? [ $attributes['className'] ] : []
 		);
 
-		$html .= '<li class="' . implode( ' ', $item_classes ) . '">';
+		$item_classes = apply_filters( 'getwid-megamenu/blocks/megamenu-item/item-classes', $item_classes, $attributes );
+
+		$html .= '<li class="' . esc_attr( implode( ' ', $item_classes ) ) . '" data-id="'.$attributes['id'].'">';
 		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" style="' . $item_link_style . '">';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
@@ -109,7 +113,8 @@ class MegaMenuItem extends AbstractBlock {
 			$font_sizes['css_classes'] = sprintf( 'has-%s-font-size', $attributes['fontSize'] );
 		} elseif ( $has_custom_font_size ) {
 			// Add the custom font size inline style.
-			$font_sizes['inline_styles'] = sprintf( 'font-size: %spx;', $attributes['customFontSize'] );
+			$font_size = is_numeric( $attributes['customFontSize'] ) ? $attributes['customFontSize'] . 'px' : $attributes['customFontSize'];
+			$font_sizes['inline_styles'] = sprintf( 'font-size: %s;', $font_size );
 		}
 
 		return $font_sizes;

@@ -1,1 +1,241 @@
-!function(e){var t={};function n(o){if(t[o])return t[o].exports;var i=t[o]={i:o,l:!1,exports:{}};return e[o].call(i.exports,i,i.exports,n),i.l=!0,i.exports}n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)n.d(o,i,function(t){return e[t]}.bind(null,i));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=16)}({16:function(e,t){var n;(n=jQuery)(document).ready((function(){var e=n(".gw-mm"),t=n(".gw-pm");function o(e){e.each((function(e,t){if(n(t).hasClass("is-mobile"))n(t).find(".gw-mm-item__dropdown-wrapper").css({left:"",width:"","max-width":""});else{var o=n(t).find(".gw-mm-item__dropdown-wrapper"),i=n(t).offset(),r=n(t).data("dropdown-width"),d=n(t).hasClass("has-full-width-dropdown")?n(window).width():n(t).width(),s=n(t).hasClass("has-full-width-dropdown")?-i.left:0;r&&r<d&&(s+=(d-r)/2),o.each((function(e,t){n(t).css({left:s,width:d,"max-width":r})}))}}))}function i(e){e.each((function(e,t){if(n(t).hasClass("is-collapsible")){var o=n(t).data("responsive-breakpoint"),i=n(t).find(".gw-mm__toggle-wrapper");n(t).find(".gw-mm__toggle"),o>=n(window).width()?(i.removeClass("is-hidden"),n(t).addClass("is-mobile")):(i.addClass("is-hidden"),n(t).removeClass("is-mobile is-opened"))}}))}function r(e,t){e.toggleClass("is-opened"),t.toggleClass("is-opened")}function d(e){e.each((function(e,t){var o=n(t).find(".gw-mm__content-wrapper");if(!n(t).hasClass("is-mobile"))return n(o).css({left:"",width:""}),!1;var i=-n(t).offset().left;n(o).css({left:i,width:n(window).width()})}))}function s(e){e.each((function(e,t){var o=n(t).find(".gw-pm-item__dropdown"),i=n(t).closest(".gw-mm").length;o.each((function(e,o){n(o).removeClass("toleft");var r=!1;n(o).offset().left+n(o).width()>=(i?n(t).closest(".gw-mm-item__dropdown-wrapper").offset().left+n(t).closest(".gw-mm-item__dropdown-wrapper").width():n(window).width())&&(r=!0),r&&n(o).addClass("toleft")}))}))}i(e),function(e){e.each((function(e,t){n(t).on("click",".gw-mm__toggle",(function(e){r(n(this),n(t))})),n(t).on("click",".gw-mm-item__toggle",(function(e){var t=n(this).closest(".gw-mm-item").find(".gw-mm-item__dropdown-wrapper");r(n(this),n(t))}))}))}(e),o(e),function(e){e.each((function(e,t){var o=n(t).data("dropdown-content-width");o&&n(t).find(".gw-mm-item__dropdown-content").css({"max-width":o})}))}(e),d(e),s(t),n(window).resize((function(){i(e),o(e),d(e),s(t)}))}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/frontend.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/frontend.js":
+/*!*************************!*\
+  !*** ./src/frontend.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function ($) {
+  $(document).ready(function () {
+    var menus = $('.gw-mm');
+    var plainMenus = $('.gw-pm');
+
+    function setDropdownsPosition(menus) {
+      menus.each(function (index, menu) {
+        if ($(menu).hasClass('is-mobile')) {
+          $(menu).find('.gw-mm-item__dropdown-wrapper').css({
+            'left': '',
+            'width': '',
+            'max-width': ''
+          });
+          return;
+        }
+
+        var dropdowns = $(menu).find('.gw-mm-item__dropdown-wrapper');
+        var menuCoords = $(menu).offset();
+        var maxWidth = $(menu).data('dropdown-width');
+        var width = $(menu).hasClass('has-full-width-dropdown') ? $(window).width() : $(menu).width();
+        var left = $(menu).hasClass('has-full-width-dropdown') ? -menuCoords.left : 0;
+
+        if (maxWidth && maxWidth < width) {
+          left = left + (width - maxWidth) / 2;
+        }
+
+        dropdowns.each(function (index, dropdown) {
+          $(dropdown).css({
+            'left': left,
+            'width': width,
+            'max-width': maxWidth
+          });
+        });
+      });
+    }
+
+    function setDropdownsContentWidth(menus) {
+      menus.each(function (index, menu) {
+        var contentWidth = $(menu).data('dropdown-content-width');
+
+        if (contentWidth) {
+          $(menu).find('.gw-mm-item__dropdown-content').css({
+            'max-width': contentWidth
+          });
+        }
+      });
+    }
+
+    function showMenuToggleButton(menus) {
+      menus.each(function (index, menu) {
+        if (!$(menu).hasClass('is-collapsible')) {
+          return;
+        }
+
+        var breakpoint = $(menu).data('responsive-breakpoint');
+        var toggleButtonWrapper = $(menu).find('.gw-mm__toggle-wrapper');
+        var toggleButton = $(menu).find('.gw-mm__toggle');
+
+        if (breakpoint >= $(window).width()) {
+          toggleButtonWrapper.removeClass('is-hidden');
+          $(menu).addClass('is-mobile');
+        } else {
+          toggleButtonWrapper.addClass('is-hidden');
+          $(menu).removeClass('is-mobile is-opened');
+        }
+      });
+    }
+
+    function attachToggleActionToButtons(menus) {
+      menus.each(function (index, menu) {
+        $(menu).on('click', '.gw-mm__toggle', function (event) {
+          toggleMobileMenu($(this), $(menu));
+        });
+        $(menu).on('click', '.gw-mm-item__toggle', function (event) {
+          var dropdown = $(this).closest('.gw-mm-item').find('.gw-mm-item__dropdown-wrapper');
+          toggleMobileMenu($(this), $(dropdown));
+        });
+      });
+    }
+
+    function toggleMobileMenu(toggle_button, menu) {
+      toggle_button.toggleClass('is-opened');
+      menu.toggleClass('is-opened');
+    }
+
+    function setMobileMenuPosition(menus) {
+      menus.each(function (index, menu) {
+        var dropdown = $(menu).find('.gw-mm__content-wrapper');
+
+        if (!$(menu).hasClass('is-mobile')) {
+          $(dropdown).css({
+            'left': '',
+            'width': ''
+          });
+          return false;
+        }
+
+        var menuCoords = $(menu).offset();
+        var left = -menuCoords.left;
+        $(dropdown).css({
+          'left': left,
+          'width': $(window).width()
+        });
+      });
+    }
+
+    function setPlainMenusDropdownPosition(menus) {
+      menus.each(function (index, menu) {
+        var dropdowns = $(menu).find('.gw-pm-item__dropdown');
+        var isInsideMegaMenu = $(menu).closest('.gw-mm').length;
+        dropdowns.each(function (index, dropdown) {
+          $(dropdown).removeClass('toleft');
+          var rightEdgePosition = $(dropdown).offset().left + $(dropdown).width();
+          var rootWidth = isInsideMegaMenu ? $(menu).closest('.gw-mm-item__dropdown-wrapper').offset().left + $(menu).closest('.gw-mm-item__dropdown-wrapper').width() : $(window).width();
+          var isLeft = false;
+
+          if (rightEdgePosition >= rootWidth) {
+            isLeft = true;
+          }
+
+          if (isLeft) {
+            $(dropdown).addClass('toleft');
+          }
+        });
+      });
+    }
+
+    showMenuToggleButton(menus);
+    attachToggleActionToButtons(menus);
+    setDropdownsPosition(menus);
+    setDropdownsContentWidth(menus);
+    setMobileMenuPosition(menus);
+    setPlainMenusDropdownPosition(plainMenus);
+    $(window).resize(function () {
+      showMenuToggleButton(menus);
+      setDropdownsPosition(menus);
+      setMobileMenuPosition(menus);
+      setPlainMenusDropdownPosition(plainMenus);
+    });
+  });
+})(jQuery);
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=frontend.js.map

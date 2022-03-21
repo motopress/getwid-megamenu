@@ -9,6 +9,12 @@
 			"type": "string",
 			"default": ""
 		},
+        "id": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
 		"text": {
 			"type": "string"
 		},
