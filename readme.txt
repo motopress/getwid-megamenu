@@ -59,8 +59,8 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 = 1.0.1, Mar 22 2022 =
 * Fixed an issue with font sizes.
-* Added 'is-current' class for current menu item.
-* Added filers for menu item classes in Menu Item and Plain Menu Item.
+* Added the 'is-current' class for a current menu item.
+* Added filers for menu item classes to the Menu Item and the Plain Menu Item blocks.
 
 = 0.0.3, May 28 2021 =
 * Fixed an issue with additional CSS class(es).
