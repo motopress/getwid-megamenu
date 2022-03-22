@@ -1,11 +1,11 @@
-=== Navigation Block with Mega Menu ===
+=== WordPress Mega Menu Block ===
 Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block
-Requires at least: 5.0
-Tested up to: 5.8
+Requires at least: 5.4
+Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,11 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 
 == Changelog ==
+
+= 1.0.1, Mar 22 2022 =
+* Fixed an issue with font sizes.
+* Added the 'is-current' class for a current menu item.
+* Added filers for menu item classes to the Menu Item and the Plain Menu Item blocks.
 
 = 0.0.3, May 28 2021 =
 * Fixed an issue with additional CSS class(es).

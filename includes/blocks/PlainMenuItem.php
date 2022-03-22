@@ -37,12 +37,17 @@ class PlainMenuItem extends AbstractBlock {
 			)
 		);
 
+		$is_active = $attributes['kind'] == 'post-type' && $attributes['id'] === get_the_ID();
+
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-plain-menu-item' ],
 			[ 'gw-pm-item' ],
 			trim( $content ) ? [ 'has-children' ] : [],
+			$is_active ? [ 'is-current' ] : [],
 			isset( $attributes['className'] ) ? [ $attributes['className'] ] : []
 		);
+
+		$item_classes = apply_filters( 'getwid-megamenu/blocks/plain-menu-item/item-classes', $item_classes, $attributes );
 
 		$font_size = $this->generateFontSizeStyles( $attributes );
 		$colors    = $this->generateTextStyles( $attributes );
@@ -55,7 +60,7 @@ class PlainMenuItem extends AbstractBlock {
 
 		$item_link_style = ' style="' . $font_size['inline_styles'] . $colors['inline_styles'] . '" ';
 
-		$html .= '<li class="' . implode( ' ', $item_classes ) . '">';
+		$html .= '<li class="' . esc_attr( implode( ' ', $item_classes ) ) . '">';
 		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" ' . $item_link_style . '>';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
@@ -107,7 +112,8 @@ class PlainMenuItem extends AbstractBlock {
 			$font_sizes['css_classes'] = sprintf( 'has-%s-font-size', $attributes['fontSize'] );
 		} elseif ( $has_custom_font_size ) {
 			// Add the custom font size inline style.
-			$font_sizes['inline_styles'] = sprintf( 'font-size: %spx;', $attributes['customFontSize'] );
+			$font_size = is_numeric( $attributes['customFontSize'] ) ? $attributes['customFontSize'] . 'px' : $attributes['customFontSize'];
+			$font_sizes['inline_styles'] = sprintf( 'font-size: %s;', $font_size );
 		}
 
 		return $font_sizes;
