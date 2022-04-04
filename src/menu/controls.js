@@ -5,9 +5,9 @@ const { useEffect } = wp.element;
 const {
 	BlockControls,
 	InspectorControls,
-	FontSizePicker,
 	withFontSizes,
-	withColors
+	withColors,
+	getFontSizeObjectByValue
 } = wp.blockEditor;
 const {
 	PanelBody,
@@ -18,9 +18,10 @@ const {
 	BaseControl,
 	ButtonGroup,
 	Button,
-	ToggleControl
+	ToggleControl,
+	FontSizePicker
 } = wp.components;
-const { withDispatch } = wp.data;
+const { withDispatch, withSelect } = wp.data;
 const { compose } = wp.compose;
 
 function Controls(args) {
@@ -28,10 +29,10 @@ function Controls(args) {
 		setAttributes,
 		attributes,
 		menuItemFontSize,
-		setMenuItemFontSize,
 		menuItemColor,
 		setMenuItemColor,
-		updateChildBlocksAttributes
+		updateChildBlocksAttributes,
+		fontSizes
 	} = args;
 
 	function setAlignment(alignment) {
@@ -64,6 +65,15 @@ function Controls(args) {
 			customTextColor: menuItemColor.slug ? undefined : menuItemColor.color,
 		} )
 	}, [menuItemColor.color] );
+
+	const setMenuItemFontSize = ( value ) => {
+		const fontSizeSlug = getFontSizeObjectByValue( fontSizes, value ).slug;
+
+		setAttributes( {
+			menuItemFontSize: fontSizeSlug,
+			customMenuItemFontSize: fontSizeSlug ? undefined : value?.toString(),
+		} );
+	};
 
 	return(
 		<>
@@ -106,6 +116,7 @@ function Controls(args) {
 			<InspectorControls>
 				<PanelBody title={ __( 'Styles' ) } initialOpen={ true }>
 					<FontSizePicker
+						fontSizes={ fontSizes }
 						value={ menuItemFontSize.size }
 						onChange={ setMenuItemFontSize }
 					/>
@@ -196,6 +207,13 @@ export default compose( [
 		menuItemColor: 'color',
 	} ),
 	withFontSizes( 'menuItemFontSize' ),
+	withSelect( (select, ownProps) => {
+		const settings = select('core/block-editor').getSettings();
+
+		return {
+			fontSizes: settings.fontSizes
+		}
+	} ),
 	withDispatch( ( dispatch, ownProps, registry ) => ( {
 		updateChildBlocksAttributes( attributes ) {
 			const { updateBlockAttributes } = dispatch( 'core/block-editor' );
