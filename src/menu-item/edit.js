@@ -60,25 +60,27 @@ function MenuItemEdit( props ) {
 		let newDropdownPosition = {};
 		let rootBlockNode;
 		const blockNode = document.querySelector( '[data-block="' + clientId + '"]' );
-		const blockCoords = blockNode.getBoundingClientRect();
+		if ( blockNode !== null ){
+			const blockCoords = blockNode.getBoundingClientRect();
 
-		if ( parentAttributes.expandDropdown ) {
-			rootBlockNode = document.querySelector('.editor-styles-wrapper');
-		} else {
-			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-getwid-megamenu' );
-		}
-		const rootCoords = rootBlockNode.getBoundingClientRect();
+			if ( parentAttributes.expandDropdown ) {
+				rootBlockNode = document.querySelector('.editor-styles-wrapper');
+			} else {
+				rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-getwid-megamenu' );
+			}
+			const rootCoords = rootBlockNode.getBoundingClientRect();
 
-		let left = -(blockCoords.x - rootCoords.x);
+			let left = -(blockCoords.x - rootCoords.x);
 
-		if ( parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth ) {
-			left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
-		}
+			if ( parentAttributes.dropdownMaxWidth && rootCoords.width > parentAttributes.dropdownMaxWidth ) {
+				left = left + (rootCoords.width - parentAttributes.dropdownMaxWidth) / 2;
+			}
 
-		newDropdownPosition = {left: left, width: rootCoords.width};
+			newDropdownPosition = {left: left, width: rootCoords.width};
 
-		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
-			setDropdownPosition(newDropdownPosition);
+			if( !isEqual(newDropdownPosition, dropdownPosition) ) {
+				setDropdownPosition(newDropdownPosition);
+			}
 		}
 	};
 
