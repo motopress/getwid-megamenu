@@ -11,7 +11,8 @@ const { head, isEqual } = lodash;
 const { __ } = wp.i18n;
 const {
 	useState,
-	useEffect
+	useEffect,
+	useRef
 } = wp.element;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
@@ -34,7 +35,6 @@ function MenuItemEdit( props ) {
 		hasDescendants,
 		updateInnerBlocks,
 		rootBlockClientId,
-		clientId,
 		parentAttributes
 	} = props;
 	const {
@@ -47,6 +47,7 @@ function MenuItemEdit( props ) {
 	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
 	const showDropdown = isMenuItemSelected && menuItemHasChildrens;
 	const [dropdownPosition, setDropdownPosition] = useState( { left:0, width: 'auto' } );
+	const menuItem = useRef(null);
 
 	const toggleItemDropdown = () => {
 		setIsItemDropdownOpened(!isItemDropdownOpened);
@@ -59,14 +60,20 @@ function MenuItemEdit( props ) {
 	const updateDropdownPosition = () => {
 		let newDropdownPosition = {};
 		let rootBlockNode;
-		const blockNode = document.querySelector( '[data-block="' + clientId + '"]' );
+		const blockNode = menuItem.current;
+
+        if (!blockNode) {
+           return;
+        }
+
 		const blockCoords = blockNode.getBoundingClientRect();
 
 		if ( parentAttributes.expandDropdown ) {
-			rootBlockNode = document.querySelector('.editor-styles-wrapper');
+			rootBlockNode = blockNode.closest('.editor-styles-wrapper');
 		} else {
-			rootBlockNode = document.querySelector( '[data-block="' + rootBlockClientId + '"] .wp-block-getwid-megamenu' );
+			rootBlockNode = blockNode.closest( '[data-block="' + rootBlockClientId + '"]' ).querySelector('.wp-block-getwid-megamenu');
 		}
+
 		const rootCoords = rootBlockNode.getBoundingClientRect();
 
 		let left = -(blockCoords.x - rootCoords.x);
@@ -87,7 +94,10 @@ function MenuItemEdit( props ) {
 	}, [ isSelected ] );
 
 	useEffect( () => {
-		window.addEventListener('resize', updateDropdownPosition);
+		const blockNode = menuItem.current;
+        if (blockNode) {
+            blockNode.ownerDocument.defaultView.addEventListener('resize', updateDropdownPosition);
+        }
 	}, [] );
 
 	useEffect( () => {
@@ -143,14 +153,9 @@ function MenuItemEdit( props ) {
 
 	return (
 		<>
-			<div className={itemClasses}>
+			<div className={itemClasses} ref={menuItem}>
 				<div className={itemLinkClasses} style={itemLinkStyles}>
-					<a
-						href="#"
-						onClick={ () => {
-							return false;
-						} }
-					>
+					<a>
 						<RichText
 							placeholder={ itemLabelPlaceholder }
 							value={ text }
@@ -211,7 +216,6 @@ export default compose([
 			isParentOfSelectedBlock,
 			hasDescendants,
 			rootBlockClientId,
-			clientId,
 			parentAttributes
 		};
 	}),
