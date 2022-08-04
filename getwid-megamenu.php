@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GETWID_MEGAMENU_VERSION', '1.0.2' );
+define( 'GETWID_MEGAMENU_VERSION', '1.0.3' );
 define( 'GETWID_MEGAMENU_FILE', __FILE__ );
 
 if ( ! function_exists( 'getwid_megamenu_init' ) && function_exists( 'register_block_type' ) ) {
