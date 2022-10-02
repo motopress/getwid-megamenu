@@ -30,3 +30,8 @@ A quick guide to working with the WordPress Mega Menu plugin:
 * Optionally turn on the "hamburger button" for your WordPress mega menu on mobile devices for easier navigation.
 
 Love working in Gutenberg? Download [Getwid WordPress blocks](https://wordpress.org/plugins/getwid/) - the biggest library of free blocks and templates for the block editor.
+
+
+Installation Tips:
+
+If you would like src/frontend.js to be built as well run build:custom or start:custom.

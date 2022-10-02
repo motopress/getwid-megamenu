@@ -38,7 +38,7 @@ class BlockRegister {
 		wp_register_style(
 			'getwid-megamenu-block-style',
 			plugins_url( 'build/style-index.css', GETWID_MEGAMENU_FILE ),
-			[],
+			['dashicons'],
 			GETWID_MEGAMENU_VERSION
 		);
 	}
