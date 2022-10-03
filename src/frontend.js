@@ -66,11 +66,35 @@
 
 		function attachToggleActionToButtons(menus) {
 			menus.each((index, menu) => {
+
+				// I think(?) this is for the larger menu on mobile and not 
+				// the submenu. Have to test that out.  
 				$(menu).on('click', '.gw-mm__toggle', function (event) {
 					toggleMobileMenu($(this), $(menu));
 				});
+				// I could write an if statement here but I still don't know 
+				// the full jurisdictions of the this operator below. 
+				// I know that this operator is a param which finds a
+				// class within the DOM. 
 
-				$(menu).on('click', '.gw-mm-item__toggle', function (event) {
+
+				// Part 2:
+				// I need to expand this click operator to beyond '.gw-mm-item__toggle'.
+
+				// .gw-mm-item__link  
+				$(menu).on('click', '.gw-mm-item__link', function (event) {
+					// I think we're in the menu DOM right now because the function is called menus. 
+					// But lets run a console.log 
+					console.log($(this));	
+					// The console log for that was this: 
+					// Object { 0: button.gw-mm-item__toggle, length: 1 }
+					// 0: <button class="gw-mm-item__toggle is-opened">
+					// length: 1
+					// <prototype>: Object { jquery: "3.6.0", constructor: S(e, t), length: 0, … }
+					// frontend.js:83:13
+
+
+
 					let dropdown = $(this).closest('.gw-mm-item').find('.gw-mm-item__dropdown-wrapper');
 					toggleMobileMenu($(this), $(dropdown));
 				});
