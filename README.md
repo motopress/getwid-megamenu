@@ -7,6 +7,21 @@
 ![](https://img.shields.io/wordpress/plugin/rating/getwid-megamenu)
 ![](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg?style=flat)
 
+
+== Start MoL's Notes ==
+
+
+
+
+
+
+== End MoL's Notes == 
+
+
+
+
+
+
 This plugin allows you to build simple and advanced navigation menus the WordPress way with blocks.
 
 Once the full-site editing is released in WordPress, navigation menu plugins as we know them will become redundant. With this WordPress Mega Menu block, you'll be able to build and customize menus seamlessly using dedicated WP navigation blocks.
