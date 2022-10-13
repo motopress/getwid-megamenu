@@ -10,6 +10,8 @@
 
 == Start MoL's Notes ==
 
+I would like for there to be a JSON file attached to the project and then there'll be a buton
+which says "export menu structure to a file". 
 
 
 
