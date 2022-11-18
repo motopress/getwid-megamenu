@@ -45,7 +45,8 @@ class MegaMenu extends AbstractBlock {
 			$toggle_button_alignment_style = isset( $attributes['toggleButtonAlignment'] ) ? 'style="text-align: ' . $attributes['toggleButtonAlignment'] . ';"' : '';
 
 			$html .= '<div class="gw-mm__toggle-wrapper is-hidden" ' . $toggle_button_alignment_style . '>';
-			$html .= '<button class="gw-mm__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
+			$button = '<button class="gw-mm__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
+			$html .= apply_filters( 'gw_mm_mobile_toggle_button', $button );
 			$html .= '</div>';
 		}
 
