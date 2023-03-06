@@ -198,7 +198,6 @@ export default compose([
 	withSelect((select, ownProps) => {
 		const {
 			hasSelectedInnerBlock,
-			getClientIdsOfDescendants,
 			getBlockCount,
 			getBlockParentsByBlockName,
 			getBlock
