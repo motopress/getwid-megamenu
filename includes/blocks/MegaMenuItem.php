@@ -49,7 +49,7 @@ class MegaMenuItem extends AbstractBlock {
 
 		$item_link_style = $font_style['inline_styles'] . $text_style['inline_styles'];
 		$is_active = false;
-		if( isset( $attributes['kind'] ) && isset( $attributes['id'] ) ){ 
+		if( isset( $attributes['kind'] ) && isset( $attributes['id'] ) ){
 			$is_active = $attributes['kind'] == 'post-type' && $attributes['id'] === get_the_ID();
 		}
 
