@@ -198,14 +198,13 @@ export default compose([
 	withSelect((select, ownProps) => {
 		const {
 			hasSelectedInnerBlock,
-			getClientIdsOfDescendants,
+			getBlockCount,
 			getBlockParentsByBlockName,
 			getBlock
 		} = select('core/block-editor');
 		const { clientId } = ownProps;
 		const isParentOfSelectedBlock = hasSelectedInnerBlock(clientId, true);
-		const hasDescendants = !!getClientIdsOfDescendants([clientId])
-			.length;
+		const hasDescendants = !!getBlockCount(clientId);
 		const rootBlockClientId = head(
 			getBlockParentsByBlockName( clientId, 'getwid-megamenu/menu' )
 		);

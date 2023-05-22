@@ -14,13 +14,10 @@
 		"@wordpress/scripts": "^12.1.0"
 	},
 	"scripts": {
-		"build": "wp-scripts build",
+		"start": "wp-scripts start src/index.js src/frontend.js",
+		"build": "wp-scripts build src/index.js src/frontend.js",
 		"format:js": "wp-scripts format-js",
-		"lint:js": "wp-scripts lint-js",
-		"packages-update": "wp-scripts packages-update",
-		"start": "wp-scripts start",
-		"start:custom": "wp-scripts start src/index.js src/frontend.js",
-		"build:custom": "wp-scripts build src/index.js src/frontend.js"
+		"lint:js": "wp-scripts lint-js"
 	},
 	"dependencies": {
 		"classnames": "^2.2.6"

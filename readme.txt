@@ -3,9 +3,9 @@ Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block
 Requires at least: 5.7
-Tested up to: 6.0
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Build better navigation menus with the WordPress mega menu blocks.
 
 == Description ==
 
-This WordPress mega menu plugin enables you to build tailor-made site navigation menus in Gutenberg. 
+This WordPress mega menu plugin enables you to build tailor-made site navigation menus in Gutenberg.
 
 *Note: this WP navigation block is made for the full-site editing experiences in WordPress. Until full-site editing is available in Core, the plugin provides limited options since it can't fully integrate with the navigation menu.*
 
@@ -56,6 +56,12 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 
 == Changelog ==
+
+= 1.0.5, May 22 2023 =
+* Added the ability to change the mobile menu toggle button markup via a filter.
+* Fixed performance issues that can be caused by a large quantity of child blocks in the menu dropdown.
+* Improved compatibility with PHP 8.
+* Minor style improvements.
 
 = 1.0.4, Sep 16 2022 =
 * Fixed an issue when the submenu icon may not be shown if the user does not logged in.
