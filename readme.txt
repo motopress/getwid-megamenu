@@ -58,8 +58,8 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 == Changelog ==
 
 = 1.0.5, May 22 2023 =
-* Added ability to change mobile menu toggle button markup via filter.
-* Fixed performance issues that can be caused by large quantity of child blocks in menu dropdown.
+* Added the ability to change the mobile menu toggle button markup via a filter.
+* Fixed performance issues that can be caused by a large quantity of child blocks in the menu dropdown.
 * Improved compatibility with PHP 8.
 * Minor style improvements.
 
