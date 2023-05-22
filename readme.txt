@@ -5,7 +5,7 @@ Tags: mega menu, megamenu, WordPress menu, navigation, block
 Requires at least: 5.7
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 
 == Changelog ==
+
+= 1.0.4, Sep 16 2022 =
+* Fixed an issue when the submenu icon may not be shown if the user does not logged in.
 
 = 1.0.3, Aug 04 2022 =
 * Improved compatibility with FSE.
