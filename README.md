@@ -9,7 +9,7 @@
 
 This plugin allows you to build simple and advanced navigation menus the WordPress way with blocks.
 
-Once the full-site editing is released in WordPress, navigation menu plugins as we know them will become redundant. With this WordPress Mega Menu block, you'll be able to build and customize menus seamlessly using dedicated WP navigation blocks.
+Once the full-site editing is released in WordPress, navigation menu plugins as we know them will become redundant. With this [WordPress Mega Menu block](https://wordpress.org/plugins/getwid-megamenu/), you'll be able to build and customize menus seamlessly using dedicated WP navigation blocks.
 
 Note: until full-site editing is not merged into WordPress Core, the options of this WordPress navigation menu plugin are temporarily limited. 
 
