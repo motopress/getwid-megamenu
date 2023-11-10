@@ -22,7 +22,8 @@ class BlockRegister {
 				'wp-element',
 				'wp-blocks',
 				'wp-components',
-				'wp-polyfill'
+				'wp-polyfill',
+				'lodash',
 			],
 			GETWID_MEGAMENU_VERSION,
 			true
