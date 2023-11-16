@@ -11,7 +11,7 @@ const {
 } = wp.blockEditor;
 const {
 	PanelBody,
-	Toolbar,
+	ToolbarDropdownMenu,
 	ToolbarButton,
 	ToolbarGroup,
 	RangeControl,
@@ -78,10 +78,9 @@ function Controls(args) {
 	return(
 		<>
 			<BlockControls>
-				<Toolbar
+				<ToolbarDropdownMenu
 					icon={ attributes.itemsJustification ? `editor-align${attributes.itemsJustification}` : "editor-alignleft" }
 					label={ __( 'Change items justification' ) }
-					isCollapsed
 					controls={ [
 						{
 							icon: "editor-alignleft",
