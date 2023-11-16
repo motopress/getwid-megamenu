@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-const { escape } = lodash;
 const { __ } = wp.i18n;
 const {
 	useCallback,
@@ -140,7 +139,7 @@ function Controls( args ) {
 										return text;
 									}
 									if ( newTitle !== '' && text !== newTitle) {
-										return escape( newTitle );
+										return newTitle;
 									}
 								} )()
 							} );

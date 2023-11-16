@@ -3,9 +3,9 @@ Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block
 Requires at least: 5.7
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 
 == Changelog ==
+
+= 1.0.6, Nov 16 2023 =
+* Improved compatibility with WordPress 6.4.
 
 = 1.0.5, May 22 2023 =
 * Added the ability to change the mobile menu toggle button markup via a filter.
