@@ -57,7 +57,7 @@ WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
 
 == Changelog ==
 
-= 1.0.6, Nov 11 2023 =
+= 1.0.6, Nov 16 2023 =
 * Improved compatibility with WordPress 6.4.
 
 = 1.0.5, May 22 2023 =
