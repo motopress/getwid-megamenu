@@ -7,7 +7,6 @@ import Controls from "./controls";
 /**
  * WordPress dependencies
  */
-const { head } = lodash;
 const { __ } = wp.i18n;
 const { useState, useEffect } = wp.element;
 const { compose } = wp.compose;
@@ -148,12 +147,8 @@ export default compose( [
 		const selectedBlockHasDescendants = !! getClientIdsOfDescendants( [
 			selectedBlockId,
 		] )?.length;
-		const rootBlockClientId = head(
-			getBlockParentsByBlockName( clientId, 'getwid-megamenu/plain-menu' )
-		);
-		const parentItemClientId = head(
-			getBlockParentsByBlockName( clientId, 'getwid-megamenu/plain-menu-item' )
-		);
+		const rootBlockClientId = getBlockParentsByBlockName( clientId, 'getwid-megamenu/plain-menu' )[0];
+		const parentItemClientId = getBlockParentsByBlockName( clientId, 'getwid-megamenu/plain-menu-item' )[0];
 
 		const parentAttributes = getBlock(rootBlockClientId).attributes;
 

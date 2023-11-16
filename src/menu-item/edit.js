@@ -7,7 +7,6 @@ import Controls from "./controls";
 /**
  * WordPress dependencies
  */
-const { head, isEqual } = lodash;
 const { __ } = wp.i18n;
 const {
 	useState,
@@ -84,7 +83,8 @@ function MenuItemEdit( props ) {
 
 		newDropdownPosition = {left: left, width: rootCoords.width};
 
-		if( !isEqual(newDropdownPosition, dropdownPosition) ) {
+		if( newDropdownPosition.left !== dropdownPosition.left
+			|| newDropdownPosition.width !== dropdownPosition.width ) {
 			setDropdownPosition(newDropdownPosition);
 		}
 	};
@@ -205,9 +205,7 @@ export default compose([
 		const { clientId } = ownProps;
 		const isParentOfSelectedBlock = hasSelectedInnerBlock(clientId, true);
 		const hasDescendants = !!getBlockCount(clientId);
-		const rootBlockClientId = head(
-			getBlockParentsByBlockName( clientId, 'getwid-megamenu/menu' )
-		);
+		const rootBlockClientId = getBlockParentsByBlockName( clientId, 'getwid-megamenu/menu' )[0];
 
 		const parentAttributes = getBlock(rootBlockClientId).attributes;
 
