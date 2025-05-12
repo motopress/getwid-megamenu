@@ -37,7 +37,10 @@ class PlainMenuItem extends AbstractBlock {
 			)
 		);
 
-		$is_active = $attributes['kind'] == 'post-type' && $attributes['id'] === get_the_ID();
+		$is_active = false;
+		if ( isset( $attributes['kind'] ) && isset( $attributes['id'] ) ) {
+			$is_active = $attributes['kind'] == 'post-type' && $attributes['id'] === get_the_ID();
+		}
 
 		$item_classes = array_merge(
 			[ 'wp-block-getwid-plain-menu-item' ],
@@ -58,10 +61,10 @@ class PlainMenuItem extends AbstractBlock {
 			[ $colors['css_classes'] ]
 		);
 
-		$item_link_style = ' style="' . $font_size['inline_styles'] . $colors['inline_styles'] . '" ';
+		$item_link_style = ' style="' . esc_attr( $font_size['inline_styles'] ) . esc_attr( $colors['inline_styles'] ) . '" ';
 
 		$html .= '<li class="' . esc_attr( implode( ' ', $item_classes ) ) . '">';
-		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" ' . $item_link_style . '>';
+		$html .= '<div class="' . esc_attr( implode( ' ', $item_link_classes ) ) . '" ' . $item_link_style . '>';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
 			$html .= esc_url( $attributes['url'] );
@@ -71,11 +74,11 @@ class PlainMenuItem extends AbstractBlock {
 		$html .= '"';
 
 		if ( isset( $attributes['linkTarget'] ) ) {
-			$html .= ' target="' . $attributes['linkTarget'] . '"';
+			$html .= ' target="' . esc_attr( $attributes['linkTarget'] ) . '"';
 		}
 
 		if ( isset( $attributes['rel'] ) ) {
-			$html .= ' rel="' . $attributes['rel'] . '"';
+			$html .= ' rel="' . esc_attr( $attributes['rel'] ) . '"';
 		}
 
 		$html .= '>' . $attributes['text'] . '</a>';

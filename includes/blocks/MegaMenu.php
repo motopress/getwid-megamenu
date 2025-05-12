@@ -22,27 +22,27 @@ class MegaMenu extends AbstractBlock {
 			$collapse_on_mobile ? array('is-collapsible') : array()
 		);
 
-		$html = '<div class="wp-block-getwid-megamenu gw-mm ' . implode( ' ', $classes ) . '"';
+		$html = '<div class="wp-block-getwid-megamenu gw-mm ' . esc_attr( implode( ' ', $classes ) ) . '"';
 		if ( isset( $attributes['dropdownMaxWidth'] ) ) {
-			$html .= ' data-dropdown-width="' . $attributes['dropdownMaxWidth'] . '"';
+			$html .= ' data-dropdown-width="' . absint( $attributes['dropdownMaxWidth'] ) . '"';
 		}
 		if ( isset( $attributes['dropdownContentMaxWidth'] ) ) {
-			$html .= ' data-dropdown-content-width="' . $attributes['dropdownContentMaxWidth'] . '"';
+			$html .= ' data-dropdown-content-width="' . absint( $attributes['dropdownContentMaxWidth'] ) . '"';
 		}
 
-		$responsive_breakpoint = isset( $attributes['responsiveBreakpoint'] ) ? $attributes['responsiveBreakpoint'] : 782;
+		$responsive_breakpoint = isset( $attributes['responsiveBreakpoint'] ) ? absint( $attributes['responsiveBreakpoint'] ) : 782;
 
 		$html .= ' data-responsive-breakpoint="' . $responsive_breakpoint . '"';
 		$html .= '>';
 
 		$html .= '<nav class="gw-mm__wrapper"';
 		if ( isset( $attributes['menuMaxWidth'] ) ) {
-			$html .= ' style="max-width:' . $attributes['menuMaxWidth'] . 'px"';
+			$html .= ' style="max-width:' . absint( $attributes['menuMaxWidth'] ) . 'px"';
 		}
 		$html .= '>';
 
 		if ( $collapse_on_mobile ) {
-			$toggle_button_alignment_style = isset( $attributes['toggleButtonAlignment'] ) ? 'style="text-align: ' . $attributes['toggleButtonAlignment'] . ';"' : '';
+			$toggle_button_alignment_style = isset( $attributes['toggleButtonAlignment'] ) ? 'style="text-align: ' . esc_attr( $attributes['toggleButtonAlignment'] ) . ';"' : '';
 
 			$button = '<button class="gw-mm__toggle"><span class="dashicons dashicons-menu"></span>' . esc_html__( 'Menu', 'getwid-megamenu' ) . '</button>';
 			$button = apply_filters( 'getwid-megamenu/blocks/megamenu/mobile-toggle-button', $button, $classes );

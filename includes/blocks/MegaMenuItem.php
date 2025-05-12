@@ -64,7 +64,7 @@ class MegaMenuItem extends AbstractBlock {
 		$item_classes = apply_filters( 'getwid-megamenu/blocks/megamenu-item/item-classes', $item_classes, $attributes );
 
 		$html .= '<li class="' . esc_attr( implode( ' ', $item_classes ) ) . '">';
-		$html .= '<div class="' . implode( ' ', $item_link_classes ) . '" style="' . $item_link_style . '">';
+		$html .= '<div class="' . esc_attr( implode( ' ', $item_link_classes ) ) . '" style="' . esc_attr( $item_link_style ) . '">';
 		$html .= '<a href="';
 		if ( isset( $attributes['url'] ) ) {
 			$html .= esc_url( $attributes['url'] );
@@ -74,11 +74,11 @@ class MegaMenuItem extends AbstractBlock {
 		$html .= '"';
 
 		if ( isset( $attributes['linkTarget'] ) ) {
-			$html .= ' target="' . $attributes['linkTarget'] . '"';
+			$html .= ' target="' . esc_attr( $attributes['linkTarget'] ) . '"';
 		}
 
 		if ( isset( $attributes['rel'] ) ) {
-			$html .= ' rel="' . $attributes['rel'] . '"';
+			$html .= ' rel="' . esc_attr( $attributes['rel'] ) . '"';
 		}
 
 		$html .= '>' . $attributes['text'] . '</a>';
