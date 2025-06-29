@@ -22,6 +22,10 @@ class PlainMenuItem extends AbstractBlock {
 			array(
 				'code'   => array(),
 				'em'     => array(),
+				'i'      => array(
+					'style' => array(),
+					'class' => array(),
+				),
 				'img'    => array(
 					'scale' => array(),
 					'class' => array(),
