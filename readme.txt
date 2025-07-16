@@ -1,4 +1,4 @@
-=== WordPress Mega Menu Block ===
+=== Navigation Block with Mega Menu ===
 Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block
@@ -49,8 +49,8 @@ Check out [Getwid WordPress Blocks](https://wordpress.org/plugins/getwid/) - a t
 
 == Copyright ==
 
-WordPress Mega Menu Block, Copyright (C) 2020, MotoPress https://motopress.com/
-WordPress Mega Menu Block plugin is distributed under the terms of the GNU GPL.
+Navigation Block with Mega Menu, Copyright (C) 2020, MotoPress https://motopress.com/
+Navigation Block with Mega Menu plugin is distributed under the terms of the GNU GPL.
 
 == Credits ==
 
