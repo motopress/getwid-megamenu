@@ -1,0 +1,6 @@
+{
+    "name": "vegetable-bits/vd-megamenu",
+    "type": "wordpress-plugin",
+    "description": "Megamenu plugin for Gutenberg WordPress",
+    "license": "GPL-2.0+"
+}
