@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Controls from './controls';
 
 /**
@@ -31,7 +31,7 @@ function PlainMenu( args ) {
 
 	const ref = useRef();
 
-	const menuClasses = classnames(
+	const menuClasses = clsx(
 		'wp-block-getwid-plain-menu',
 		'gw-pm',
 		{

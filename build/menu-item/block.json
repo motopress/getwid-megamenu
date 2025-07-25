@@ -1,0 +1,47 @@
+{
+  "name": "getwid-megamenu/menu-item",
+  "category": "layout",
+  "parent": [
+    "getwid-megamenu/menu"
+  ],
+  "attributes": {
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "id": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "linkTarget": {
+      "type": "string"
+    },
+    "rel": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "customTextColor": {
+      "type": "string"
+    },
+    "fontSize": {
+      "type": "string"
+    },
+    "customFontSize": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "anchor": false,
+    "align": false,
+    "alignWide": false,
+    "reusable": false,
+    "lightBlockWrapper": false
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Controls from "./controls";
 
 /**
@@ -123,12 +123,12 @@ function MenuItemEdit( props ) {
 		maxWidth: parentAttributes.dropdownContentMaxWidth
 	};
 
-	const dropdownClasses = classnames('gw-mm-item__dropdown', {
+	const dropdownClasses = clsx('gw-mm-item__dropdown', {
 		'has-background': attributes.dropdownBackgroundColor || attributes.customDropdownBackgroundColor,
 		[ `has-${ attributes.dropdownBackgroundColor }-background-color` ]: !! attributes.dropdownBackgroundColor,
 	});
 
-	const itemClasses = classnames(
+	const itemClasses = clsx(
 		'wp-block-getwid-megamenu-item',
 		'gw-mm-item',
 		{
@@ -137,7 +137,7 @@ function MenuItemEdit( props ) {
 		}
 	);
 
-	const itemLinkClasses = classnames(
+	const itemLinkClasses = clsx(
 		'gw-mm-item__link',
 		{
 			'has-text-color': attributes.textColor || attributes.customTextColor,

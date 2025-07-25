@@ -11,7 +11,7 @@
 	],
 	"main": "build/index.js",
 	"devDependencies": {
-		"@wordpress/scripts": "^12.1.0"
+		"@wordpress/scripts": "^30.18.0"
 	},
 	"scripts": {
 		"start": "wp-scripts start src/index.js src/frontend.js",
@@ -20,6 +20,6 @@
 		"lint:js": "wp-scripts lint-js"
 	},
 	"dependencies": {
-		"classnames": "^2.2.6"
+		"clsx": "^2.1.1"
 	}
 }

@@ -1,0 +1,33 @@
+{
+  "name": "getwid-megamenu/plain-menu",
+  "title": "",
+  "category": "layout",
+  "attributes": {
+    "itemsJustification": {
+      "type": "string"
+    },
+    "orientation": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "menuItemFontSize": {
+      "type": "string"
+    },
+    "customMenuItemFontSize": {
+      "type": "string"
+    },
+    "menuItemColor": {
+      "type": "string"
+    },
+    "customMenuItemColor": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "anchor": false,
+    "align": false,
+    "reusable": false,
+    "customClassName": true,
+    "lightBlockWrapper": false
+  }
+}

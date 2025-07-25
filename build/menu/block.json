@@ -1,0 +1,56 @@
+{
+  "name": "getwid-megamenu/menu",
+  "title": "",
+  "category": "layout",
+  "attributes": {
+    "itemsJustification": {
+      "type": "string"
+    },
+    "expandDropdown": {
+      "type": "boolean",
+      "default": false
+    },
+    "menuMaxWidth": {
+      "type": "number"
+    },
+    "dropdownMaxWidth": {
+      "type": "number"
+    },
+    "dropdownContentMaxWidth": {
+      "type": "number"
+    },
+    "collapseOnMobile": {
+      "type": "boolean",
+      "default": true
+    },
+    "responsiveBreakpoint": {
+      "type": "number",
+      "default": 600
+    },
+    "menuItemFontSize": {
+      "type": "string"
+    },
+    "customMenuItemFontSize": {
+      "type": "string"
+    },
+    "menuItemColor": {
+      "type": "string"
+    },
+    "customMenuItemColor": {
+      "type": "string"
+    },
+    "toggleButtonAlignment": {
+      "type": "string"
+    }
+  },
+  "supports": {
+    "anchor": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "reusable": false,
+    "customClassName": true,
+    "lightBlockWrapper": false
+  }
+}

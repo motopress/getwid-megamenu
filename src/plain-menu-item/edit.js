@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Controls from "./controls";
 
 /**
@@ -41,7 +41,7 @@ function MenuItemEdit(props) {
 	const menuItemHasChildrens = isItemDropdownOpened || hasDescendants;
 	const showDropdown = isMenuItemSelected && menuItemHasChildrens;
 
-	const itemClasses = classnames(
+	const itemClasses = clsx(
 		'wp-block-getwid-plain-menu-item',
 		'gw-pm-item',
 		{
@@ -60,7 +60,7 @@ function MenuItemEdit(props) {
 		} );
 	}, [] );
 
-	const itemLinkClasses = classnames(
+	const itemLinkClasses = clsx(
 		'gw-pm-item__link',
 		{
 			'has-text-color': attributes.textColor || attributes.customTextColor,

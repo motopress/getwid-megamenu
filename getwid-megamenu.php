@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: Navigation Block with Mega Menu
- * Plugin URI: https://motopress.com/products/wordpress-mega-menu-block/
+ * Plugin URI: https://github.com/vegetable-bits/vd-megamenu/tree/master
  * Description: Build better navigation menus with the WordPress mega menu blocks.
- * Version: 1.0.7
+ * Version: 1.1.0
  * Author: MotoPress
- * Author URI: https://motopress.com/
+ * Author URI: https://github.com/vegetable-bits/
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: getwid-megamenu
