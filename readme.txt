@@ -3,7 +3,7 @@ Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: mega menu, megamenu, WordPress menu, navigation, block
 Requires at least: 5.7
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 5.6
 Stable tag: 1.0.7
 License: GPLv2 or later
